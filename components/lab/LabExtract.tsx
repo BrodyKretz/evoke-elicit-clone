@@ -82,7 +82,7 @@ export function LabExtract() {
         </p>
         <Link
           href="/lab/find"
-          className="inline-flex items-center gap-1 rounded-md border border-bg bg-bg px-3 py-1.5 text-[13px] font-medium text-surface hover:bg-bg"
+          className="inline-flex items-center gap-1 rounded-md border border-teal bg-teal px-3 py-1.5 text-[13px] font-medium text-white hover:bg-teal-hover hover:border-teal-hover"
         >
           <Search size={12} /> Find papers
         </Link>
@@ -121,7 +121,7 @@ export function LabExtract() {
         <button
           type="submit"
           disabled={!question.trim() || running}
-          className="rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-surface hover:bg-text disabled:opacity-50"
+          className="rounded-full bg-teal px-4 py-1.5 text-[13px] font-medium text-white hover:bg-teal-hover disabled:opacity-50"
         >
           {running ? "Extracting…" : "Run extract"}
         </button>

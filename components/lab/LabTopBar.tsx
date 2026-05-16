@@ -9,7 +9,7 @@ export function LabTopBar() {
     <header className="flex h-12 items-center justify-end bg-bg px-5">
       <Link
         href="/research-agent"
-        className="inline-flex items-center rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-surface hover:bg-text"
+        className="inline-flex items-center rounded-full bg-teal px-4 py-1.5 text-[13px] font-medium text-white hover:bg-teal-hover"
       >
         Research agent
       </Link>

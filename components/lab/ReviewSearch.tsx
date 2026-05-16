@@ -127,7 +127,7 @@ export function ReviewSearch() {
         <button
           type="submit"
           disabled={!query.trim() || loading}
-          className="rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-surface hover:bg-text disabled:opacity-50"
+          className="rounded-full bg-teal px-4 py-1.5 text-[13px] font-medium text-white hover:bg-teal-hover disabled:opacity-50"
         >
           {loading ? "Screening…" : "Run review"}
         </button>
