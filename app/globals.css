@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  background: theme("colors.bg");
+  color: theme("colors.text.DEFAULT");
+  font-family: theme("fontFamily.sans");
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center gap-1.5 rounded-md border border-border-strong bg-surface px-3 py-1.5 text-[13px] font-medium text-text transition-colors hover:bg-surface-muted hover:border-text-muted;
+  }
+  .btn-primary {
+    @apply bg-teal text-white border-teal hover:bg-teal-hover hover:border-teal-hover;
+  }
+  .btn-icon {
+    @apply w-8 h-8 p-0 grid place-items-center;
+  }
+  .section-label {
+    @apply inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-teal mb-3.5;
+  }
+  .subsection-title {
+    @apply font-display text-[22px] font-medium my-7 mb-4 text-text;
+  }
+  .sub-subsection-title {
+    @apply text-base font-semibold my-5 mb-3 text-text;
+  }
+}
+
+/* Blinking caret for the typewriter placeholder. Step-based so it actually
+   blinks instead of pulsing. */
+@keyframes evoke-caret-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.evoke-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background-color: currentColor;
+  vertical-align: text-bottom;
+  margin-left: 1px;
+  animation: evoke-caret-blink 1s steps(2, start) infinite;
+}
+
+/* Custom scrollbars on overflow panels — subtle */
+.scroll-pane {
+  scrollbar-width: thin;
+  scrollbar-color: theme("colors.border-strong") transparent;
+}
+.scroll-pane::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scroll-pane::-webkit-scrollbar-thumb {
+  background: theme("colors.border-strong");
+  border-radius: 4px;
+}
