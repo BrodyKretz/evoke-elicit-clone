@@ -219,7 +219,7 @@ function LibraryLink() {
   );
 }
 
-function Sidebar({ mode }: { mode: Mode }) {
+export function Sidebar({ mode }: { mode: Mode }) {
   return (
     <aside className="flex w-[240px] flex-shrink-0 flex-col border-r border-[#E5E7EB] bg-[#FAFAF9] px-3 py-5 dark:border-[#2F2F2F] dark:bg-[#171717]">
       <Link href="/" className="mb-5 flex items-center gap-2 px-1">
@@ -264,7 +264,7 @@ function Sidebar({ mode }: { mode: Mode }) {
 
 // ---------- Top bar ----------
 
-function TopBar() {
+export function TopBar() {
   return (
     <header className="flex items-center justify-end gap-2 px-6 py-3">
       <ThemeToggle />
