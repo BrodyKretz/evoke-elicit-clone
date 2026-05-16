@@ -167,23 +167,59 @@ export function LabExtract() {
           e.preventDefault();
           run();
         }}
-        className="mb-6 flex items-center gap-2 rounded-full border border-transparent bg-surface dark:bg-[#1F1F1F] px-4 py-2 shadow-sm"
+        className="mb-6 overflow-hidden rounded-2xl border border-border dark:border-[#2F2F2F] shadow-sm"
       >
-        <Grid size={14} className="flex-shrink-0 text-text-muted dark:text-[#B4B4B4]" />
-        <input
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-          placeholder="What question is this extraction meant to answer? (guides which columns get generated)"
-          className="flex-1 bg-transparent text-[14px] text-text dark:text-[#ECECEC] outline-none placeholder:text-text-faint dark:placeholder:text-[#8E8E8E]"
-          disabled={running}
-        />
-        <button
-          type="submit"
-          disabled={!question.trim() || running || chosen.length === 0}
-          className="rounded-full bg-teal px-4 py-1.5 text-[13px] font-medium text-white hover:bg-teal-hover disabled:opacity-50"
-        >
-          {running ? "Extracting…" : "Run extract"}
-        </button>
+        <div className="flex items-center bg-teal px-4 py-3">
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-[13px] font-medium text-white">
+            <Grid size={14} /> Extract data
+          </span>
+        </div>
+        <div className="bg-surface dark:bg-[#1F1F1F] px-4 py-4">
+          <textarea
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            onKeyDown={(e) => {
+              if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+                e.preventDefault();
+                run();
+              }
+            }}
+            rows={3}
+            placeholder="What question should this extraction answer? (guides which columns get generated)"
+            className="w-full resize-none bg-transparent text-[15px] leading-relaxed text-text dark:text-[#ECECEC] outline-none placeholder:text-text-faint dark:placeholder:text-[#8E8E8E]"
+            disabled={running}
+          />
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <span className="text-[12px] text-text-faint dark:text-[#8E8E8E]">Try an example</span>
+            {[
+              "Efficacy outcomes by study design",
+              "Sample size and population",
+              "Reported limitations",
+            ].map((ex) => (
+              <button
+                key={ex}
+                type="button"
+                onClick={() => setQuestion(ex)}
+                disabled={running}
+                className="rounded-md bg-surface-muted dark:bg-[#2A2A2A] px-3 py-1.5 text-[13px] text-text dark:text-[#ECECEC] hover:opacity-80 disabled:opacity-50"
+              >
+                {ex}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="flex items-center justify-between border-t border-border dark:border-[#2F2F2F] bg-surface dark:bg-[#1F1F1F] px-4 py-2.5">
+          <span className="text-[12px] text-text-faint dark:text-[#8E8E8E]">
+            {chosen.length} paper{chosen.length === 1 ? "" : "s"} selected
+          </span>
+          <button
+            type="submit"
+            disabled={!question.trim() || running || chosen.length === 0}
+            className="rounded-full bg-teal px-4 py-1.5 text-[13px] font-medium text-white hover:bg-teal-hover disabled:opacity-50"
+          >
+            {running ? "Extracting…" : "Run extract"}
+          </button>
+        </div>
       </form>
 
       <div className="mb-6 rounded-[10px] border border-border dark:border-[#2F2F2F] bg-surface dark:bg-[#1F1F1F]">
