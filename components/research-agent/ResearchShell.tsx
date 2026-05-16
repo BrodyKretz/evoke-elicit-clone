@@ -153,13 +153,13 @@ type SideItem = {
 const SIDE_WORKFLOWS: SideItem[] = [
   { label: "Research agent", icon: Atom, href: "/research-agent", mode: "research-agent" },
   { label: "Report", icon: BookOpen, href: "/lab/report", mode: "report" },
-  { label: "Systematic review", icon: ListChecks, href: "/lab/review", pro: true },
+  { label: "Systematic review", icon: ListChecks, href: "/lab/review" },
 ];
 
 const SIDE_TOOLS: SideItem[] = [
   { label: "Find papers", icon: Search, href: "/lab/find", mode: "find-papers" },
   { label: "Chat with papers", icon: MessageCircle, href: "/lab/chat", mode: "chat-papers" },
-  { label: "Extract data", icon: Scan, href: "/lab/extract", pro: true },
+  { label: "Extract data", icon: Scan, href: "/lab/extract" },
 ];
 
 const SIDE_RECENTS = [
@@ -327,14 +327,14 @@ function WorkflowDropdown({ mode }: { mode: Mode }) {
           {(["research-agent", "report"] as Mode[]).map((m) => (
             <DropdownItem key={m} m={m} active={m === mode} onPick={pick} />
           ))}
-          <DropdownItem m={null} label="Systematic review" icon={ListChecks} pro onPick={() => {}} />
+          <DropdownItem m={null} label="Systematic review" icon={ListChecks} onPick={() => {}} />
           <div className="mt-1 px-2 py-1 text-[11px] font-medium uppercase tracking-wider text-[#9CA3AF]">
             Tools
           </div>
           {(["find-papers", "chat-papers"] as Mode[]).map((m) => (
             <DropdownItem key={m} m={m} active={m === mode} onPick={pick} />
           ))}
-          <DropdownItem m="extract-data" active={"extract-data" === mode} pro onPick={pick} />
+          <DropdownItem m="extract-data" active={"extract-data" === mode} onPick={pick} />
         </div>
       )}
     </div>
