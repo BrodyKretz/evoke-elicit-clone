@@ -168,7 +168,7 @@ export function ReviewSearch() {
       )}
 
       {usedCriterion && (
-        <div className="mb-4 rounded-xl bg-teal-light px-4 py-3">
+        <div className="mb-4 rounded-xl bg-teal-light dark:bg-[#14302E] px-4 py-3">
           <div className="mb-1 inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider text-teal">
             <Sparkles size={11} /> Criterion applied
             {!criterion.trim() && (
@@ -202,7 +202,7 @@ export function ReviewSearch() {
                       {style.label}
                     </span>
                     {isSaved ? (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-teal-light px-2 py-0.5 text-[11px] font-medium text-teal">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-teal-light dark:bg-[#14302E] px-2 py-0.5 text-[11px] font-medium text-teal">
                         <Check size={10} /> Saved
                       </span>
                     ) : (

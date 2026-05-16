@@ -115,7 +115,7 @@ export function LabExtract() {
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           placeholder="What question is this extraction meant to answer? (guides which columns get generated)"
-          className="flex-1 bg-transparent text-[14px] outline-none placeholder:text-text-faint dark:placeholder:text-[#8E8E8E]"
+          className="flex-1 bg-transparent text-[14px] text-text dark:text-[#ECECEC] outline-none placeholder:text-text-faint dark:placeholder:text-[#8E8E8E]"
           disabled={running}
         />
         <button
