@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Paper } from "@/lib/types";
 import { Book, Grid, Search, User } from "@/components/ui/Icon";
 import { useToast } from "@/components/ui/Toast";
 import { getSelectedPapers, subscribeSelection } from "@/lib/lab/selection";
+import { getLibrary, subscribeLibrary } from "@/lib/library";
 
 type ExtractRow = {
   paperId: string;
@@ -24,21 +25,75 @@ type ExtractResult = {
 
 export function LabExtract() {
   const { show } = useToast();
-  const [papers, setPapers] = useState<Paper[]>([]);
+  const [selPapers, setSelPapers] = useState<Paper[]>([]);
+  const [libPapers, setLibPapers] = useState<Paper[]>([]);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [question, setQuestion] = useState("");
   const [running, setRunning] = useState(false);
   const [result, setResult] = useState<ExtractResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const refresh = () => setPapers(getSelectedPapers());
+    const refresh = () => setSelPapers(getSelectedPapers());
     refresh();
     return subscribeSelection(refresh);
   }, []);
 
+  useEffect(() => {
+    const refresh = () => setLibPapers(getLibrary().map((e) => e.paper));
+    refresh();
+    return subscribeLibrary(refresh);
+  }, []);
+
+  const { pool, originById } = useMemo(() => {
+    const seen = new Set<string>();
+    const merged: Paper[] = [];
+    const selIds = new Set(selPapers.map((p) => p.id));
+    const libIds = new Set(libPapers.map((p) => p.id));
+    const origin: Record<string, "selection" | "library" | "both"> = {};
+
+    for (const p of selPapers) {
+      if (!seen.has(p.id)) {
+        seen.add(p.id);
+        merged.push(p);
+      }
+      origin[p.id] = libIds.has(p.id) ? "both" : "selection";
+    }
+    for (const p of libPapers) {
+      if (!seen.has(p.id)) {
+        seen.add(p.id);
+        merged.push(p);
+      }
+      if (!origin[p.id]) {
+        origin[p.id] = selIds.has(p.id) ? "both" : "library";
+      }
+    }
+
+    return { pool: merged, originById: origin };
+  }, [selPapers, libPapers]);
+
+  useEffect(() => {
+    const poolIds = new Set(pool.map((p) => p.id));
+    setSelectedIds((prev) => {
+      const kept = new Set<string>();
+      for (const id of poolIds) {
+        if (prev.has(id) || prev.size === 0) {
+          kept.add(id);
+        }
+      }
+      // auto-add new ids not previously seen (and keep existing selections)
+      for (const id of poolIds) {
+        if (!prev.has(id)) kept.add(id);
+      }
+      return kept;
+    });
+  }, [pool.map((p) => p.id).join(",")]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const chosen = pool.filter((p) => selectedIds.has(p.id));
+
   const run = async () => {
     const q = question.trim();
-    if (!q || running || papers.length === 0) return;
+    if (!q || running || chosen.length === 0) return;
     setRunning(true);
     setError(null);
     setResult(null);
@@ -46,7 +101,7 @@ export function LabExtract() {
       const res = await fetch("/api/lab/extract", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ papers, question: q }),
+        body: JSON.stringify({ papers: chosen, question: q }),
       });
       const body = (await res.json().catch(() => ({}))) as ExtractResult & { error?: string };
       if (!res.ok) {
@@ -64,7 +119,7 @@ export function LabExtract() {
     }
   };
 
-  if (papers.length === 0) {
+  if (pool.length === 0) {
     return (
       <div className="mx-auto max-w-3xl px-8 py-12">
         <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-transparent bg-surface dark:bg-[#1F1F1F] px-2.5 py-0.5 text-[11px] uppercase tracking-wider text-text-muted dark:text-[#B4B4B4]">
@@ -74,18 +129,22 @@ export function LabExtract() {
           Extract data
         </h1>
         <p className="mb-6 max-w-2xl text-[14px] leading-relaxed text-text-muted dark:text-[#B4B4B4]">
-          You haven&apos;t selected any papers yet. Go to{" "}
-          <Link href="/lab/find" className="font-medium text-text dark:text-[#ECECEC] hover:underline">
-            Find papers
-          </Link>{" "}
-          and check the boxes next to papers you want to extract from.
+          No papers yet. Save papers to your Library, or select them in Find papers.
         </p>
-        <Link
-          href="/lab/find"
-          className="inline-flex items-center gap-1 rounded-md border border-teal bg-teal px-3 py-1.5 text-[13px] font-medium text-white hover:bg-teal-hover hover:border-teal-hover"
-        >
-          <Search size={12} /> Find papers
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            href="/lab/find"
+            className="inline-flex items-center gap-1 rounded-md border border-teal bg-teal px-3 py-1.5 text-[13px] font-medium text-white hover:bg-teal-hover hover:border-teal-hover"
+          >
+            <Search size={12} /> Find papers
+          </Link>
+          <Link
+            href="/library"
+            className="inline-flex items-center gap-1 rounded-md border border-border dark:border-[#2F2F2F] bg-surface dark:bg-[#1F1F1F] px-3 py-1.5 text-[13px] font-medium text-text dark:text-[#ECECEC] hover:opacity-80"
+          >
+            <Book size={12} /> View library
+          </Link>
+        </div>
       </div>
     );
   }
@@ -96,7 +155,7 @@ export function LabExtract() {
         Lab · Tool
       </div>
       <h1 className="mb-2 font-display text-2xl font-medium tracking-tight text-text dark:text-[#ECECEC]">
-        Extract data from {papers.length} paper{papers.length === 1 ? "" : "s"}
+        Extract data from {chosen.length} paper{chosen.length === 1 ? "" : "s"}
       </h1>
       <p className="mb-5 max-w-2xl text-[13px] text-text-muted dark:text-[#B4B4B4]">
         Columns are auto-generated by Sonnet 4.6 from your guiding question, then each
@@ -120,12 +179,35 @@ export function LabExtract() {
         />
         <button
           type="submit"
-          disabled={!question.trim() || running}
+          disabled={!question.trim() || running || chosen.length === 0}
           className="rounded-full bg-teal px-4 py-1.5 text-[13px] font-medium text-white hover:bg-teal-hover disabled:opacity-50"
         >
           {running ? "Extracting…" : "Run extract"}
         </button>
       </form>
+
+      <div className="mb-6 rounded-[10px] border border-border dark:border-[#2F2F2F] bg-surface dark:bg-[#1F1F1F]">
+        <div className="flex items-center justify-between border-b border-border dark:border-[#2F2F2F] px-4 py-2.5">
+          <span className="text-[13px] font-medium text-text dark:text-[#ECECEC]">Papers · {chosen.length} of {pool.length} selected</span>
+          <button type="button" onClick={() => setSelectedIds(chosen.length === pool.length ? new Set() : new Set(pool.map(p => p.id)))} className="text-[12px] font-medium text-teal hover:underline">{chosen.length === pool.length ? "Select none" : "Select all"}</button>
+        </div>
+        <ul className="max-h-64 overflow-y-auto">
+          {pool.map(p => {
+            const on = selectedIds.has(p.id);
+            const origin = originById[p.id];
+            return (
+              <li key={p.id} className="flex items-center gap-3 border-b border-border dark:border-[#2F2F2F] px-4 py-2 last:border-b-0">
+                <input type="checkbox" checked={on} onChange={() => setSelectedIds(prev => { const n = new Set(prev); if (n.has(p.id)) n.delete(p.id); else n.add(p.id); return n; })} className="h-4 w-4 accent-teal" />
+                <div className="min-w-0 flex-1">
+                  <div className="truncate text-[13px] text-text dark:text-[#ECECEC]">{p.title}</div>
+                  <div className="truncate text-[11.5px] text-text-faint dark:text-[#8E8E8E]">{p.authors?.slice(0,2).join(", ")}{p.authors && p.authors.length > 2 ? " et al." : ""} · {p.year || "n.d."}</div>
+                </div>
+                <span className="flex-shrink-0 rounded-full bg-surface-muted dark:bg-[#2A2A2A] px-2 py-0.5 text-[10.5px] uppercase tracking-wide text-text-faint dark:text-[#8E8E8E]">{origin === "both" ? "Both" : origin === "library" ? "Library" : "Selection"}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
 
       {error && (
         <div className="mb-6 rounded-[10px] bg-rose-50/50 px-4 py-3 text-sm text-rose-800">
@@ -135,7 +217,7 @@ export function LabExtract() {
 
       {running && (
         <div className="mb-6 rounded-[10px] border border-transparent bg-surface dark:bg-[#1F1F1F] px-4 py-6 text-center text-sm text-text-muted dark:text-[#B4B4B4]">
-          Running Sonnet 4.6 against {papers.length} paper{papers.length === 1 ? "" : "s"}…
+          Running Sonnet 4.6 against {chosen.length} paper{chosen.length === 1 ? "" : "s"}…
         </div>
       )}
 
