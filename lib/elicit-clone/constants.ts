@@ -30,13 +30,13 @@ export type Item = {
 export const WORKFLOW_ITEMS: Item[] = [
   { key: "research-agent", label: "Research agent", icon: Atom },
   { key: "report", label: "Report", icon: BookOpen },
-  { key: "systematic-review", label: "Systematic review", icon: ListChecks, pro: true },
+  { key: "systematic-review", label: "Systematic review", icon: ListChecks },
 ];
 
 export const TOOL_ITEMS: Item[] = [
   { key: "find-papers", label: "Find papers", icon: Search },
   { key: "chat-with-papers", label: "Chat with papers", icon: MessageCircle },
-  { key: "extract-data", label: "Extract data", icon: Scan, pro: true },
+  { key: "extract-data", label: "Extract data", icon: Scan },
 ];
 
 export const ALL_WORKFLOW_ITEMS: Item[] = [...WORKFLOW_ITEMS, ...TOOL_ITEMS];
