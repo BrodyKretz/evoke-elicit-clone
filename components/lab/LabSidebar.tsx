@@ -127,7 +127,7 @@ function LibraryRow({ pathname }: { pathname: string }) {
         <Book size={15} className="text-text" />
         <span className="flex-1 truncate">Library</span>
         {count > 0 && (
-          <span className="rounded-full bg-teal px-1.5 text-[10px] font-bold text-surface">
+          <span className="rounded-full bg-teal px-1.5 text-[10px] font-bold text-white">
             {count}
           </span>
         )}
