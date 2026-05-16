@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Paper } from "@/lib/types";
 import { Book, Grid, Search, User } from "@/components/ui/Icon";
 import { useToast } from "@/components/ui/Toast";
@@ -72,22 +72,22 @@ export function LabExtract() {
     return { pool: merged, originById: origin };
   }, [selPapers, libPapers]);
 
+  const seenIds = useRef<Set<string>>(new Set());
   useEffect(() => {
-    const poolIds = new Set(pool.map((p) => p.id));
     setSelectedIds((prev) => {
-      const kept = new Set<string>();
-      for (const id of poolIds) {
-        if (prev.has(id) || prev.size === 0) {
-          kept.add(id);
+      const next = new Set(prev);
+      for (const p of pool) {
+        if (!seenIds.current.has(p.id)) {
+          next.add(p.id); // newly-appeared paper defaults to selected
+          seenIds.current.add(p.id);
         }
       }
-      // auto-add new ids not previously seen (and keep existing selections)
-      for (const id of poolIds) {
-        if (!prev.has(id)) kept.add(id);
-      }
-      return kept;
+      const poolIds = new Set(pool.map((p) => p.id));
+      for (const id of [...next]) if (!poolIds.has(id)) next.delete(id); // prune removed
+      return next;
     });
-  }, [pool.map((p) => p.id).join(",")]); // eslint-disable-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pool.map((p) => p.id).join(",")]);
 
   const chosen = pool.filter((p) => selectedIds.has(p.id));
 
