@@ -102,8 +102,8 @@ export function ReviewSearch() {
 
   return (
     <div className="mx-auto max-w-4xl px-8 py-10">
-      <h1 className="mb-2 text-3xl font-semibold tracking-tight text-text">Systematic review</h1>
-      <p className="mb-7 max-w-2xl text-[14px] leading-relaxed text-text-muted">
+      <h1 className="mb-2 text-3xl font-semibold tracking-tight text-text dark:text-[#ECECEC]">Systematic review</h1>
+      <p className="mb-7 max-w-2xl text-[14px] leading-relaxed text-text-muted dark:text-[#B4B4B4]">
         Search + screen in one shot. Each paper is graded against your inclusion
         criterion (or one we auto-generate) so you only read what matters. 12
         papers per run — each triggers an LLM call.
@@ -114,14 +114,14 @@ export function ReviewSearch() {
           e.preventDefault();
           run();
         }}
-        className="mb-3 flex items-center gap-2 rounded-xl bg-surface px-4 py-2.5 shadow-sm"
+        className="mb-3 flex items-center gap-2 rounded-xl bg-surface dark:bg-[#1F1F1F] px-4 py-2.5 shadow-sm"
       >
-        <Search size={16} className="flex-shrink-0 text-text-faint" />
+        <Search size={16} className="flex-shrink-0 text-text-faint dark:text-[#8E8E8E]" />
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="e.g. SGLT2 inhibitors heart failure preserved ejection fraction"
-          className="flex-1 bg-transparent text-[14px] text-text outline-none placeholder:text-text-faint"
+          className="flex-1 bg-transparent text-[14px] text-text dark:text-[#ECECEC] outline-none placeholder:text-text-faint dark:placeholder:text-[#8E8E8E]"
           disabled={loading}
         />
         <button
@@ -133,10 +133,10 @@ export function ReviewSearch() {
         </button>
       </form>
 
-      <div className="mb-6 rounded-xl bg-surface p-3">
-        <label className="mb-1.5 flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider text-text-faint">
+      <div className="mb-6 rounded-xl bg-surface dark:bg-[#1F1F1F] p-3">
+        <label className="mb-1.5 flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider text-text-faint dark:text-[#8E8E8E]">
           <Filter size={11} /> Inclusion criterion
-          <span className="ml-1 normal-case tracking-normal text-text-faint">
+          <span className="ml-1 normal-case tracking-normal text-text-faint dark:text-[#8E8E8E]">
             (optional — leave blank to auto-generate)
           </span>
         </label>
@@ -145,15 +145,15 @@ export function ReviewSearch() {
           onChange={(e) => setCriterion(e.target.value)}
           placeholder="e.g. Studies enrolling adults ≥65 with HFpEF reporting CV-death or HF-hospitalization outcomes"
           rows={2}
-          className="w-full resize-y rounded-md bg-transparent px-2 py-1.5 text-[13px] text-text outline-none placeholder:text-text-faint"
+          className="w-full resize-y rounded-md bg-transparent px-2 py-1.5 text-[13px] text-text dark:text-[#ECECEC] outline-none placeholder:text-text-faint dark:placeholder:text-[#8E8E8E]"
           disabled={loading}
         />
       </div>
 
       {correctedQuery && (
-        <div className="mb-4 rounded-lg border border-border bg-surface px-4 py-2 text-[13px] text-text">
+        <div className="mb-4 rounded-lg border border-border dark:border-[#2F2F2F] bg-surface dark:bg-[#1F1F1F] px-4 py-2 text-[13px] text-text dark:text-[#ECECEC]">
           Searched as: <span className="font-semibold">{correctedQuery}</span>{" "}
-          <span className="text-text-faint">(auto-corrected)</span>
+          <span className="text-text-faint dark:text-[#8E8E8E]">(auto-corrected)</span>
         </div>
       )}
 
@@ -162,7 +162,7 @@ export function ReviewSearch() {
       )}
 
       {ran && !loading && !error && papers.length === 0 && (
-        <div className="rounded-lg border border-border-strong bg-surface px-4 py-3 text-[13px] text-text-muted">
+        <div className="rounded-lg border border-border-strong dark:border-[#3F3F3F] bg-surface dark:bg-[#1F1F1F] px-4 py-3 text-[13px] text-text-muted dark:text-[#B4B4B4]">
           No papers found. Try rewording the query.
         </div>
       )}
@@ -172,11 +172,11 @@ export function ReviewSearch() {
           <div className="mb-1 inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider text-teal">
             <Sparkles size={11} /> Criterion applied
             {!criterion.trim() && (
-              <span className="ml-1 normal-case tracking-normal text-text-faint">(auto-generated)</span>
+              <span className="ml-1 normal-case tracking-normal text-text-faint dark:text-[#8E8E8E]">(auto-generated)</span>
             )}
           </div>
-          <p className="text-[13px] leading-relaxed text-text">{usedCriterion.text}</p>
-          <div className="mt-2 text-[11.5px] text-text-faint">
+          <p className="text-[13px] leading-relaxed text-text dark:text-[#ECECEC]">{usedCriterion.text}</p>
+          <div className="mt-2 text-[11.5px] text-text-faint dark:text-[#8E8E8E]">
             {includedCount} of {papers.length} included
           </div>
         </div>
@@ -194,7 +194,7 @@ export function ReviewSearch() {
                 className={cn("rounded-xl border px-4 py-4 transition-colors", style.row)}
               >
                 <div className="mb-1.5 flex items-start justify-between gap-2">
-                  <h3 className="text-[15px] font-semibold leading-snug text-text">
+                  <h3 className="text-[15px] font-semibold leading-snug text-text dark:text-[#ECECEC]">
                     {paper.title}
                   </h3>
                   <div className="flex flex-shrink-0 items-center gap-1.5">
@@ -213,19 +213,19 @@ export function ReviewSearch() {
                           if (added > 0) show("Saved to library");
                           else show("Already in your library");
                         }}
-                        className="inline-flex items-center gap-1 rounded-full border border-border-strong px-2 py-0.5 text-[11px] font-medium text-text-muted hover:border-border hover:text-text"
+                        className="inline-flex items-center gap-1 rounded-full border border-border-strong dark:border-[#3F3F3F] px-2 py-0.5 text-[11px] font-medium text-text-muted dark:text-[#B4B4B4] hover:border-border dark:hover:border-[#3F3F3F] hover:text-text dark:hover:text-[#ECECEC]"
                       >
                         <Book size={10} /> Save
                       </button>
                     )}
                   </div>
                 </div>
-                <div className="mb-1.5 inline-flex items-center gap-1.5 text-[13px] text-text-muted">
+                <div className="mb-1.5 inline-flex items-center gap-1.5 text-[13px] text-text-muted dark:text-[#B4B4B4]">
                   <User size={12} />
                   {paper.authors.slice(0, 4).join(", ")}
                   {paper.authors.length > 4 ? ` +${paper.authors.length - 4}` : ""}
                 </div>
-                <div className="mb-2 inline-flex flex-wrap items-center gap-2.5 text-[12px] text-text-muted">
+                <div className="mb-2 inline-flex flex-wrap items-center gap-2.5 text-[12px] text-text-muted dark:text-[#B4B4B4]">
                   <span className="inline-flex items-center gap-1">
                     <Book size={11} />
                     {paper.journal ? `${paper.journal} · ` : ""}
@@ -237,15 +237,15 @@ export function ReviewSearch() {
                       href={`https://doi.org/${paper.doi}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-1 rounded bg-surface px-1.5 py-0.5 font-medium hover:text-text"
+                      className="inline-flex items-center gap-1 rounded bg-surface dark:bg-[#1F1F1F] px-1.5 py-0.5 font-medium hover:text-text dark:hover:text-[#ECECEC]"
                     >
                       <LinkIcon size={10} /> DOI
                     </a>
                   )}
                 </div>
                 {decision?.rationale && (
-                  <p className="rounded-md bg-surface-muted px-3 py-2 text-[12.5px] leading-relaxed text-text">
-                    <span className="text-text-faint">Rationale: </span>
+                  <p className="rounded-md bg-surface-muted dark:bg-[#2A2A2A] px-3 py-2 text-[12.5px] leading-relaxed text-text dark:text-[#ECECEC]">
+                    <span className="text-text-faint dark:text-[#8E8E8E]">Rationale: </span>
                     {decision.rationale}
                   </p>
                 )}
