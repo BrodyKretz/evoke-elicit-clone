@@ -42,7 +42,7 @@ const TOOLS: Item[] = [
 function Section({ title, items, pathname }: { title: string; items: Item[]; pathname: string }) {
   return (
     <div className="mb-3">
-      <div className="mb-1 px-3 text-[11px] font-medium uppercase tracking-wider text-[#8E8E8E]">
+      <div className="mb-1 px-3 text-[11px] font-medium uppercase tracking-wider text-text-faint">
         {title}
       </div>
       <ul className="flex flex-col">
@@ -56,14 +56,14 @@ function Section({ title, items, pathname }: { title: string; items: Item[]; pat
                 className={cn(
                   "mx-1 flex items-center gap-2.5 rounded-md px-2.5 py-2 text-[14px] transition-colors",
                   active
-                    ? "bg-[#2F2F2F] text-[#ECECEC]"
-                    : "text-[#ECECEC] hover:bg-[#2A2A2A]"
+                    ? "bg-surface-muted text-text"
+                    : "text-text hover:bg-surface"
                 )}
               >
-                <Icon size={15} className="text-[#ECECEC]" />
+                <Icon size={15} className="text-text" />
                 <span className="flex-1 truncate">{it.label}</span>
                 {it.badge && (
-                  <span className="rounded-md bg-[#2A2A2A] px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-[#8E8E8E]">
+                  <span className="rounded-md bg-surface px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-text-faint">
                     {it.badge}
                   </span>
                 )}
@@ -80,12 +80,12 @@ export function LabSidebar() {
   const pathname = usePathname() ?? "";
 
   return (
-    <aside className="flex h-screen w-[260px] flex-shrink-0 flex-col bg-[#171717] text-[#ECECEC]">
+    <aside className="flex h-screen w-[260px] flex-shrink-0 flex-col bg-bg text-text">
       <div className="flex items-center justify-between px-4 py-3.5">
-        <Link href="/" className="text-lg font-semibold tracking-tight text-[#ECECEC]">
+        <Link href="/" className="text-lg font-semibold tracking-tight text-text">
           Evoke
         </Link>
-        <span className="rounded-md bg-[#2A2A2A] px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-[#B4B4B4]">
+        <span className="rounded-md bg-surface px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-text-muted">
           Lab
         </span>
       </div>
@@ -96,7 +96,7 @@ export function LabSidebar() {
         <LibraryRow pathname={pathname} />
       </nav>
 
-      <div className="px-3 py-3 text-[11.5px] leading-relaxed text-[#8E8E8E]">
+      <div className="px-3 py-3 text-[11.5px] leading-relaxed text-text-faint">
         Standalone tools that share Evoke&apos;s agent stack. Pick papers,
         then chat or extract without committing to a full report.
       </div>
@@ -116,18 +116,18 @@ function LibraryRow({ pathname }: { pathname: string }) {
   }, []);
   const active = pathname === "/library";
   return (
-    <div className="mb-3 mt-1 border-t border-[#2A2A2A] pt-3">
+    <div className="mb-3 mt-1 border-t border-border pt-3">
       <Link
         href="/library"
         className={cn(
           "mx-1 flex items-center gap-2.5 rounded-md px-2.5 py-2 text-[14px] transition-colors",
-          active ? "bg-[#2F2F2F] text-[#ECECEC]" : "text-[#ECECEC] hover:bg-[#2A2A2A]"
+          active ? "bg-surface-muted text-text" : "text-text hover:bg-surface"
         )}
       >
-        <Book size={15} className="text-[#ECECEC]" />
+        <Book size={15} className="text-text" />
         <span className="flex-1 truncate">Library</span>
         {count > 0 && (
-          <span className="rounded-full bg-[#1F6E68] px-1.5 text-[10px] font-bold text-white">
+          <span className="rounded-full bg-teal px-1.5 text-[10px] font-bold text-surface">
             {count}
           </span>
         )}

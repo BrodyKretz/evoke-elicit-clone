@@ -6,16 +6,16 @@ import Link from "next/link";
 // position the old "Lab" pill held on the previous home page.
 export function LabTopBar() {
   return (
-    <header className="flex h-12 items-center justify-end bg-[#212121] px-5">
+    <header className="flex h-12 items-center justify-end bg-bg px-5">
       <Link
         href="/research-agent"
-        className="inline-flex items-center rounded-full bg-[#ECECEC] px-4 py-1.5 text-[13px] font-medium text-[#0D0D0D] hover:bg-white"
+        className="inline-flex items-center rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-surface hover:bg-text"
       >
         Research agent
       </Link>
       <Link
         href="/research-agent/v1"
-        className="ml-2 inline-flex items-center rounded-full border border-[#3A3A3A] bg-transparent px-3 py-1 text-[12px] font-medium text-[#B4B4B4] hover:border-[#5D5D5D] hover:text-[#ECECEC]"
+        className="ml-2 inline-flex items-center rounded-full border border-border-strong bg-transparent px-3 py-1 text-[12px] font-medium text-text-muted hover:border-border hover:text-text"
       >
         v1
       </Link>
