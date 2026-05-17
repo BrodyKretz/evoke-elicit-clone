@@ -13,27 +13,27 @@ export default function ResearchAgentV1Page() {
 
   return (
     <div
-      className="min-h-screen bg-[#212121] text-[#ECECEC]"
+      className="min-h-screen bg-bg text-text"
       style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
     >
-      <header className="flex items-center justify-between bg-[#171717] px-6 py-3">
+      <header className="flex items-center justify-between bg-surface px-6 py-3">
         <div className="flex items-center gap-4">
-          <Link href="/" className="text-lg font-semibold tracking-tight text-[#ECECEC]">
+          <Link href="/" className="text-lg font-semibold tracking-tight text-text">
             Evoke
           </Link>
-          <span className="rounded-md bg-[#2A2A2A] px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-[#B4B4B4]">
+          <span className="rounded-md bg-surface-muted px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-text-muted">
             v1
           </span>
           <CorpusToggle />
         </div>
-        <nav className="flex items-center gap-3 text-[13px] text-[#B4B4B4]">
+        <nav className="flex items-center gap-3 text-[13px] text-text-muted">
           <Link
             href="/research-agent"
-            className="inline-flex items-center rounded-full bg-[#ECECEC] px-4 py-1.5 text-[13px] font-medium text-[#0D0D0D] hover:bg-white"
+            className="inline-flex items-center rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-bg hover:bg-white"
           >
             Current research agent
           </Link>
-          <Link href="/" className="hover:text-[#ECECEC]">
+          <Link href="/" className="hover:text-text">
             Lab
           </Link>
         </nav>
@@ -44,8 +44,8 @@ export default function ResearchAgentV1Page() {
       <section className="mx-auto max-w-6xl px-6 pb-24">
         <div className="mb-5 flex items-end justify-between">
           <div>
-            <h2 className="text-2xl font-semibold text-[#ECECEC]">Example reports</h2>
-            <p className="mt-1 text-sm text-[#B4B4B4]">
+            <h2 className="text-2xl font-semibold text-text">Example reports</h2>
+            <p className="mt-1 text-sm text-text-muted">
               Three reports baked in to demonstrate each pipeline stage.
             </p>
           </div>
@@ -56,9 +56,9 @@ export default function ResearchAgentV1Page() {
           ))}
         </div>
 
-        <div className="mt-12 rounded-[12px] bg-[#2A2A2A] p-6">
-          <h3 className="mb-2 text-lg font-semibold text-[#ECECEC]">How the pipeline works</h3>
-          <p className="mb-4 max-w-prose text-sm text-[#B4B4B4]">
+        <div className="mt-12 rounded-[12px] bg-surface p-6">
+          <h3 className="mb-2 text-lg font-semibold text-text">How the pipeline works</h3>
+          <p className="mb-4 max-w-prose text-sm text-text-muted">
             Four stages, modeled after Elicit. Gather → Screen → Extract → Synthesize, with a
             scoped chat panel for follow-up questions on every run.
           </p>
@@ -69,10 +69,10 @@ export default function ResearchAgentV1Page() {
               { n: "3", t: "Extract", d: "LLMs pull structured fields from each paper into a table." },
               { n: "4", t: "Generate", d: "Synthesize the extracted data into a narrative review with citations." },
             ].map((s) => (
-              <li key={s.n} className="rounded-[10px] bg-[#212121] p-4">
-                <div className="mb-1 text-2xl font-semibold text-[#ECECEC]">{s.n}</div>
-                <div className="mb-1 text-sm font-semibold text-[#ECECEC]">{s.t}</div>
-                <div className="text-xs text-[#B4B4B4]">{s.d}</div>
+              <li key={s.n} className="rounded-[10px] bg-bg p-4">
+                <div className="mb-1 text-2xl font-semibold text-text">{s.n}</div>
+                <div className="mb-1 text-sm font-semibold text-text">{s.t}</div>
+                <div className="text-xs text-text-muted">{s.d}</div>
               </li>
             ))}
           </ol>

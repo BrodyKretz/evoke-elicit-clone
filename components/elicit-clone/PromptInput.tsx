@@ -28,18 +28,18 @@ export function PromptInput() {
   const showModeDropdown = modeOptions !== null && modeOptions.length > 0;
 
   return (
-    <div className="relative rounded-2xl border border-[#E5E7EB] bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.04),_0_10px_30px_rgba(31,110,104,0.06)]">
+    <div className="relative rounded-2xl border border-border bg-surface p-5 shadow-[0_1px_3px_rgba(0,0,0,0.04),_0_10px_30px_rgba(31,110,104,0.06)]">
       <div className="relative">
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder={PLACEHOLDER}
-          className="block min-h-[120px] w-full resize-none border-0 bg-transparent text-[17px] text-[#1F2937] outline-none placeholder:text-[#6B7280] focus:outline-none focus:ring-0"
+          className="block min-h-[120px] w-full resize-none border-0 bg-transparent text-[17px] text-text outline-none placeholder:text-text-muted focus:outline-none focus:ring-0"
         />
         {/* Decorative "G" badge per the design spec — purely visual, no integration. */}
         <span
           aria-hidden
-          className="pointer-events-none absolute bottom-2 right-2 grid h-7 w-7 place-items-center rounded-full bg-[#15A47B] text-sm font-bold text-white"
+          className="pointer-events-none absolute bottom-2 right-2 grid h-7 w-7 place-items-center rounded-full bg-teal text-sm font-bold text-white"
         >
           G
         </span>
@@ -71,14 +71,14 @@ export function PromptInput() {
         <button
           type="button"
           aria-label="Usage"
-          className="rounded-lg border border-[#E5E7EB] p-1.5 text-[#1F2937] hover:bg-[#F3F4F6]"
+          className="rounded-lg border border-border p-1.5 text-text hover:bg-surface-muted"
         >
           <PieChart size={16} />
         </button>
         <button
           type="button"
           aria-label="Attach"
-          className="rounded-lg border border-[#E5E7EB] p-1.5 text-[#1F2937] hover:bg-[#F3F4F6]"
+          className="rounded-lg border border-border p-1.5 text-text hover:bg-surface-muted"
         >
           <Plus size={16} />
         </button>
@@ -86,7 +86,7 @@ export function PromptInput() {
         <button
           type="button"
           aria-label="Submit"
-          className="ml-auto grid h-9 w-9 place-items-center rounded-lg bg-[#1F6E68] text-white transition-colors hover:bg-[#185650]"
+          className="ml-auto grid h-9 w-9 place-items-center rounded-lg bg-teal text-white transition-colors hover:bg-teal-hover"
         >
           <ArrowRight size={18} />
         </button>

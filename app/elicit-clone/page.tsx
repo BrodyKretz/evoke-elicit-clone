@@ -18,7 +18,7 @@ export default function ElicitClonePage() {
 
           <div className="mt-10 flex items-start gap-8">
             <section className="flex-none">
-              <h2 className="mb-3 text-sm text-[#6B7280]">Jump back in</h2>
+              <h2 className="mb-3 text-sm text-text-muted">Jump back in</h2>
               <RecentCard
                 title={JUMP_BACK_IN.title}
                 workflow={JUMP_BACK_IN.workflow}
@@ -27,7 +27,7 @@ export default function ElicitClonePage() {
             </section>
 
             <section className="flex-1">
-              <h2 className="mb-3 text-sm text-[#6B7280]">Suggested based on your work</h2>
+              <h2 className="mb-3 text-sm text-text-muted">Suggested based on your work</h2>
               <div className="flex gap-4">
                 {SUGGESTED.map((c) => (
                   <RecentCard key={c.title} title={c.title} workflow={c.workflow} />

@@ -26,14 +26,14 @@ function statusLabel(status: TrialStatus): string {
 
 function statusTone(status: TrialStatus): string {
   if (status === "RECRUITING" || status === "ENROLLING_BY_INVITATION") {
-    return "bg-[#1F6E68]/20 text-[#5FE3C6]";
+    return "bg-teal-light text-teal-bright";
   }
-  if (status === "ACTIVE_NOT_RECRUITING") return "bg-[#3F3F3F] text-[#ECECEC]";
-  if (status === "COMPLETED") return "bg-[#2F2F2F] text-[#B4B4B4]";
+  if (status === "ACTIVE_NOT_RECRUITING") return "bg-border-strong text-text";
+  if (status === "COMPLETED") return "bg-surface-muted text-text-muted";
   if (status === "TERMINATED" || status === "WITHDRAWN" || status === "SUSPENDED") {
-    return "bg-[#3A1F1F] text-[#FF6B6B]";
+    return "bg-rose-50/50 text-rose-800";
   }
-  return "bg-[#2F2F2F] text-[#B4B4B4]";
+  return "bg-surface-muted text-text-muted";
 }
 
 export function TrialsSearch() {
@@ -88,8 +88,8 @@ export function TrialsSearch() {
 
   return (
     <div className="mx-auto max-w-4xl px-8 py-10">
-      <h1 className="mb-2 text-3xl font-semibold tracking-tight text-[#ECECEC]">Clinical trials</h1>
-      <p className="mb-7 max-w-2xl text-[14px] leading-relaxed text-[#B4B4B4]">
+      <h1 className="mb-2 text-3xl font-semibold tracking-tight text-text">Clinical trials</h1>
+      <p className="mb-7 max-w-2xl text-[14px] leading-relaxed text-text-muted">
         Live search against ClinicalTrials.gov. Returns NCT id, phases, conditions,
         interventions, sponsor, enrollment, and dates.
       </p>
@@ -99,32 +99,32 @@ export function TrialsSearch() {
           e.preventDefault();
           run();
         }}
-        className="mb-3 flex items-center gap-2 rounded-xl bg-[#2F2F2F] px-4 py-2.5 shadow-sm"
+        className="mb-3 flex items-center gap-2 rounded-xl bg-surface-muted px-4 py-2.5 shadow-sm"
       >
-        <Search size={16} className="flex-shrink-0 text-[#8E8E8E]" />
+        <Search size={16} className="flex-shrink-0 text-text-faint" />
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="e.g. GLP-1 agonist heart failure"
-          className="flex-1 bg-transparent text-[14px] text-[#ECECEC] outline-none placeholder:text-[#8E8E8E]"
+          className="flex-1 bg-transparent text-[14px] text-text outline-none placeholder:text-text-faint"
           disabled={loading}
         />
         <button
           type="submit"
           disabled={!q.trim() || loading}
-          className="rounded-full bg-[#ECECEC] px-4 py-1.5 text-[13px] font-medium text-[#0D0D0D] hover:bg-white disabled:opacity-50"
+          className="rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-bg hover:bg-white disabled:opacity-50"
         >
           {loading ? "Searching…" : "Search"}
         </button>
       </form>
 
-      <div className="mb-6 flex items-center gap-2 text-[12px] text-[#B4B4B4]">
+      <div className="mb-6 flex items-center gap-2 text-[12px] text-text-muted">
         <Filter size={12} />
         <span>Status:</span>
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value as "" | TrialStatus)}
-          className="rounded-md bg-[#2A2A2A] px-2 py-1 text-[12px] text-[#ECECEC] outline-none"
+          className="rounded-md bg-surface px-2 py-1 text-[12px] text-text outline-none"
         >
           {STATUS_OPTIONS.map((o) => (
             <option key={o.value} value={o.value}>
@@ -135,18 +135,18 @@ export function TrialsSearch() {
       </div>
 
       {error && (
-        <div className="mb-6 rounded-lg bg-[#3A1F1F] px-4 py-3 text-sm text-[#FF6B6B]">{error}</div>
+        <div className="mb-6 rounded-lg bg-rose-50/50 px-4 py-3 text-sm text-rose-800">{error}</div>
       )}
 
       {ran && !loading && !error && trials.length === 0 && (
-        <div className="rounded-lg border border-[#3F3F3F] bg-[#2A2A2A] px-4 py-3 text-[13px] text-[#B4B4B4]">
+        <div className="rounded-lg border border-border-strong bg-surface px-4 py-3 text-[13px] text-text-muted">
           No trials found. Try rewording or loosening the status filter.
         </div>
       )}
 
       {trials.length > 0 && (
         <>
-          <div className="mb-2 text-[12px] uppercase tracking-wider text-[#8E8E8E]">
+          <div className="mb-2 text-[12px] uppercase tracking-wider text-text-faint">
             {trials.length}
             {totalCount && totalCount > trials.length ? ` of ${totalCount}` : ""} trial
             {trials.length === 1 ? "" : "s"}
@@ -155,22 +155,22 @@ export function TrialsSearch() {
             {trials.map((t) => (
               <li
                 key={t.nctId}
-                className="rounded-xl border border-transparent bg-[#2A2A2A] px-4 py-4 transition-colors hover:bg-[#333333]"
+                className="rounded-xl border border-transparent bg-surface px-4 py-4 transition-colors hover:bg-surface-muted"
               >
                 <div className="mb-1.5 flex items-start justify-between gap-2">
-                  <h3 className="text-[15px] font-semibold leading-snug text-[#ECECEC]">{t.title}</h3>
+                  <h3 className="text-[15px] font-semibold leading-snug text-text">{t.title}</h3>
                   <span
                     className={`inline-flex flex-shrink-0 items-center rounded-full px-2 py-0.5 text-[11px] font-medium ${statusTone(t.status)}`}
                   >
                     {statusLabel(t.status)}
                   </span>
                 </div>
-                <div className="mb-2 inline-flex flex-wrap items-center gap-2.5 text-[12px] text-[#B4B4B4]">
+                <div className="mb-2 inline-flex flex-wrap items-center gap-2.5 text-[12px] text-text-muted">
                   <a
                     href={t.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 rounded bg-[#2F2F2F] px-1.5 py-0.5 font-medium hover:text-[#ECECEC]"
+                    className="inline-flex items-center gap-1 rounded bg-surface-muted px-1.5 py-0.5 font-medium hover:text-text"
                   >
                     <LinkIcon size={10} /> {t.nctId}
                   </a>
@@ -186,30 +186,30 @@ export function TrialsSearch() {
                   )}
                 </div>
                 {t.sponsor && (
-                  <div className="mb-1.5 inline-flex items-center gap-1.5 text-[12.5px] text-[#B4B4B4]">
+                  <div className="mb-1.5 inline-flex items-center gap-1.5 text-[12.5px] text-text-muted">
                     <User size={12} /> {t.sponsor}
                   </div>
                 )}
                 {t.conditions.length > 0 && (
-                  <div className="mb-1 text-[12.5px] text-[#ECECEC]">
-                    <span className="text-[#8E8E8E]">Conditions: </span>
+                  <div className="mb-1 text-[12.5px] text-text">
+                    <span className="text-text-faint">Conditions: </span>
                     {t.conditions.slice(0, 6).join(" · ")}
                     {t.conditions.length > 6 ? ` +${t.conditions.length - 6}` : ""}
                   </div>
                 )}
                 {t.interventions.length > 0 && (
-                  <div className="text-[12.5px] text-[#ECECEC]">
-                    <span className="text-[#8E8E8E]">Interventions: </span>
+                  <div className="text-[12.5px] text-text">
+                    <span className="text-text-faint">Interventions: </span>
                     {t.interventions.slice(0, 6).join(" · ")}
                     {t.interventions.length > 6 ? ` +${t.interventions.length - 6}` : ""}
                   </div>
                 )}
-                <div className="mt-2.5 inline-flex items-center gap-1 text-[12px] text-[#B4B4B4]">
+                <div className="mt-2.5 inline-flex items-center gap-1 text-[12px] text-text-muted">
                   <a
                     href={t.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 hover:text-[#ECECEC]"
+                    className="inline-flex items-center gap-1 hover:text-text"
                   >
                     Open on ClinicalTrials.gov <ExternalLink size={11} />
                   </a>

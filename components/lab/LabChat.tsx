@@ -161,15 +161,15 @@ export function LabChat() {
   if (papers.length === 0) {
     return (
       <div className="mx-auto max-w-3xl px-8 py-12">
-        <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-transparent bg-[#2A2A2A] px-2.5 py-0.5 text-[11px] uppercase tracking-wider text-[#B4B4B4]">
+        <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-transparent bg-surface px-2.5 py-0.5 text-[11px] uppercase tracking-wider text-text-muted">
           Lab · Tool
         </div>
-        <h1 className="mb-3 font-display text-3xl font-medium tracking-tight text-[#ECECEC]">
+        <h1 className="mb-3 font-display text-3xl font-medium tracking-tight text-text">
           Chat with papers
         </h1>
-        <p className="mb-6 max-w-2xl text-[14px] leading-relaxed text-[#B4B4B4]">
+        <p className="mb-6 max-w-2xl text-[14px] leading-relaxed text-text-muted">
           You haven&apos;t selected any papers yet. Head to{" "}
-          <Link href="/lab/find" className="font-medium text-[#ECECEC] hover:underline">
+          <Link href="/lab/find" className="font-medium text-text hover:underline">
             Find papers
           </Link>{" "}
           and check the boxes next to papers you want to discuss. Your selection is saved
@@ -177,7 +177,7 @@ export function LabChat() {
         </p>
         <Link
           href="/lab/find"
-          className="inline-flex items-center gap-1 rounded-full bg-[#ECECEC] px-4 py-1.5 text-[13px] font-medium text-[#0D0D0D] hover:bg-white"
+          className="inline-flex items-center gap-1 rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-bg hover:bg-white"
         >
           <Search size={12} /> Find papers
         </Link>
@@ -187,29 +187,29 @@ export function LabChat() {
 
   return (
     <div className="mx-auto flex h-[calc(100vh-60px)] max-w-4xl flex-col px-8 py-6">
-      <div className="mb-1 inline-flex items-center gap-1.5 self-start rounded-full border border-transparent bg-[#2A2A2A] px-2.5 py-0.5 text-[11px] uppercase tracking-wider text-[#B4B4B4]">
+      <div className="mb-1 inline-flex items-center gap-1.5 self-start rounded-full border border-transparent bg-surface px-2.5 py-0.5 text-[11px] uppercase tracking-wider text-text-muted">
         Lab · Tool
       </div>
-      <h1 className="mb-2 font-display text-2xl font-medium tracking-tight text-[#ECECEC]">
+      <h1 className="mb-2 font-display text-2xl font-medium tracking-tight text-text">
         Chat with {papers.length} paper{papers.length === 1 ? "" : "s"}
       </h1>
 
-      <div className="mb-4 rounded-[10px] border border-transparent bg-[#2A2A2A]">
+      <div className="mb-4 rounded-[10px] border border-transparent bg-surface">
         <button
           onClick={() => setPaperListOpen((v) => !v)}
-          className="flex w-full items-center justify-between px-3 py-2 text-[12.5px] font-medium text-[#B4B4B4] hover:text-[#ECECEC]"
+          className="flex w-full items-center justify-between px-3 py-2 text-[12.5px] font-medium text-text-muted hover:text-text"
         >
           <span>{paperListOpen ? "Hide" : "Show"} selected papers</span>
-          <span className="text-[#8E8E8E]">{papers.length}</span>
+          <span className="text-text-faint">{papers.length}</span>
         </button>
         {paperListOpen && (
           <ul className="border-t border-transparent px-3 py-2 text-[12.5px]">
             {papers.map((p) => (
               <li key={p.id} className="flex items-start gap-2 py-1">
-                <User size={11} className="mt-1 flex-shrink-0 text-[#8E8E8E]" />
+                <User size={11} className="mt-1 flex-shrink-0 text-text-faint" />
                 <div className="min-w-0">
-                  <div className="truncate font-medium text-[#ECECEC]">{p.title}</div>
-                  <div className="text-[#B4B4B4]">
+                  <div className="truncate font-medium text-text">{p.title}</div>
+                  <div className="text-text-muted">
                     <Book size={9} className="mr-1 inline" />
                     {p.authors.slice(0, 2).join(", ")}
                     {p.authors.length > 2 ? " et al." : ""} · {p.year || "n.d."}
@@ -225,15 +225,15 @@ export function LabChat() {
         value={topic}
         onChange={(e) => setTopic(e.target.value)}
         placeholder="Optional: what's the overall topic? (helps frame the chat)"
-        className="mb-3 w-full rounded-md border border-transparent bg-[#2A2A2A] px-3 py-1.5 text-[13px] outline-none focus:border-[#0D0D0D]"
+        className="mb-3 w-full rounded-md border border-transparent bg-surface px-3 py-1.5 text-[13px] outline-none focus:border-border-strong"
       />
 
       <div
         ref={scrollRef}
-        className="mb-3 flex-1 overflow-y-auto rounded-[10px] border border-transparent bg-[#2A2A2A] p-3"
+        className="mb-3 flex-1 overflow-y-auto rounded-[10px] border border-transparent bg-surface p-3"
       >
         {messages.length === 0 ? (
-          <div className="space-y-2 text-[13px] text-[#B4B4B4]">
+          <div className="space-y-2 text-[13px] text-text-muted">
             <p>Ask anything about your selected papers:</p>
             <ul className="space-y-1 text-xs">
               <li>· Compare findings across two papers</li>
@@ -256,13 +256,13 @@ export function LabChat() {
                   key={i}
                   className={
                     m.role === "user"
-                      ? "ml-6 rounded-lg bg-[#2F2F2F] px-2.5 py-1.5 text-[13px] text-[#ECECEC]"
+                      ? "ml-6 rounded-lg bg-surface-muted px-2.5 py-1.5 text-[13px] text-text"
                       : m.isDumDum
-                      ? "mr-2 rounded-md border-l-2 border-teal bg-[#2F2F2F]/30 px-2 py-1.5 text-[13px] leading-relaxed text-[#ECECEC]"
-                      : "mr-2 text-[13px] leading-relaxed text-[#ECECEC]"
+                      ? "mr-2 rounded-md border-l-2 border-teal bg-surface-muted/30 px-2 py-1.5 text-[13px] leading-relaxed text-text"
+                      : "mr-2 text-[13px] leading-relaxed text-text"
                   }
                 >
-                  <div className="mb-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#B4B4B4]">
+                  <div className="mb-0.5 text-[10px] font-semibold uppercase tracking-wider text-text-muted">
                     {m.role === "user" ? "You" : m.isDumDum ? "Evoke · DumDum" : "Evoke"}
                   </div>
                   <div className="whitespace-pre-wrap">
@@ -272,7 +272,7 @@ export function LabChat() {
                     <button
                       type="button"
                       onClick={() => simplify(i)}
-                      className="mt-1.5 inline-flex items-center gap-1 rounded-full border border-transparent-strong bg-[#2A2A2A] px-2.5 py-0.5 text-[11px] font-medium text-[#B4B4B4] hover:border-[#0D0D0D] hover:text-[#ECECEC]"
+                      className="mt-1.5 inline-flex items-center gap-1 rounded-full border border-border bg-surface px-2.5 py-0.5 text-[11px] font-medium text-text-muted hover:border-border-strong hover:text-text"
                       title="Rewrite this answer in plain language for a high-schooler."
                     >
                       DumDum it
@@ -304,12 +304,12 @@ export function LabChat() {
           rows={2}
           disabled={streaming}
           placeholder="Ask a question about these papers…"
-          className="flex-1 resize-none rounded-md border border-transparent bg-[#2A2A2A] px-3 py-2 text-[13px] outline-none focus:border-[#0D0D0D] disabled:opacity-60"
+          className="flex-1 resize-none rounded-md border border-transparent bg-surface px-3 py-2 text-[13px] outline-none focus:border-border-strong disabled:opacity-60"
         />
         <button
           type="submit"
           disabled={!draft.trim() || streaming}
-          className="rounded-full bg-[#ECECEC] px-4 py-1.5 text-[13px] font-medium text-[#0D0D0D] hover:bg-white disabled:opacity-50"
+          className="rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-bg hover:bg-white disabled:opacity-50"
         >
           {streaming ? "…" : "Send"}
         </button>

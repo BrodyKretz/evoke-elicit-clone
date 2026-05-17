@@ -195,12 +195,12 @@ function staticTimeline(report: Report): Entry[] {
 }
 
 const DOT_BY_KIND: Record<Entry["kind"], string> = {
-  step: "bg-[#1F6E68]",
-  criterion: "bg-[#1F6E68]",
-  columns: "bg-[#1F6E68]",
-  progress: "bg-[#9CA3AF]",
-  tldr: "bg-[#1F6E68]",
-  done: "bg-[#1F6E68]",
+  step: "bg-teal",
+  criterion: "bg-teal",
+  columns: "bg-teal",
+  progress: "bg-text-faint",
+  tldr: "bg-teal",
+  done: "bg-teal",
   error: "bg-red-500",
 };
 
@@ -317,7 +317,7 @@ export function LiveProgressFeed({ report }: { report: Report }) {
           {/* sticky live progress for screen/extract — only while streaming */}
           {streaming && screenProgress && (
             <li className="relative flex items-start gap-2.5">
-              <span className="relative z-10 mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-[#9CA3AF] ring-2 ring-surface" />
+              <span className="relative z-10 mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-text-faint ring-2 ring-surface" />
               <div className="min-w-0">
                 <div className="text-[12.5px] font-medium leading-snug text-text">
                   Screening papers
@@ -336,7 +336,7 @@ export function LiveProgressFeed({ report }: { report: Report }) {
           )}
           {streaming && extractProgress && (
             <li className="relative flex items-start gap-2.5">
-              <span className="relative z-10 mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-[#9CA3AF] ring-2 ring-surface" />
+              <span className="relative z-10 mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-text-faint ring-2 ring-surface" />
               <div className="min-w-0">
                 <div className="text-[12.5px] font-medium leading-snug text-text">
                   Extracting fields
