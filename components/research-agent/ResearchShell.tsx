@@ -187,7 +187,7 @@ function SideRow({ item, currentMode }: { item: SideItem; currentMode: Mode }) {
           : "text-text hover:bg-surface-muted")
       }
     >
-      <Icon size={18} className={active ? "text-teal" : "text-text-muted"} />
+      <Icon size={18} className={active ? "text-teal-bright" : "text-text-muted"} />
       <span className={"flex-1 truncate " + (item.pro ? "text-text-muted" : "")}>{item.label}</span>
       {item.pro && <Lock size={13} className="text-text-faint" />}
     </span>
@@ -223,8 +223,8 @@ export function Sidebar({ mode }: { mode: Mode }) {
   return (
     <aside className="flex w-[240px] flex-shrink-0 flex-col border-r border-border bg-surface-muted px-3 py-5">
       <Link href="/" className="mb-5 flex items-center gap-2 px-1">
-        <Layers size={22} className="text-teal" />
-        <span className="text-xl font-semibold text-teal">Evoke</span>
+        <Layers size={22} className="text-teal-bright" />
+        <span className="text-xl font-semibold text-teal-bright">Evoke</span>
       </Link>
 
       <LibraryLink />
@@ -583,7 +583,7 @@ function PromptBody({
                 type="button"
                 onClick={() => setDraft(ex)}
                 disabled={submitting}
-                className="rounded-md bg-surface-muted px-2.5 py-1 text-[12.5px] text-text hover:bg-border"
+                className="rounded-md bg-surface-muted px-2.5 py-1 text-[12.5px] text-text hover:bg-surface-muted"
               >
                 {ex}
               </button>
@@ -634,7 +634,7 @@ function PromptBody({
             aria-label="Submit"
             onClick={onSubmit}
             disabled={!draft.trim() || submitting}
-            className="grid h-8 w-9 place-items-center rounded-lg bg-teal/15 text-teal hover:bg-teal/25 disabled:opacity-50"
+            className="grid h-8 w-9 place-items-center rounded-lg bg-teal/25 text-teal-bright hover:bg-teal/35 disabled:opacity-50"
           >
             <ArrowRight size={16} />
           </button>
@@ -696,11 +696,11 @@ function ActionChips({
             className={
               "inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13.5px] transition-colors " +
               (active
-                ? "border border-teal bg-teal-light text-teal"
+                ? "border border-teal/40 bg-teal/[0.12] text-teal-bright"
                 : "border border-border bg-surface text-text hover:bg-surface-muted")
             }
           >
-            <Icon size={14} className={active ? "text-teal" : "text-text-muted"} />
+            <Icon size={14} className={active ? "text-teal-bright" : "text-text-muted"} />
             {c.label}
           </button>
         );

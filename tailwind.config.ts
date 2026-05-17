@@ -15,6 +15,7 @@ const config: Config = {
           DEFAULT: "rgb(var(--c-teal) / <alpha-value>)",
           hover: "rgb(var(--c-teal-hover) / <alpha-value>)",
           light: "rgb(var(--c-teal-light) / <alpha-value>)",
+          bright: "rgb(var(--c-teal-bright) / <alpha-value>)",
         },
         text: {
           DEFAULT: "rgb(var(--c-text) / <alpha-value>)",
