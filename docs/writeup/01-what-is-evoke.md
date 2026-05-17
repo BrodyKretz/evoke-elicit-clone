@@ -15,8 +15,17 @@ Five interface screens, mirroring Elicit's one-to-one:
 Plus a sidebar that's always visible while looking at a run:
 
 - **Pipeline status** — which of the four stages have completed, with per-stage metadata (sources found / sources included / data points extracted).
-- **Chat with this report** — an AI assistant scoped strictly to the run's data. Answers questions about the studies, compares findings, explains methodology, but politely declines anything outside the run.
+- **Chat with this report** — an AI assistant scoped strictly to the run's data. Answers questions about the studies, compares findings, explains methodology, but politely declines anything outside the run. (Built — earlier drafts described it as planned; it now exists.)
 - **Download .md** — exports the synthesized report as portable Markdown with proper citation footnotes and a references section.
+
+### The other surface: the Lab
+
+Beyond the Report workflow, every pipeline stage is also usable as a
+**standalone tool** — Find papers, Systematic review, Extract data, Chat with
+papers, plus Import / Trials / Notebook, all sharing a persistent **Library**
+of saved papers. These aren't new agents; they're direct entry points to the
+same agents the Report flow chains together. Covered in full in *The Lab
+surface* (section 10).
 
 ## What it does (the long version)
 
@@ -50,4 +59,4 @@ These are all discussed in detail in *Where Evoke falls short*.
 
 ## Where the inspiration ends
 
-Evoke deliberately picks Elicit's UI conventions wholesale — the cream-and-teal palette, the Manrope/Fraunces typography, the 5-tab layout, the structured-table-as-research-artifact aesthetic. The implementation is independent: every prompt, every agent, every typed schema was written from scratch. None of Elicit's internals are reproduced — they're guessed-at from the visible product behavior and the published rate at which Elicit reports get generated.
+Evoke deliberately picks Elicit's UI conventions wholesale — the teal accent, the Manrope/Fraunces typography, the 5-tab layout, the structured-table-as-research-artifact aesthetic. It diverges deliberately on theme: Evoke is **dark-first** with a light (warm-paper) toggle, driven by a CSS-variable token system rather than Elicit's cream-only look — see *The design system* (section 11). The implementation is independent: every prompt, every agent, every typed schema was written from scratch. None of Elicit's internals are reproduced — they're guessed-at from the visible product behavior and the published rate at which Elicit reports get generated.

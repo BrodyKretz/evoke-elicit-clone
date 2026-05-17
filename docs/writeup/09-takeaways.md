@@ -60,6 +60,36 @@ The result: the user sees "Gathering sources… 25 found. Screening… 12 of 25.
 
 The corollary: design your typed events alongside your pipeline. Per-stage start/done events, per-iteration progress events, and named outputs (criterion text, column list, TLDR) are all worth emitting. They become the user's window into what your agent is doing.
 
+## 6. Fix the system, not the symptom — and have a tell for which you're doing
+
+The longest detour in this build was theming. The same defect — a screen that
+didn't respond to the theme — was "fixed" screen by screen for a while before
+it was fixed at the token layer (section 11). The general lesson isn't "use
+design tokens." It's that there's a **diagnostic tell**: if you fix instances
+of a bug and the bug count doesn't fall, you're enumerating symptoms, not
+eliminating a cause. Converging means each fix makes the next one unnecessary.
+Not converging means stop and find the layer the defect actually lives in.
+
+This recurred in miniature several times: the invisible-teal contrast bug
+showed up in a dozen components and the fix was one accent token, not a dozen
+edits; the "Extract didn't see Library papers" bug was one shared store, not
+per-tool patches. Whenever a defect has *N* sites, the strong prior is that the
+fix has *one* site, one layer down.
+
+The corollary for working with an agent on your codebase: the cheapest place to
+catch "you're symptom-patching" is a reviewer step that counts recurrences. A
+contrast-ratio check across the whole diff caught every invisible-token
+regression before a human looked — not because the implementer was careless,
+but because *systemic* bugs are exactly the ones a per-change author is
+positioned not to see. Build the proxy that sees across changes.
+
+And when you genuinely can't observe the output (here: no working browser
+automation), don't pretend the green checks mean it works. Build a ladder of
+cheaper proxies — grep, types, DOM, computed contrast — and state plainly that
+the top rung is still a human's eyes. "It compiles" has never meant "it looks
+right," and saying so honestly is part of the engineering, not a hedge around
+it.
+
 ---
 
 ## What I'd recommend reading next

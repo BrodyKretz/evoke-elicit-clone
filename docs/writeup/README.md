@@ -21,6 +21,8 @@ layer is done, this folder should be ~80% of a publishable post.
 7. [How it all fits together](07-how-it-fits-together.md) — End-to-end sequence diagram.
 8. [Where Evoke falls short](08-shortcomings.md) — Honest limitations.
 9. [Takeaways for builders](09-takeaways.md) — Generalizable lessons.
+10. [The Lab surface](10-the-lab-surface.md) — Pipeline stages as standalone, composable tools.
+11. [The design system](11-the-design-system.md) — Dark-first CSS-variable theming, learned the hard way.
 
 ## Working principles for the writeup
 

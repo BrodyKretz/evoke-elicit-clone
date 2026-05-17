@@ -44,18 +44,28 @@ To actually hit 1000:
 - Need to bump the screening concurrency and accept the longer wall-clock (or use Anthropic Batch API).
 - Prompt caching becomes genuinely valuable at that scale — system prompt + criterion can stay cached across 1000 paper-specific calls. Currently below cache thresholds.
 
-### 5. No "Chat with this report" interface — *next to build*
+### 5. Systematic Review is one stage, not Elicit's full SR pipeline
 
-Elicit's most compelling post-synthesis feature is an open-ended chat over the report and underlying data. "Why was paper X excluded? Add it back." "Compare the methodology between the two RCTs." That's where a real agentic loop earns its keep — the user's questions are open-ended and the model decides which tools to call against the run's data.
+This replaces a now-resolved item. (For the record: "Chat with this report"
+*was* the open shortcoming here; it has since been built — scoped Opus over a
+run's screening + extraction + report, plus a standalone "Chat with papers"
+Lab tool. The original spec lived in this slot; it shipped.)
 
-The Evoke UI has a chat-card placeholder in the sidebar but the backend isn't wired yet. Spec for the next session:
+The current honest gap is **Systematic Review**. Elicit's Enterprise SR is a
+staged pipeline: abstract screening → *full-text* screening → extraction →
+bibliography-formatted report, against *multiple* inclusion/exclusion criteria,
+with CSV/XLSX at each stage. Evoke's Systematic Review tool is the
+single-stage, single-criterion abstract screen with an in-app explainer panel —
+genuinely useful as fast triage, but not the multi-stage artifact. Closing
+this means multi-criterion screening + per-stage exports + reusing the report
+synthesis; the one piece that stays out of reach is full-text screening,
+because it depends on the same PDF acquisition gap as #2. Documented as
+deferred in the README rather than silently dropped.
 
-- **Scope-bounded.** Chat only answers from the current run's screening + extraction + synthesized report + paper abstracts. Does not draw on broader knowledge. Evidence-based responses, like Elicit's version.
-- **Capabilities.** Compare findings across papers; explain methodology, outcomes, and conclusions; synthesize across studies; help the user understand the report. Plus light platform-navigation help ("press 'edit columns' to add fields").
-- **Architecture.** `POST /api/reports/[id]/chat` taking `{messages, userMessage}`; backend builds a system prompt from the run's data; streams Opus response via SSE. UI replaces the sidebar chat-card placeholder with a real message thread.
-- **No S2 dependency.** Operates on any completed run, including the seeded fixtures — buildable today.
-
-Worth roughly one focused session. Promoted from "out of scope" to "next to build" after the user explicitly named it as a target feature.
+New operational footnote: a corpus key (`CORE_API_KEY`) and the Anthropic key
+are user-supplied in `.env.local`. During development a key was committed to a
+transcript and rotated; the CORE key should still be rotated. Keys are never
+bundled.
 
 ## Unsolved design problems
 
@@ -85,7 +95,12 @@ Again, additive change: the synthesis prompt needs to emit indices instead of co
 
 ### Re-running just one stage
 
-The "Edit & re-screen" flow added in Session 6 only works for screening. Editing extraction columns (or adding new ones) after a run finishes would need a similar endpoint. So would re-running synthesis with a different style ("make it shorter," "emphasize methodology"). The architecture supports it; the UI doesn't yet.
+The "Edit & re-screen" flow added in Session 6 only works for screening.
+Editable extraction columns now exist in the *standalone* Extract data tool
+(rename/add/remove + re-run), but a column-edit cascade *inside a completed
+report* is still unbuilt, as is re-running synthesis with a different style
+("make it shorter," "emphasize methodology"). The architecture supports it;
+those specific UIs don't yet.
 
 ### State persistence is JSON file
 
@@ -96,9 +111,13 @@ The "Edit & re-screen" flow added in Session 6 only works for screening. Editing
 
 The architecture is friendly to this swap — `lib/store.ts` is a thin file-based implementation behind a small API surface — but the swap itself is unstarted.
 
-### Schema for chat interactions
+### Theme residue
 
-If/when "chat with this report" lands, the agent needs tools that read the run's screening + extraction + paper data. Designing those tools (and the agent loop that calls them) is its own design exercise, ducked here.
+The token system (section 11) is complete, but one known artifact remains: a
+returning user with a stored *light* preference gets a brief flash of the dark
+default before hydration applies `.light`. The fix is a standard
+before-paint inline `<head>` script that sets the class synchronously;
+deferred and documented in the README, not hidden.
 
 ## What I'd build first if I had another two weeks
 
@@ -106,6 +125,6 @@ If/when "chat with this report" lands, the agent needs tools that read the run's
 2. Build a small eval benchmark (~30 questions with hand-picked target papers).
 3. Tune prompts against the eval until each stage is at "trusted enough to ship internally."
 4. Wire per-cell provenance + cite arrays so the UI is actually citation-anchored.
-5. Add "Chat with this report" as the demo-worthy moat.
+5. Rebuild Systematic Review as the multi-criterion, staged, exportable artifact.
 
-In that order. The further down the list, the easier each item gets — the early ones unlock everything that follows.
+In that order. The further down the list, the easier each item gets — the early ones unlock everything that follows. ("Chat with this report" used to head this list; it's built, so it dropped off — the list is honestly maintained, not aspirational.)
