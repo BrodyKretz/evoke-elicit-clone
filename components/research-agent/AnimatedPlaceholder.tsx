@@ -38,7 +38,7 @@ export function AnimatedPlaceholder({ text, visible }: { text: string; visible: 
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-x-5 top-5 select-none text-[16px] leading-relaxed text-[#9CA3AF] dark:text-[#8E8E8E]"
+      className="pointer-events-none absolute inset-x-5 top-5 select-none text-[16px] leading-relaxed text-text-faint"
     >
       {shown}
       <span className="evoke-caret" />
