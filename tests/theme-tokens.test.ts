@@ -27,3 +27,12 @@ test("globals.css defines an html.light block overriding every token var", () =>
 test("no raw theme() color calls remain in plain CSS declarations", () => {
   assert.doesNotMatch(css, /background:\s*theme\("colors/, "use rgb(var(--c-*)) not theme() in raw CSS");
 });
+
+const cfg = readFileSync(new URL("../tailwind.config.ts", import.meta.url), "utf8");
+
+test("tailwind tokens reference CSS vars with alpha support", () => {
+  for (const name of ["c-bg","c-surface","c-surface-muted","c-border","c-border-strong","c-teal","c-teal-hover","c-teal-light","c-text","c-text-muted","c-text-faint","c-chip-bg","c-chip-border","c-examples"]) {
+    assert.match(cfg, new RegExp("rgb\\(var\\(--" + name + "\\) / <alpha-value>\\)"), `tailwind must map --${name}`);
+  }
+  assert.doesNotMatch(cfg, /bg:\s*"#F5F2EA"/, "no hardcoded hex token values remain");
+});
