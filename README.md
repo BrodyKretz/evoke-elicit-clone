@@ -79,6 +79,26 @@ docs/
 
 Next.js 14 (App Router) · TypeScript · Tailwind CSS. Mock API routes today; Python agent layer planned for phase 2.
 
+## Known limitations & deferred scope
+
+Honest about what's *not* built yet:
+
+- **Systematic Review is single-stage.** It does abstract screening against one
+  (editable) inclusion criterion. Elicit's multi-criterion + staged
+  (abstract → full-text) screening with per-stage CSV/XLSX export is **not
+  built** — only the abstract-screen slice plus an in-app explainer panel.
+- **Abstract-only.** Screening and extraction read paper abstracts; there is no
+  full-text/PDF parsing and no bring-your-own-PDF flow.
+- **Extraction.** The Lab Extract tool supports editable/custom columns, a
+  Library + selection paper picker, and CSV export. A re-extract cascade inside
+  the full report flow is not built.
+- **Theme.** App-wide light/dark theme via CSS-variable tokens, dark by
+  default, toggleable. Minor: if a `light` preference is stored, the first
+  paint can briefly flash dark before hydration (no SSR inline theme script).
+  Include/maybe/exclude decision pills intentionally use fixed Tailwind tints.
+- **Keys are user-provided.** `ANTHROPIC_API_KEY` and a corpus key must be set
+  in `.env.local`; none are bundled.
+
 ## Writeup
 
 Documenting the build as we go — see `docs/writeup/` for the running outline. Modeled after [Shlok's OpenPoke writeup](https://www.shloked.com/writing/openpoke).
