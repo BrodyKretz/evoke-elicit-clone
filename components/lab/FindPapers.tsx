@@ -178,7 +178,7 @@ export function FindPapers() {
                           {p.title}
                         </h3>
                         {savedIds.has(p.id) ? (
-                          <span className="inline-flex flex-shrink-0 items-center gap-1 rounded-full bg-teal-light px-2 py-0.5 text-[11px] font-medium text-teal">
+                          <span className="inline-flex flex-shrink-0 items-center gap-1 rounded-full bg-teal px-2 py-0.5 text-[11px] font-medium text-white">
                             <Check size={10} /> Saved
                           </span>
                         ) : (

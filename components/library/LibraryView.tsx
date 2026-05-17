@@ -356,7 +356,7 @@ export function LibraryView() {
                   <div className="flex flex-shrink-0 items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
                     {pinnedIds.has(e.paper.id) ? (
                       <span
-                        className="inline-flex items-center gap-1 rounded-full bg-teal-light px-2 py-0.5 text-[11px] font-medium text-teal"
+                        className="inline-flex items-center gap-1 rounded-full bg-teal px-2 py-0.5 text-[11px] font-medium text-white"
                         title="Already pinned in Notebook"
                       >
                         <Check size={10} /> Pinned
