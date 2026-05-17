@@ -5,7 +5,7 @@ export default function ElicitCloneLayout({ children }: { children: React.ReactN
   return (
     <div
       style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-      className="min-h-screen bg-white text-[#1F2937]"
+      className="min-h-screen bg-bg text-text"
     >
       {children}
     </div>

@@ -35,14 +35,14 @@ export function ModeDropdown({ options, current, onPick, open, setOpen }: Props)
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] px-2.5 py-1.5 text-sm font-medium text-[#1F2937] hover:bg-[#F3F4F6]"
+        className="flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-sm font-medium text-text hover:bg-surface-muted"
       >
         <span>{current}</span>
-        <ChevronDown size={14} className="text-[#6B7280]" />
+        <ChevronDown size={14} className="text-text-muted" />
       </button>
 
       {open && (
-        <div className="absolute left-0 top-[calc(100%+6px)] z-20 w-[240px] rounded-xl border border-[#E5E7EB] bg-white p-2 shadow-lg">
+        <div className="absolute left-0 top-[calc(100%+6px)] z-20 w-[240px] rounded-xl border border-border bg-surface p-2 shadow-lg">
           {options.map((opt) => {
             const active = opt === current;
             return (
@@ -53,16 +53,16 @@ export function ModeDropdown({ options, current, onPick, open, setOpen }: Props)
                   onPick(opt);
                   setOpen(false);
                 }}
-                className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-[15px] hover:bg-[#F3F4F6]"
+                className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-[15px] hover:bg-surface-muted"
               >
                 <span
                   className={
-                    active ? "font-semibold text-[#1F6E68]" : "font-medium text-[#1F2937]"
+                    active ? "font-semibold text-teal-bright" : "font-medium text-text"
                   }
                 >
                   {opt}
                 </span>
-                {active && <Check size={14} className="text-[#1F6E68]" />}
+                {active && <Check size={14} className="text-teal-bright" />}
               </button>
             );
           })}

@@ -195,13 +195,13 @@ function staticTimeline(report: Report): Entry[] {
 }
 
 const DOT_BY_KIND: Record<Entry["kind"], string> = {
-  step: "bg-[#1F6E68]",
-  criterion: "bg-[#1F6E68]",
-  columns: "bg-[#1F6E68]",
-  progress: "bg-[#9CA3AF]",
-  tldr: "bg-[#1F6E68]",
-  done: "bg-[#1F6E68]",
-  error: "bg-red-500",
+  step: "bg-teal",
+  criterion: "bg-teal",
+  columns: "bg-teal",
+  progress: "bg-text-faint",
+  tldr: "bg-teal",
+  done: "bg-teal",
+  error: "bg-error",
 };
 
 export function LiveProgressFeed({ report }: { report: Report }) {
@@ -256,7 +256,7 @@ export function LiveProgressFeed({ report }: { report: Report }) {
           {done ? "Run timeline" : "Live progress"}
         </div>
         {streaming && (
-          <span className="inline-flex items-center gap-1 text-[11px] font-medium text-teal">
+          <span className="inline-flex items-center gap-1 text-[11px] font-medium text-teal-bright">
             <span className="grid h-2 w-2 place-items-center">
               <span className="h-2 w-2 animate-ping rounded-full bg-teal/60" />
               <span className="absolute h-1.5 w-1.5 rounded-full bg-teal" />
@@ -274,7 +274,7 @@ export function LiveProgressFeed({ report }: { report: Report }) {
         )}
         {entries.length === 0 && streaming && (
           <div className="rounded-md bg-surface-muted px-3 py-3 text-[12.5px] text-text-muted">
-            <Sparkles size={11} className="-mt-0.5 mr-1 inline text-teal" />
+            <Sparkles size={11} className="-mt-0.5 mr-1 inline text-teal-bright" />
             Spinning up the pipeline…
           </div>
         )}
@@ -299,10 +299,10 @@ export function LiveProgressFeed({ report }: { report: Report }) {
                 <div
                   className={
                     "text-[12.5px] font-medium leading-snug " +
-                    (e.kind === "error" ? "text-red-600" : "text-text")
+                    (e.kind === "error" ? "text-error" : "text-text")
                   }
                 >
-                  {e.kind === "done" && <Check size={11} className="-mt-0.5 mr-1 inline text-teal" />}
+                  {e.kind === "done" && <Check size={11} className="-mt-0.5 mr-1 inline text-teal-bright" />}
                   {e.title}
                 </div>
                 {e.detail && (
@@ -317,7 +317,7 @@ export function LiveProgressFeed({ report }: { report: Report }) {
           {/* sticky live progress for screen/extract — only while streaming */}
           {streaming && screenProgress && (
             <li className="relative flex items-start gap-2.5">
-              <span className="relative z-10 mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-[#9CA3AF] ring-2 ring-surface" />
+              <span className="relative z-10 mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-text-faint ring-2 ring-surface" />
               <div className="min-w-0">
                 <div className="text-[12.5px] font-medium leading-snug text-text">
                   Screening papers
@@ -336,7 +336,7 @@ export function LiveProgressFeed({ report }: { report: Report }) {
           )}
           {streaming && extractProgress && (
             <li className="relative flex items-start gap-2.5">
-              <span className="relative z-10 mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-[#9CA3AF] ring-2 ring-surface" />
+              <span className="relative z-10 mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-text-faint ring-2 ring-surface" />
               <div className="min-w-0">
                 <div className="text-[12.5px] font-medium leading-snug text-text">
                   Extracting fields

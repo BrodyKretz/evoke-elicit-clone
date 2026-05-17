@@ -13,7 +13,7 @@ export function LabShell({
 }) {
   return (
     <div
-      className="flex min-h-screen bg-white text-[#1F2937] dark:bg-[#0F0F0F] dark:text-[#ECECEC]"
+      className="flex min-h-screen bg-bg text-text"
       style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
     >
       <Sidebar mode={mode} />

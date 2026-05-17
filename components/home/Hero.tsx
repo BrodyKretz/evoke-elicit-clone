@@ -56,15 +56,15 @@ export function Hero() {
   };
 
   return (
-    <section className="mx-auto max-w-3xl px-6 pt-20 pb-12 text-center text-[#ECECEC]">
-      <div className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-[#2A2A2A] px-3 py-1 text-[12px] text-[#B4B4B4]">
-        <Sparkles size={12} className="text-[#ECECEC]" />
+    <section className="mx-auto max-w-3xl px-6 pt-20 pb-12 text-center text-text">
+      <div className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-surface px-3 py-1 text-[12px] text-text-muted">
+        <Sparkles size={12} className="text-text" />
         Research agent v1
       </div>
-      <h1 className="mb-4 text-5xl font-semibold leading-tight tracking-tight text-[#ECECEC]">
+      <h1 className="mb-4 text-5xl font-semibold leading-tight tracking-tight text-text">
         Ready when you are.
       </h1>
-      <p className="mx-auto mb-10 max-w-2xl text-base text-[#B4B4B4]">
+      <p className="mx-auto mb-10 max-w-2xl text-base text-text-muted">
         Ask a research question — Evoke gathers, screens, extracts, and synthesizes
         sources into a structured report with citations you can trace.
       </p>
@@ -74,31 +74,31 @@ export function Hero() {
           e.preventDefault();
           submit();
         }}
-        className="mx-auto flex max-w-2xl items-center gap-2 rounded-full bg-[#2F2F2F] px-5 py-3"
+        className="mx-auto flex max-w-2xl items-center gap-2 rounded-full bg-surface-muted px-5 py-3"
       >
-        <Search size={18} className="flex-shrink-0 text-[#B4B4B4]" />
+        <Search size={18} className="flex-shrink-0 text-text-muted" />
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Ask anything"
-          className="flex-1 bg-transparent text-[15px] text-[#ECECEC] outline-none placeholder:text-[#8E8E8E]"
+          className="flex-1 bg-transparent text-[15px] text-text outline-none placeholder:text-text-faint"
           disabled={submitting}
         />
         <button
           type="submit"
-          className="inline-flex items-center gap-1 rounded-full bg-[#ECECEC] px-4 py-1.5 text-[13px] font-medium text-[#0D0D0D] hover:bg-white disabled:opacity-50"
+          className="inline-flex items-center gap-1 rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-bg hover:opacity-90 disabled:opacity-50"
           disabled={!q.trim() || submitting}
         >
           {submitting ? "Searching…" : <>Start <ArrowRight size={14} /></>}
         </button>
       </form>
 
-      <div className="mt-3 text-xs text-[#8E8E8E]">
+      <div className="mt-3 text-xs text-text-faint">
         Hits {corpus === "core" ? "CORE" : "Semantic Scholar"} live · gather → screen → extract → synthesize
       </div>
 
       <div className="mt-10">
-        <div className="mb-3 text-[11px] font-medium uppercase tracking-wider text-[#8E8E8E]">
+        <div className="mb-3 text-[11px] font-medium uppercase tracking-wider text-text-faint">
           Try an example
         </div>
         <ul className="mx-auto flex max-w-2xl flex-wrap justify-center gap-2 text-left">
@@ -108,7 +108,7 @@ export function Hero() {
                 type="button"
                 disabled={submitting}
                 onClick={() => setQ(ex)}
-                className="rounded-full bg-[#2A2A2A] px-3.5 py-1.5 text-[12.5px] text-[#B4B4B4] transition-colors hover:bg-[#333333] hover:text-[#ECECEC] disabled:opacity-60"
+                className="rounded-full bg-surface px-3.5 py-1.5 text-[12.5px] text-text-muted transition-colors hover:bg-surface-muted hover:text-text disabled:opacity-60"
               >
                 {ex}
               </button>

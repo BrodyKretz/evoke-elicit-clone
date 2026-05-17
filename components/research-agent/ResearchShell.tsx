@@ -112,7 +112,7 @@ export function ResearchShell({ mode }: { mode: Mode }) {
 
   return (
     <div
-      className="flex min-h-screen bg-white text-[#1F2937] dark:bg-[#0F0F0F] dark:text-[#ECECEC]"
+      className="flex min-h-screen bg-bg text-text"
       style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
     >
       <Sidebar mode={mode} />
@@ -169,7 +169,7 @@ const SIDE_RECENTS = [
 
 function SectionHeader({ label }: { label: string }) {
   return (
-    <div className="px-2 py-1.5 text-[11px] font-medium uppercase tracking-wider text-[#9CA3AF]">
+    <div className="px-2 py-1.5 text-[11px] font-medium uppercase tracking-wider text-text-faint">
       {label}
     </div>
   );
@@ -183,13 +183,13 @@ function SideRow({ item, currentMode }: { item: SideItem; currentMode: Mode }) {
       className={
         "flex w-full items-center gap-3 rounded-lg px-2 py-2 text-[15px] " +
         (active
-          ? "bg-white text-[#1F2937] shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-[#E5E7EB] dark:bg-[#2A2A2A] dark:text-[#ECECEC] dark:ring-[#3F3F3F] dark:shadow-none"
-          : "text-[#1F2937] hover:bg-[#F3F4F6] dark:text-[#ECECEC] dark:hover:bg-[#2A2A2A]")
+          ? "bg-surface text-text shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-border"
+          : "text-text hover:bg-surface-muted")
       }
     >
-      <Icon size={18} className={active ? "text-[#1F6E68]" : "text-[#6B7280]"} />
-      <span className={"flex-1 truncate " + (item.pro ? "text-[#6B7280]" : "")}>{item.label}</span>
-      {item.pro && <Lock size={13} className="text-[#9CA3AF]" />}
+      <Icon size={18} className={active ? "text-teal-bright" : "text-text-muted"} />
+      <span className={"flex-1 truncate " + (item.pro ? "text-text-muted" : "")}>{item.label}</span>
+      {item.pro && <Lock size={13} className="text-text-faint" />}
     </span>
   );
   if (!item.href) return <span className="block cursor-default">{inner}</span>;
@@ -206,12 +206,12 @@ function LibraryLink() {
   return (
     <Link
       href="/library"
-      className="mx-1 mb-3 flex items-center gap-3 rounded-lg px-2 py-2 text-[15px] text-[#1F2937] hover:bg-[#F3F4F6] dark:text-[#ECECEC] dark:hover:bg-[#2A2A2A]"
+      className="mx-1 mb-3 flex items-center gap-3 rounded-lg px-2 py-2 text-[15px] text-text hover:bg-surface-muted"
     >
-      <Library size={18} className="text-[#6B7280]" />
+      <Library size={18} className="text-text-muted" />
       <span className="flex-1 truncate">Library</span>
       {count > 0 && (
-        <span className="rounded-full bg-[#1F6E68] px-1.5 text-[10px] font-bold text-white">
+        <span className="rounded-full bg-teal px-1.5 text-[10px] font-bold text-white">
           {count}
         </span>
       )}
@@ -221,10 +221,10 @@ function LibraryLink() {
 
 export function Sidebar({ mode }: { mode: Mode }) {
   return (
-    <aside className="flex w-[240px] flex-shrink-0 flex-col border-r border-[#E5E7EB] bg-[#FAFAF9] px-3 py-5 dark:border-[#2F2F2F] dark:bg-[#171717]">
+    <aside className="flex w-[240px] flex-shrink-0 flex-col border-r border-border bg-surface-muted px-3 py-5">
       <Link href="/" className="mb-5 flex items-center gap-2 px-1">
-        <Layers size={22} className="text-[#1F6E68]" />
-        <span className="text-xl font-semibold text-[#1F6E68]">Evoke</span>
+        <Layers size={22} className="text-teal-bright" />
+        <span className="text-xl font-semibold text-teal-bright">Evoke</span>
       </Link>
 
       <LibraryLink />
@@ -243,7 +243,7 @@ export function Sidebar({ mode }: { mode: Mode }) {
         ))}
       </div>
 
-      <div className="my-2 border-t border-[#E5E7EB]" />
+      <div className="my-2 border-t border-border" />
 
       <SectionHeader label="Recents" />
       <div className="flex flex-col">
@@ -251,10 +251,10 @@ export function Sidebar({ mode }: { mode: Mode }) {
           <button
             key={title}
             type="button"
-            className="flex items-center gap-3 rounded-lg px-2 py-2 text-left hover:bg-[#F3F4F6]"
+            className="flex items-center gap-3 rounded-lg px-2 py-2 text-left hover:bg-surface-muted"
           >
-            <Atom size={16} className="flex-shrink-0 text-[#6B7280]" />
-            <span className="truncate text-[14px] text-[#1F2937] dark:text-[#ECECEC]">{title}</span>
+            <Atom size={16} className="flex-shrink-0 text-text-muted" />
+            <span className="truncate text-[14px] text-text">{title}</span>
           </button>
         ))}
       </div>
@@ -270,7 +270,7 @@ export function TopBar() {
       <ThemeToggle />
       <Link
         href="/research-agent/v1"
-        className="inline-flex items-center gap-1.5 rounded-full border border-[#E5E7EB] bg-white px-3 py-1.5 text-[13px] font-medium text-[#1F2937] hover:bg-[#F9FAFB] dark:border-[#3F3F3F] dark:bg-[#2A2A2A] dark:text-[#ECECEC] dark:hover:bg-[#333333]"
+        className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-[13px] font-medium text-text hover:bg-surface-muted"
       >
         Research agent v1
       </Link>
@@ -320,15 +320,15 @@ function WorkflowDropdown({ mode }: { mode: Mode }) {
         <ChevronDown size={14} />
       </button>
       {open && (
-        <div className="absolute left-0 top-[calc(100%+6px)] z-20 w-[280px] rounded-xl border border-[#E5E7EB] bg-white p-2 shadow-lg">
-          <div className="px-2 py-1 text-[11px] font-medium uppercase tracking-wider text-[#9CA3AF]">
+        <div className="absolute left-0 top-[calc(100%+6px)] z-20 w-[280px] rounded-xl border border-border bg-surface p-2 shadow-lg">
+          <div className="px-2 py-1 text-[11px] font-medium uppercase tracking-wider text-text-faint">
             Workflows
           </div>
           {(["research-agent", "report"] as Mode[]).map((m) => (
             <DropdownItem key={m} m={m} active={m === mode} onPick={pick} />
           ))}
           <DropdownItem m={null} label="Systematic review" icon={ListChecks} onPick={() => {}} />
-          <div className="mt-1 px-2 py-1 text-[11px] font-medium uppercase tracking-wider text-[#9CA3AF]">
+          <div className="mt-1 px-2 py-1 text-[11px] font-medium uppercase tracking-wider text-text-faint">
             Tools
           </div>
           {(["find-papers", "chat-papers"] as Mode[]).map((m) => (
@@ -364,13 +364,13 @@ function DropdownItem({
       type="button"
       onClick={() => m && onPick(m)}
       disabled={disabled}
-      className="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left text-[15px] hover:bg-[#F3F4F6] disabled:cursor-default"
+      className="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left text-[15px] hover:bg-surface-muted disabled:cursor-default"
     >
-      <Icon size={18} className={active ? "text-[#1F6E68]" : "text-[#1F2937]"} />
-      <span className={"flex-1 truncate " + (active ? "font-semibold text-[#1F6E68]" : "font-medium text-[#1F2937]")}>
+      <Icon size={18} className={active ? "text-teal-bright" : "text-text"} />
+      <span className={"flex-1 truncate " + (active ? "font-semibold text-teal-bright" : "font-medium text-text")}>
         {label}
       </span>
-      {pro && <Lock size={13} className="text-[#9CA3AF]" />}
+      {pro && <Lock size={13} className="text-text-faint" />}
     </button>
   );
 }
@@ -396,14 +396,14 @@ function SourceDropdown() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center gap-1.5 rounded-md border border-[#E5E7EB] bg-white px-2.5 py-1.5 text-[13px] text-[#1F2937] hover:bg-[#F3F4F6] dark:border-[#3F3F3F] dark:bg-[#2A2A2A] dark:text-[#ECECEC] dark:hover:bg-[#333333] dark:text-[#ECECEC] dark:hover:bg-[#2A2A2A] dark:border-[#3F3F3F] dark:bg-[#2A2A2A] dark:text-[#ECECEC] dark:hover:bg-[#333333]"
+        className="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-2.5 py-1.5 text-[13px] text-text hover:bg-surface-muted"
       >
-        <span className="text-[#6B7280] dark:text-[#B4B4B4]">Source</span>
+        <span className="text-text-muted">Source</span>
         <span className="font-medium">{source}</span>
-        <ChevronDown size={13} className="text-[#6B7280] dark:text-[#B4B4B4]" />
+        <ChevronDown size={13} className="text-text-muted" />
       </button>
       {open && (
-        <div className="absolute bottom-[calc(100%+6px)] left-0 z-20 w-[300px] rounded-xl border border-[#E5E7EB] bg-white p-2 shadow-lg dark:border-[#3F3F3F] dark:bg-[#2A2A2A]">
+        <div className="absolute bottom-[calc(100%+6px)] left-0 z-20 w-[300px] rounded-xl border border-border bg-surface p-2 shadow-lg">
           {SOURCE_OPTIONS.map((opt) => {
             const active = opt.label === source;
             return (
@@ -414,15 +414,15 @@ function SourceDropdown() {
                   setSource(opt.label);
                   setOpen(false);
                 }}
-                className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-[14px] hover:bg-[#F3F4F6] dark:hover:bg-[#333333]"
+                className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-[14px] hover:bg-surface-muted"
               >
                 <span>
-                  <span className={active ? "font-semibold text-[#1F6E68]" : "text-[#1F2937] dark:text-[#ECECEC]"}>
+                  <span className={active ? "font-semibold text-teal-bright" : "text-text"}>
                     {opt.label}
                   </span>{" "}
-                  <span className="text-[#9CA3AF] dark:text-[#8E8E8E]">({opt.count})</span>
+                  <span className="text-text-faint">({opt.count})</span>
                 </span>
-                {active && <Check size={14} className="text-[#1F6E68]" />}
+                {active && <Check size={14} className="text-teal-bright" />}
               </button>
             );
           })}
@@ -495,12 +495,12 @@ function PromptCard({
   };
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#E5E7EB] shadow-[0_1px_3px_rgba(0,0,0,0.04),_0_10px_30px_rgba(31,110,104,0.06)] dark:border-[#2F2F2F] dark:shadow-none">
-      <div className="flex items-center bg-[#1F6E68] px-3 py-3">
+    <div className="overflow-hidden rounded-2xl border border-border shadow-[0_1px_3px_rgba(0,0,0,0.04),_0_10px_30px_rgba(31,110,104,0.06)]">
+      <div className="flex items-center bg-teal px-3 py-3">
         <WorkflowDropdown mode={mode} />
       </div>
 
-      <div className="bg-white dark:bg-[#1F1F1F]">
+      <div className="bg-surface">
         {config.body === "chat-empty" ? (
           <ChatEmptyBody />
         ) : (
@@ -558,22 +558,22 @@ function PromptBody({
               onSubmit();
             }
           }}
-          className="block min-h-[140px] w-full resize-none border-0 bg-white px-5 pt-5 pb-3 text-[16px] leading-relaxed text-[#1F2937] outline-none focus:outline-none focus:ring-0 dark:bg-[#1F1F1F] dark:text-[#ECECEC] caret-[#1F6E68] dark:caret-[#ECECEC]"
+          className="block min-h-[140px] w-full resize-none border-0 bg-surface px-5 pt-5 pb-3 text-[16px] leading-relaxed text-text outline-none focus:outline-none focus:ring-0 caret-teal"
         />
         {config.placeholder && (
           <AnimatedPlaceholder text={config.placeholder} visible={draft.length === 0} />
         )}
         <span
           aria-hidden
-          className="pointer-events-none absolute bottom-3 right-5 grid h-7 w-7 place-items-center rounded-full bg-[#15A47B] text-[13px] font-bold text-white"
+          className="pointer-events-none absolute bottom-3 right-5 grid h-7 w-7 place-items-center rounded-full bg-teal text-[13px] font-bold text-white"
         >
           G
         </span>
       </div>
 
       {mode === "report" && (
-        <div className="border-t border-[#F3F4F6] dark:border-[#2F2F2F] px-5 py-3">
-          <div className="mb-2 text-[12.5px] text-[#6B7280] dark:text-[#B4B4B4]">
+        <div className="border-t border-border px-5 py-3">
+          <div className="mb-2 text-[12.5px] text-text-muted">
             Try a couple of free examples to see what this is all about
           </div>
           <div className="flex flex-wrap gap-2">
@@ -583,7 +583,7 @@ function PromptBody({
                 type="button"
                 onClick={() => setDraft(ex)}
                 disabled={submitting}
-                className="rounded-md bg-[#F3F4F6] px-2.5 py-1 text-[12.5px] text-[#1F2937] hover:bg-[#E5E7EB] dark:bg-[#2F2F2F] dark:text-[#ECECEC] dark:hover:bg-[#333333]"
+                className="rounded-md bg-surface-muted px-2.5 py-1 text-[12.5px] text-text hover:bg-surface-muted"
               >
                 {ex}
               </button>
@@ -592,14 +592,14 @@ function PromptBody({
         </div>
       )}
 
-      <div className="flex items-center justify-between border-t border-[#F3F4F6] dark:border-[#2F2F2F] px-3 py-2.5">
+      <div className="flex items-center justify-between border-t border-border px-3 py-2.5">
         <div className="flex items-center gap-2">
           {mode === "research-agent" && (
             <button
               type="button"
               aria-label="Attach"
               onClick={() => show("Attach — coming soon")}
-              className="rounded-lg p-2 text-[#6B7280] hover:bg-[#F3F4F6]"
+              className="rounded-lg p-2 text-text-muted hover:bg-surface-muted"
             >
               <Plus size={16} />
             </button>
@@ -609,7 +609,7 @@ function PromptBody({
               type="button"
               onClick={clearAction}
               title="Click to remove this tag"
-              className="group inline-flex items-center gap-1.5 rounded-lg border border-[#1F6E68]/40 bg-[#1F6E68]/[0.08] px-2.5 py-1.5 text-[13px] font-medium text-[#1F6E68] hover:border-[#1F6E68]/70"
+              className="group inline-flex items-center gap-1.5 rounded-lg border border-teal/40 bg-teal/[0.08] px-2.5 py-1.5 text-[13px] font-medium text-teal-bright hover:border-teal/70"
             >
               <ActionIcon size={14} />
               {selectedLabel}
@@ -623,9 +623,9 @@ function PromptBody({
             <button
               type="button"
               onClick={() => show("Extended mode — coming soon")}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-2.5 py-1.5 text-[13px] text-[#1F2937] hover:bg-[#F3F4F6] dark:border-[#3F3F3F] dark:bg-[#2A2A2A] dark:text-[#ECECEC] dark:hover:bg-[#333333] dark:text-[#ECECEC] dark:hover:bg-[#2A2A2A]"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface px-2.5 py-1.5 text-[13px] text-text hover:bg-surface-muted"
             >
-              <Hourglass size={14} className="text-[#6B7280]" />
+              <Hourglass size={14} className="text-text-muted" />
               Extended
             </button>
           )}
@@ -634,7 +634,7 @@ function PromptBody({
             aria-label="Submit"
             onClick={onSubmit}
             disabled={!draft.trim() || submitting}
-            className="grid h-8 w-9 place-items-center rounded-lg bg-[#1F6E68]/15 text-[#1F6E68] hover:bg-[#1F6E68]/25 disabled:opacity-50"
+            className="grid h-8 w-9 place-items-center rounded-lg bg-teal/25 text-teal-bright hover:bg-teal/35 disabled:opacity-50"
           >
             <ArrowRight size={16} />
           </button>
@@ -647,16 +647,16 @@ function PromptBody({
 function ChatEmptyBody() {
   return (
     <div className="flex flex-col items-center justify-center px-6 py-16 text-center">
-      <p className="mb-6 text-[15px] text-[#6B7280] dark:text-[#B4B4B4]">
+      <p className="mb-6 text-[15px] text-text-muted">
         Select sources from your library
         <br />
         or upload your own to begin a conversation
       </p>
       <Link
         href="/lab/find"
-        className="inline-flex items-center gap-2 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[14px] font-medium text-[#1F2937] hover:bg-[#F9FAFB]"
+        className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2 text-[14px] font-medium text-text hover:bg-surface-muted"
       >
-        <Library size={14} className="text-[#6B7280]" />
+        <Library size={14} className="text-text-muted" />
         Select sources
       </Link>
     </div>
@@ -696,11 +696,11 @@ function ActionChips({
             className={
               "inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13.5px] transition-colors " +
               (active
-                ? "border border-[#1F6E68] bg-[#1F6E68]/[0.08] text-[#1F6E68]"
-                : "border border-[#E5E7EB] bg-white text-[#1F2937] hover:bg-[#F9FAFB]")
+                ? "border border-teal/40 bg-teal/[0.12] text-teal-bright"
+                : "border border-border bg-surface text-text hover:bg-surface-muted")
             }
           >
-            <Icon size={14} className={active ? "text-[#1F6E68]" : "text-[#6B7280]"} />
+            <Icon size={14} className={active ? "text-teal-bright" : "text-text-muted"} />
             {c.label}
           </button>
         );
@@ -742,16 +742,16 @@ function Cards() {
           <Link
             key={c.title}
             href="/research-agent"
-            className="group flex flex-col gap-3 rounded-xl border border-[#E5E7EB] bg-white p-4 text-left transition hover:border-[#D1D5DB] hover:shadow-sm dark:border-[#2F2F2F] dark:bg-[#1F1F1F] dark:hover:border-[#3F3F3F] dark:hover:bg-[#2A2A2A]"
+            className="group flex flex-col gap-3 rounded-xl border border-border bg-surface p-4 text-left transition hover:border-border-strong hover:shadow-sm"
           >
-            <span className="inline-flex items-center gap-1 self-start rounded-full bg-[#F3F4F6] px-2 py-0.5 text-xs text-[#6B7280] dark:bg-[#2F2F2F] dark:text-[#B4B4B4]">
+            <span className="inline-flex items-center gap-1 self-start rounded-full bg-surface-muted px-2 py-0.5 text-xs text-text-muted">
               <Pill size={12} />
               {c.pill}
             </span>
-            <span className="text-sm font-medium leading-snug text-[#1F2937] dark:text-[#ECECEC]">{c.title}</span>
+            <span className="text-sm font-medium leading-snug text-text">{c.title}</span>
             {c.footer && (
-              <span className="inline-flex items-center gap-1.5 text-xs text-[#6B7280] dark:text-[#B4B4B4]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#1F6E68]" />
+              <span className="inline-flex items-center gap-1.5 text-xs text-text-muted">
+                <span className="h-1.5 w-1.5 rounded-full bg-teal" />
                 {c.footer.workflow} · {c.footer.when}
               </span>
             )}

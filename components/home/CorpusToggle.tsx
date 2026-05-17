@@ -42,8 +42,8 @@ export function CorpusToggle() {
       className={cn(
         "px-2.5 py-1 text-[12px] font-medium transition-colors",
         corpus === key
-          ? "bg-[#ECECEC] text-[#0D0D0D]"
-          : "bg-transparent text-[#B4B4B4] hover:text-[#ECECEC]"
+          ? "bg-text text-bg"
+          : "bg-transparent text-text-muted hover:text-text"
       )}
       aria-pressed={corpus === key}
     >
@@ -52,8 +52,8 @@ export function CorpusToggle() {
   );
 
   return (
-    <div className="inline-flex items-center gap-1 rounded-full bg-[#2A2A2A] p-0.5 text-[12px]">
-      <span className="px-2 text-[11px] uppercase tracking-wider text-[#8E8E8E]">
+    <div className="inline-flex items-center gap-1 rounded-full bg-surface p-0.5 text-[12px]">
+      <span className="px-2 text-[11px] uppercase tracking-wider text-text-faint">
         Corpus
       </span>
       <div className="flex overflow-hidden rounded-full">

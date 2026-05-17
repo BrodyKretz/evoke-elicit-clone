@@ -140,7 +140,7 @@ export function ReportView({ report }: { report: Report }) {
           </a>
         </div>
       </div>
-      <h2 className="mb-4 font-display text-[32px] font-medium leading-tight tracking-tight text-teal">
+      <h2 className="mb-4 font-display text-[32px] font-medium leading-tight tracking-tight text-teal-bright">
         {report.question}
       </h2>
       <p className="mb-9 max-w-prose text-base text-text-muted">{report.tldr}</p>
@@ -155,7 +155,7 @@ export function ReportView({ report }: { report: Report }) {
             <button
               type="button"
               onClick={() => setMethodsOpen(true)}
-              className="text-teal font-medium underline-offset-2 hover:underline"
+              className="text-teal-bright font-medium underline-offset-2 hover:underline"
             >
               More on methods
             </button>
@@ -191,7 +191,7 @@ export function ReportView({ report }: { report: Report }) {
                 <div className="flex flex-shrink-0 items-center gap-1.5">
                   <CiteCopyButtons paper={r} onCopied={(label) => show(`Copied ${label}`)} />
                   {savedIds.has(r.id) ? (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-teal-light px-2 py-0.5 text-[11px] font-medium text-teal">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-teal-light px-2 py-0.5 text-[11px] font-medium text-teal-bright">
                       <Check size={10} /> Saved
                     </span>
                   ) : (

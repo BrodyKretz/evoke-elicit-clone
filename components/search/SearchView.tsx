@@ -12,8 +12,8 @@ import { cn } from "@/lib/utils/cn";
 const DECISION_STYLE: Record<ScreeningDecision, { label: string; cls: string; rationaleCls: string; why: string }> = {
   include: {
     label: "Included",
-    cls: "bg-teal-light text-teal",
-    rationaleCls: "border-teal/30 bg-teal-light/40 text-teal",
+    cls: "bg-teal-light text-teal-bright",
+    rationaleCls: "border-teal/30 bg-teal-light/40 text-teal-bright",
     why: "Why included",
   },
   maybe: {
@@ -75,14 +75,14 @@ function Result({
             {screening && <ScreeningBadge result={screening} />}
           </div>
           {saved ? (
-            <span className="inline-flex items-center gap-1 rounded-full bg-teal-light px-2 py-0.5 text-[11px] font-medium text-teal">
+            <span className="inline-flex items-center gap-1 rounded-full bg-teal-light px-2 py-0.5 text-[11px] font-medium text-teal-bright">
               <Check size={10} /> Saved
             </span>
           ) : (
             <button
               type="button"
               onClick={onSave}
-              className="inline-flex items-center gap-1 rounded-full border border-border-strong px-2 py-0.5 text-[11px] font-medium text-text-muted hover:border-teal hover:text-teal"
+              className="inline-flex items-center gap-1 rounded-full border border-border-strong px-2 py-0.5 text-[11px] font-medium text-text-muted hover:border-teal hover:text-teal-bright"
               title={`Save to library (${sourceLabel})`}
             >
               <Book size={10} /> Save
@@ -233,7 +233,7 @@ export function SearchView({ report }: { report: Report }) {
       {criterion && (
         <div className="mb-4 rounded-[10px] border border-border bg-teal-light/40 px-4 py-3">
           <div className="mb-1 flex items-center justify-between gap-2">
-            <div className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-teal">
+            <div className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-teal-bright">
               <Sparkles size={11} /> Screening criterion
             </div>
             {editable && !editing && (
@@ -242,7 +242,7 @@ export function SearchView({ report }: { report: Report }) {
                   setDraftCriterion(criterion.text);
                   setEditing(true);
                 }}
-                className="text-[11px] font-semibold text-teal hover:underline"
+                className="text-[11px] font-semibold text-teal-bright hover:underline"
               >
                 Edit & re-screen
               </button>
@@ -328,12 +328,12 @@ export function SearchView({ report }: { report: Report }) {
         </button>
         <button className="btn" onClick={() => show("Export menu")}>
           <Download size={12} /> Export
-          <span className="ml-1 rounded bg-teal-light px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-teal">
+          <span className="ml-1 rounded bg-teal-light px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-teal-bright">
             UPGRADE
           </span>
         </button>
         {bannerOpen && (
-          <div className="inline-flex items-center gap-2 rounded-md bg-teal-light px-2.5 py-1.5 text-[13px] text-teal">
+          <div className="inline-flex items-center gap-2 rounded-md bg-teal-light px-2.5 py-1.5 text-[13px] text-teal-bright">
             <FileText size={14} /> Get full-texts?
             <button onClick={() => setBannerOpen(false)} className="opacity-60 hover:opacity-100" aria-label="Dismiss">
               <X size={12} />

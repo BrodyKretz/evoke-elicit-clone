@@ -248,7 +248,7 @@ export function ExtractionView({ report }: { report: Report }) {
               }}
               className={cn(
                 "inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-2.5 py-1.5 text-[13px] text-text hover:bg-surface-muted",
-                sortBy !== "relevance" && "border-teal text-teal"
+                sortBy !== "relevance" && "border-teal text-teal-bright"
               )}
             >
               <Sort size={12} /> Sort: {SORT_LABELS[sortBy]}
@@ -264,10 +264,10 @@ export function ExtractionView({ report }: { report: Report }) {
                     }}
                     className="flex w-full items-center justify-between rounded-md px-2.5 py-1.5 text-left text-[13px] hover:bg-surface-muted"
                   >
-                    <span className={sortBy === k ? "font-semibold text-teal" : "text-text"}>
+                    <span className={sortBy === k ? "font-semibold text-teal-bright" : "text-text"}>
                       {k === "relevance" ? "Relevance" : k === "year" ? "Recency" : k === "cited" ? "Cited" : "Title"}
                     </span>
-                    {sortBy === k && <Check size={12} className="text-teal" />}
+                    {sortBy === k && <Check size={12} className="text-teal-bright" />}
                   </button>
                 ))}
               </div>
@@ -283,7 +283,7 @@ export function ExtractionView({ report }: { report: Report }) {
               }}
               className={cn(
                 "inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-2.5 py-1.5 text-[13px] text-text hover:bg-surface-muted",
-                (pdfOnly || yearMin !== "" || yearMax !== "" || studyTypes.size > 0) && "border-teal text-teal"
+                (pdfOnly || yearMin !== "" || yearMax !== "" || studyTypes.size > 0) && "border-teal text-teal-bright"
               )}
             >
               <Filter size={12} /> Filters
@@ -402,7 +402,7 @@ export function ExtractionView({ report }: { report: Report }) {
 
         {/* Selection action bar */}
         {selected.size > 0 && (
-          <div className="mb-3 flex items-center justify-between gap-3 rounded-md border border-teal bg-teal-light/50 px-3 py-1.5 text-[13px] text-teal">
+          <div className="mb-3 flex items-center justify-between gap-3 rounded-md border border-teal bg-teal-light/50 px-3 py-1.5 text-[13px] text-teal-bright">
             <span className="font-medium">
               {selected.size} selected
             </span>
@@ -422,7 +422,7 @@ export function ExtractionView({ report }: { report: Report }) {
                   if (added > 0) show(`Saved ${added} to library`);
                   else show("All selected papers are already in your library");
                 }}
-                className="inline-flex items-center gap-1 rounded-md border border-teal bg-surface px-2.5 py-1 text-[12.5px] font-medium text-teal hover:bg-teal-light"
+                className="inline-flex items-center gap-1 rounded-md border border-teal bg-surface px-2.5 py-1 text-[12.5px] font-medium text-teal hover:bg-teal-light hover:text-teal-bright"
               >
                 <Book size={11} /> Save {selected.size}
               </button>
@@ -514,12 +514,12 @@ export function ExtractionView({ report }: { report: Report }) {
                             href={`https://doi.org/${row.paper.doi}`}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center gap-1 rounded bg-chip-bg px-1.5 py-0.5 font-medium hover:text-teal"
+                            className="inline-flex items-center gap-1 rounded bg-chip-bg px-1.5 py-0.5 font-medium hover:text-teal-bright"
                           >
                             <LinkIcon size={9} /> DOI
                           </a>
                         )}
-                        <span className={row.paper.fullTextAvailable ? "text-teal" : "text-text-faint"}>
+                        <span className={row.paper.fullTextAvailable ? "text-teal-bright" : "text-text-faint"}>
                           {row.paper.fullTextAvailable ? "Full text" : "Abstract only"}
                         </span>
                       </div>
@@ -531,7 +531,7 @@ export function ExtractionView({ report }: { report: Report }) {
                           <div className="whitespace-pre-line leading-snug">{cell}</div>
                           {quotes.length > 0 && (
                             <details className="mt-1.5">
-                              <summary className="cursor-pointer text-[11px] text-text-muted hover:text-teal">
+                              <summary className="cursor-pointer text-[11px] text-text-muted hover:text-teal-bright">
                                 {quotes.length} quote{quotes.length === 1 ? "" : "s"} from abstract
                                 <ChevronRight size={10} className="ml-0.5 inline" />
                               </summary>

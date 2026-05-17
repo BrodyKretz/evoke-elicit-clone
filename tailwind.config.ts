@@ -15,6 +15,7 @@ const config: Config = {
           DEFAULT: "rgb(var(--c-teal) / <alpha-value>)",
           hover: "rgb(var(--c-teal-hover) / <alpha-value>)",
           light: "rgb(var(--c-teal-light) / <alpha-value>)",
+          bright: "rgb(var(--c-teal-bright) / <alpha-value>)",
         },
         text: {
           DEFAULT: "rgb(var(--c-text) / <alpha-value>)",
@@ -26,6 +27,10 @@ const config: Config = {
           border: "rgb(var(--c-chip-border) / <alpha-value>)",
         },
         examples: "rgb(var(--c-examples) / <alpha-value>)",
+        "error-bg": "rgb(var(--c-error-bg) / <alpha-value>)",
+        error: "rgb(var(--c-error-text) / <alpha-value>)",
+        "warning-bg": "rgb(var(--c-warning-bg) / <alpha-value>)",
+        warning: "rgb(var(--c-warning-text) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["var(--font-manrope)", "system-ui", "sans-serif"],

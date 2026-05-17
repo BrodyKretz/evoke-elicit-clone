@@ -29,33 +29,33 @@ export function SelectionBar() {
   };
 
   return (
-    <div className="sticky top-0 z-10 flex items-center justify-between bg-[#2A2A2A] px-6 py-2 text-[13px]">
-      <div className="font-medium text-[#ECECEC]">
+    <div className="sticky top-0 z-10 flex items-center justify-between bg-surface px-6 py-2 text-[13px]">
+      <div className="font-medium text-text">
         {count} paper{count === 1 ? "" : "s"} selected
       </div>
       <div className="flex items-center gap-2">
         <Link
           href="/lab/chat"
-          className="inline-flex items-center gap-1 rounded-full bg-[#ECECEC] px-3 py-1 text-[12.5px] font-medium text-[#0D0D0D] hover:bg-white"
+          className="inline-flex items-center gap-1 rounded-full bg-text px-3 py-1 text-[12.5px] font-medium text-bg hover:opacity-90"
         >
           <MessageSquare size={11} /> Chat with selection
         </Link>
         <Link
           href="/lab/extract"
-          className="inline-flex items-center gap-1 rounded-full bg-[#ECECEC] px-3 py-1 text-[12.5px] font-medium text-[#0D0D0D] hover:bg-white"
+          className="inline-flex items-center gap-1 rounded-full bg-text px-3 py-1 text-[12.5px] font-medium text-bg hover:opacity-90"
         >
           <Grid size={11} /> Extract from selection
         </Link>
         <button
           onClick={saveSelection}
-          className="inline-flex items-center gap-1 rounded-full border border-[#3F3F3F] bg-transparent px-2.5 py-1 text-[12.5px] font-medium text-[#ECECEC] hover:border-[#ECECEC]"
+          className="inline-flex items-center gap-1 rounded-full border border-border-strong bg-transparent px-2.5 py-1 text-[12.5px] font-medium text-text hover:border-text-faint"
           title="Save the current selection to your library"
         >
           <Book size={11} /> Save {count}
         </button>
         <button
           onClick={clearSelection}
-          className="inline-flex items-center gap-1 rounded-full bg-transparent px-2.5 py-1 text-[12.5px] text-[#B4B4B4] hover:text-[#ECECEC]"
+          className="inline-flex items-center gap-1 rounded-full bg-transparent px-2.5 py-1 text-[12.5px] text-text-muted hover:text-text"
           title="Clear selection"
         >
           <X size={11} /> Clear

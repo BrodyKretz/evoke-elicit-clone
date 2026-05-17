@@ -16,24 +16,24 @@ export function ExampleReportCard({ report }: { report: Report }) {
   return (
     <Link
       href={`/report/${report.id}/${report.initialView}`}
-      className="group flex flex-col rounded-[14px] bg-[#2A2A2A] p-6 transition-colors hover:bg-[#333333]"
+      className="group flex flex-col rounded-[14px] bg-surface p-6 transition-colors hover:bg-surface-muted"
     >
       <div className="mb-3 flex items-center gap-2">
         <span
           className={
             "inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[11px] font-medium " +
-            (allDone ? "bg-[#ECECEC] text-[#0D0D0D]" : "bg-[#212121] text-[#B4B4B4]")
+            (allDone ? "bg-text text-bg" : "bg-bg text-text-muted")
           }
         >
           {allDone && <Check size={10} />}
           {STATE_LABEL[report.initialView]}
         </span>
-        <span className="text-xs text-[#8E8E8E]">{report.date}</span>
+        <span className="text-xs text-text-faint">{report.date}</span>
       </div>
-      <h3 className="mb-2 text-[18px] font-semibold leading-snug text-[#ECECEC]">{report.question}</h3>
-      <p className="mb-4 line-clamp-3 text-sm text-[#B4B4B4]">{report.tldr}</p>
+      <h3 className="mb-2 text-[18px] font-semibold leading-snug text-text">{report.question}</h3>
+      <p className="mb-4 line-clamp-3 text-sm text-text-muted">{report.tldr}</p>
 
-      <div className="mt-auto flex items-center justify-between text-xs text-[#B4B4B4]">
+      <div className="mt-auto flex items-center justify-between text-xs text-text-muted">
         <div className="flex flex-wrap gap-3">
           {report.status.gather.sourcesFound != null && (
             <span>{report.status.gather.sourcesFound} sources</span>
@@ -45,7 +45,7 @@ export function ExampleReportCard({ report }: { report: Report }) {
             <span>{report.status.extract.dataPointsExtracted} data points</span>
           )}
         </div>
-        <span className="inline-flex items-center gap-1 font-medium text-[#ECECEC] opacity-0 transition-opacity group-hover:opacity-100">
+        <span className="inline-flex items-center gap-1 font-medium text-text opacity-0 transition-opacity group-hover:opacity-100">
           Open <ArrowRight size={12} />
         </span>
       </div>

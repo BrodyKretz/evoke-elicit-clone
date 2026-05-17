@@ -53,7 +53,7 @@ export function ThemeToggle() {
       onClick={flip}
       aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
       title={theme === "dark" ? "Light mode" : "Dark mode"}
-      className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[#E5E7EB] bg-white text-[#1F2937] hover:bg-[#F3F4F6] dark:border-[#3F3F3F] dark:bg-[#2A2A2A] dark:text-[#ECECEC] dark:hover:bg-[#333333]"
+      className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border-strong bg-surface-muted text-text hover:bg-surface"
     >
       {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
     </button>

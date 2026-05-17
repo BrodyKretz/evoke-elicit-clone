@@ -176,22 +176,22 @@ export function LibraryView() {
   };
 
   return (
-    <div className="mx-auto max-w-5xl px-8 py-10 text-[#1F2937]">
+    <div className="mx-auto max-w-5xl px-8 py-10 text-text">
       <h1 className="mb-2 text-3xl font-semibold tracking-tight">Library</h1>
-      <p className="mb-6 max-w-2xl text-[14.5px] leading-relaxed text-[#5D5D5D]">
+      <p className="mb-6 max-w-2xl text-[14.5px] leading-relaxed text-text-muted">
         Papers you&apos;ve saved across runs. Click any entry to open its DOI;
         download the whole library as CSV.
       </p>
 
       {entries.length === 0 ? (
-        <div className="mt-6 rounded-xl border border-[#E5E7EB] bg-[#FAFAF9] p-10 text-center">
-          <div className="mx-auto mb-3 grid h-10 w-10 place-items-center rounded-full bg-white text-[#6B7280]">
+        <div className="mt-6 rounded-xl border border-border bg-bg p-10 text-center">
+          <div className="mx-auto mb-3 grid h-10 w-10 place-items-center rounded-full bg-surface text-text-muted">
             <Book size={18} />
           </div>
-          <h3 className="mb-1 text-base font-semibold text-[#1F2937]">No saved papers yet</h3>
-          <p className="mx-auto mb-5 max-w-md text-[13px] text-[#6B7280]">
+          <h3 className="mb-1 text-base font-semibold text-text">No saved papers yet</h3>
+          <p className="mx-auto mb-5 max-w-md text-[13px] text-text-muted">
             Hit{" "}
-            <span className="inline-flex items-center gap-1 rounded bg-[#F3F4F6] px-1.5 py-0.5 font-medium">
+            <span className="inline-flex items-center gap-1 rounded bg-surface-muted px-1.5 py-0.5 font-medium">
               <Book size={11} /> Save to library
             </span>{" "}
             on any extraction row or search result. Saved papers persist across
@@ -199,7 +199,7 @@ export function LibraryView() {
           </p>
           <Link
             href="/research-agent"
-            className="inline-flex items-center gap-1.5 rounded-md bg-[#1F6E68] px-3 py-1.5 text-[13px] font-medium text-white hover:bg-[#185650]"
+            className="inline-flex items-center gap-1.5 rounded-md bg-teal px-3 py-1.5 text-[13px] font-medium text-white hover:bg-teal-hover"
           >
             <Sparkles size={12} /> Start a research run
           </Link>
@@ -208,13 +208,13 @@ export function LibraryView() {
         <>
           {/* Toolbar */}
           <div className="mb-3 flex flex-wrap items-center gap-2">
-            <div className="inline-flex flex-1 min-w-[200px] items-center gap-1.5 rounded-md border border-[#E5E7EB] bg-white px-2.5 py-1.5">
-              <Search size={13} className="text-[#6B7280]" />
+            <div className="inline-flex flex-1 min-w-[200px] items-center gap-1.5 rounded-md border border-border bg-surface px-2.5 py-1.5">
+              <Search size={13} className="text-text-muted" />
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search saved papers…"
-                className="w-full bg-transparent text-[13px] outline-none placeholder:text-[#9CA3AF]"
+                className="w-full bg-transparent text-[13px] outline-none placeholder:text-text-faint"
               />
             </div>
 
@@ -222,14 +222,14 @@ export function LibraryView() {
               <button
                 onClick={() => setSortOpen((v) => !v)}
                 className={cn(
-                  "inline-flex items-center gap-1.5 rounded-md border border-[#E5E7EB] bg-white px-2.5 py-1.5 text-[13px] text-[#1F2937] hover:bg-[#F3F4F6]",
-                  sortBy !== "savedAt" && "border-[#1F6E68] text-[#1F6E68]"
+                  "inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-2.5 py-1.5 text-[13px] text-text hover:bg-surface-muted",
+                  sortBy !== "savedAt" && "border-teal text-teal-bright"
                 )}
               >
                 <Sort size={12} /> Sort: {SORT_LABELS[sortBy]}
               </button>
               {sortOpen && (
-                <div className="absolute right-0 top-[calc(100%+4px)] z-20 w-[220px] rounded-lg border border-[#E5E7EB] bg-white p-1.5 shadow-md">
+                <div className="absolute right-0 top-[calc(100%+4px)] z-20 w-[220px] rounded-lg border border-border bg-surface p-1.5 shadow-md">
                   {(["savedAt", "year", "cited", "title"] as SortKey[]).map((k) => (
                     <button
                       key={k}
@@ -237,12 +237,12 @@ export function LibraryView() {
                         setSortBy(k);
                         setSortOpen(false);
                       }}
-                      className="flex w-full items-center justify-between rounded-md px-2.5 py-1.5 text-left text-[13px] hover:bg-[#F3F4F6]"
+                      className="flex w-full items-center justify-between rounded-md px-2.5 py-1.5 text-left text-[13px] hover:bg-surface-muted"
                     >
-                      <span className={sortBy === k ? "font-semibold text-[#1F6E68]" : "text-[#1F2937]"}>
+                      <span className={sortBy === k ? "font-semibold text-teal-bright" : "text-text"}>
                         {SORT_LABELS[k]}
                       </span>
-                      {sortBy === k && <Check size={12} className="text-[#1F6E68]" />}
+                      {sortBy === k && <Check size={12} className="text-teal-bright" />}
                     </button>
                   ))}
                 </div>
@@ -251,7 +251,7 @@ export function LibraryView() {
 
             <button
               onClick={downloadCsv}
-              className="inline-flex items-center gap-1.5 rounded-md border border-[#E5E7EB] bg-white px-2.5 py-1.5 text-[13px] text-[#1F2937] hover:bg-[#F3F4F6]"
+              className="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-2.5 py-1.5 text-[13px] text-text hover:bg-surface-muted"
             >
               <Download size={12} /> Download CSV
             </button>
@@ -263,7 +263,7 @@ export function LibraryView() {
                   show("Library cleared");
                 }
               }}
-              className="inline-flex items-center gap-1.5 rounded-md border border-[#E5E7EB] bg-white px-2.5 py-1.5 text-[13px] text-[#6B7280] hover:bg-[#F3F4F6] hover:text-[#1F2937]"
+              className="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-2.5 py-1.5 text-[13px] text-text-muted hover:bg-surface-muted hover:text-text"
             >
               <X size={12} /> Clear all
             </button>
@@ -272,14 +272,14 @@ export function LibraryView() {
           {/* Source filter chips — only render when there's >1 distinct source */}
           {sources.length > 1 && (
             <div className="mb-3 flex flex-wrap items-center gap-1.5 text-[12px]">
-              <span className="text-[#6B7280]">Source:</span>
+              <span className="text-text-muted">Source:</span>
               <button
                 onClick={() => setSourceFilter(null)}
                 className={cn(
                   "rounded-full border px-2 py-0.5 text-[11.5px] font-medium transition-colors",
                   sourceFilter === null
-                    ? "border-[#1F6E68] bg-[#1F6E68] text-white"
-                    : "border-[#E5E7EB] bg-white text-[#1F2937] hover:bg-[#F3F4F6]"
+                    ? "border-teal bg-teal text-white"
+                    : "border-border bg-surface text-text hover:bg-surface-muted"
                 )}
               >
                 All
@@ -291,8 +291,8 @@ export function LibraryView() {
                   className={cn(
                     "max-w-[200px] truncate rounded-full border px-2 py-0.5 text-[11.5px] font-medium transition-colors",
                     sourceFilter === s
-                      ? "border-[#1F6E68] bg-[#1F6E68] text-white"
-                      : "border-[#E5E7EB] bg-white text-[#1F2937] hover:bg-[#F3F4F6]"
+                      ? "border-teal bg-teal text-white"
+                      : "border-border bg-surface text-text hover:bg-surface-muted"
                   )}
                   title={s}
                 >
@@ -303,7 +303,7 @@ export function LibraryView() {
           )}
 
           {/* Counts */}
-          <div className="mb-3 text-[12px] text-[#6B7280]">
+          <div className="mb-3 text-[12px] text-text-muted">
             {visible.length} of {entries.length} {entries.length === 1 ? "paper" : "papers"}
             {query && ` matching "${query}"`}
             {sourceFilter && ` from "${sourceFilter}"`}
@@ -314,18 +314,18 @@ export function LibraryView() {
             {visible.map((e) => (
               <li
                 key={e.paper.id}
-                className="group rounded-xl border border-[#E5E7EB] bg-white p-4 transition-colors hover:bg-[#FAFAFA]"
+                className="group rounded-xl border border-border bg-surface p-4 transition-colors hover:bg-surface-muted"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0 flex-1">
-                    <h3 className="mb-1.5 text-[15px] font-semibold leading-snug text-[#1F2937]">
+                    <h3 className="mb-1.5 text-[15px] font-semibold leading-snug text-text">
                       {e.paper.title}
                     </h3>
-                    <div className="mb-1.5 text-[13px] text-[#6B7280]">
+                    <div className="mb-1.5 text-[13px] text-text-muted">
                       {e.paper.authors.slice(0, 4).join(", ")}
                       {e.paper.authors.length > 4 ? ` +${e.paper.authors.length - 4} more` : ""}
                     </div>
-                    <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[12px] text-[#6B7280]">
+                    <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[12px] text-text-muted">
                       {e.paper.journal && (
                         <span className="inline-flex items-center gap-1">
                           <Book size={10} />
@@ -339,16 +339,16 @@ export function LibraryView() {
                           href={`https://doi.org/${e.paper.doi}`}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-1 rounded bg-[#F3F4F6] px-1.5 py-0.5 font-medium hover:text-[#1F6E68]"
+                          className="inline-flex items-center gap-1 rounded bg-surface-muted px-1.5 py-0.5 font-medium hover:text-teal-bright"
                         >
                           <LinkIcon size={9} /> DOI
                         </a>
                       )}
-                      <span className="text-[#9CA3AF]">· saved {formatWhen(e.savedAt)}</span>
-                      {e.source && <span className="text-[#9CA3AF]">· from {e.source}</span>}
+                      <span className="text-text-faint">· saved {formatWhen(e.savedAt)}</span>
+                      {e.source && <span className="text-text-faint">· from {e.source}</span>}
                     </div>
                     {e.paper.abstract && (
-                      <p className="mt-2 line-clamp-3 text-[13px] leading-relaxed text-[#1F2937]/90">
+                      <p className="mt-2 line-clamp-3 text-[13px] leading-relaxed text-text/90">
                         {e.paper.abstract}
                       </p>
                     )}
@@ -356,7 +356,7 @@ export function LibraryView() {
                   <div className="flex flex-shrink-0 items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
                     {pinnedIds.has(e.paper.id) ? (
                       <span
-                        className="inline-flex items-center gap-1 rounded-full bg-[#E6F4F2] px-2 py-0.5 text-[11px] font-medium text-[#1F6E68]"
+                        className="inline-flex items-center gap-1 rounded-full bg-teal px-2 py-0.5 text-[11px] font-medium text-white"
                         title="Already pinned in Notebook"
                       >
                         <Check size={10} /> Pinned
@@ -367,7 +367,7 @@ export function LibraryView() {
                         onClick={() => {
                           if (pinPaper(e.paper.id)) show("Pinned to notebook");
                         }}
-                        className="rounded-md p-1 text-[#6B7280] hover:bg-[#F3F4F6] hover:text-[#1F2937]"
+                        className="rounded-md p-1 text-text-muted hover:bg-surface-muted hover:text-text"
                         title="Pin to notebook"
                       >
                         <Book size={14} />
@@ -376,7 +376,7 @@ export function LibraryView() {
                     <button
                       type="button"
                       onClick={() => copyCitation(formatApa(e.paper), "APA citation")}
-                      className="rounded-md px-1.5 py-1 text-[10.5px] font-medium text-[#6B7280] hover:bg-[#F3F4F6] hover:text-[#1F2937]"
+                      className="rounded-md px-1.5 py-1 text-[10.5px] font-medium text-text-muted hover:bg-surface-muted hover:text-text"
                       title="Copy APA citation"
                     >
                       APA
@@ -384,7 +384,7 @@ export function LibraryView() {
                     <button
                       type="button"
                       onClick={() => copyCitation(formatBibtex(e.paper), "BibTeX entry")}
-                      className="rounded-md px-1.5 py-1 text-[10.5px] font-medium text-[#6B7280] hover:bg-[#F3F4F6] hover:text-[#1F2937]"
+                      className="rounded-md px-1.5 py-1 text-[10.5px] font-medium text-text-muted hover:bg-surface-muted hover:text-text"
                       title="Copy BibTeX entry"
                     >
                       BibTeX
@@ -394,7 +394,7 @@ export function LibraryView() {
                         removeFromLibrary(e.paper.id);
                         show("Removed from library");
                       }}
-                      className="rounded-md p-1 text-[#9CA3AF] hover:bg-[#F3F4F6] hover:text-[#1F2937]"
+                      className="rounded-md p-1 text-text-faint hover:bg-surface-muted hover:text-text"
                       title="Remove from library"
                     >
                       <X size={14} />
@@ -404,7 +404,7 @@ export function LibraryView() {
               </li>
             ))}
             {visible.length === 0 && (
-              <li className="rounded-md border border-[#E5E7EB] bg-[#FAFAF9] px-4 py-6 text-center text-[13px] text-[#6B7280]">
+              <li className="rounded-md border border-border bg-bg px-4 py-6 text-center text-[13px] text-text-muted">
                 No saved papers match &ldquo;{query}&rdquo;.
               </li>
             )}
