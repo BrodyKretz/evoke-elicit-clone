@@ -114,7 +114,7 @@ export function FindPapers() {
         <button
           type="submit"
           disabled={!q.trim() || loading}
-          className="rounded-full bg-surface px-4 py-1.5 text-[13px] font-medium text-bg hover:bg-white disabled:opacity-50"
+          className="rounded-full bg-teal px-4 py-1.5 text-[13px] font-medium text-white hover:bg-teal-hover disabled:opacity-50"
         >
           {loading ? "Searching…" : "Search"}
         </button>
@@ -166,7 +166,7 @@ export function FindPapers() {
                       className={cn(
                         "mt-1 grid h-5 w-5 flex-shrink-0 place-items-center rounded border-[1.5px] transition-colors",
                         isSelected
-                          ? "border-surface bg-surface text-bg"
+                          ? "border-teal bg-teal text-white"
                           : "border-border-strong text-transparent hover:border-border-strong hover:text-text"
                       )}
                     >
