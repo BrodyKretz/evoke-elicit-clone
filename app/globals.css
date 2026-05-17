@@ -2,10 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --c-bg: 15 15 15;
+  --c-surface: 31 31 31;
+  --c-surface-muted: 42 42 42;
+  --c-border: 47 47 47;
+  --c-border-strong: 63 63 63;
+  --c-teal: 31 110 104;
+  --c-teal-hover: 24 86 80;
+  --c-teal-light: 20 48 46;
+  --c-text: 236 236 236;
+  --c-text-muted: 180 180 180;
+  --c-text-faint: 142 142 142;
+  --c-chip-bg: 42 42 42;
+  --c-chip-border: 63 63 63;
+  --c-examples: 42 42 42;
+}
+html.light {
+  --c-bg: 245 242 234;
+  --c-surface: 255 255 255;
+  --c-surface-muted: 250 248 242;
+  --c-border: 229 225 214;
+  --c-border-strong: 212 207 192;
+  --c-teal: 15 92 92;
+  --c-teal-hover: 10 74 74;
+  --c-teal-light: 232 240 238;
+  --c-text: 26 31 31;
+  --c-text-muted: 107 114 112;
+  --c-text-faint: 156 160 156;
+  --c-chip-bg: 240 237 227;
+  --c-chip-border: 224 220 206;
+  --c-examples: 221 227 222;
+}
+
 html,
 body {
-  background: theme("colors.bg");
-  color: theme("colors.text.DEFAULT");
+  background: rgb(var(--c-bg));
+  color: rgb(var(--c-text));
   font-family: theme("fontFamily.sans");
   font-size: 15px;
   line-height: 1.55;
@@ -52,13 +85,13 @@ body {
 /* Custom scrollbars on overflow panels — subtle */
 .scroll-pane {
   scrollbar-width: thin;
-  scrollbar-color: theme("colors.border-strong") transparent;
+  scrollbar-color: rgb(var(--c-border-strong)) transparent;
 }
 .scroll-pane::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 .scroll-pane::-webkit-scrollbar-thumb {
-  background: theme("colors.border-strong");
+  background: rgb(var(--c-border-strong));
   border-radius: 4px;
 }
