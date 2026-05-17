@@ -12,8 +12,8 @@ import { cn } from "@/lib/utils/cn";
 const DECISION_STYLE: Record<ScreeningDecision, { label: string; cls: string; rationaleCls: string; why: string }> = {
   include: {
     label: "Included",
-    cls: "bg-teal-light text-teal",
-    rationaleCls: "border-teal/30 bg-teal-light/40 text-teal",
+    cls: "bg-teal-light text-teal-bright",
+    rationaleCls: "border-teal/30 bg-teal-light/40 text-teal-bright",
     why: "Why included",
   },
   maybe: {
@@ -75,7 +75,7 @@ function Result({
             {screening && <ScreeningBadge result={screening} />}
           </div>
           {saved ? (
-            <span className="inline-flex items-center gap-1 rounded-full bg-teal-light px-2 py-0.5 text-[11px] font-medium text-teal">
+            <span className="inline-flex items-center gap-1 rounded-full bg-teal-light px-2 py-0.5 text-[11px] font-medium text-teal-bright">
               <Check size={10} /> Saved
             </span>
           ) : (
@@ -328,12 +328,12 @@ export function SearchView({ report }: { report: Report }) {
         </button>
         <button className="btn" onClick={() => show("Export menu")}>
           <Download size={12} /> Export
-          <span className="ml-1 rounded bg-teal-light px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-teal">
+          <span className="ml-1 rounded bg-teal-light px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-teal-bright">
             UPGRADE
           </span>
         </button>
         {bannerOpen && (
-          <div className="inline-flex items-center gap-2 rounded-md bg-teal-light px-2.5 py-1.5 text-[13px] text-teal">
+          <div className="inline-flex items-center gap-2 rounded-md bg-teal-light px-2.5 py-1.5 text-[13px] text-teal-bright">
             <FileText size={14} /> Get full-texts?
             <button onClick={() => setBannerOpen(false)} className="opacity-60 hover:opacity-100" aria-label="Dismiss">
               <X size={12} />

@@ -66,7 +66,7 @@ export function DataTable({ columns, rows, viewMore }: Props) {
                             onClick={() => setOpenFilter((o) => (o === i ? null : i))}
                             className={cn(
                               "grid h-[22px] w-[22px] place-items-center rounded text-text-faint transition-colors hover:bg-surface-muted hover:text-text",
-                              filterActive && "bg-teal-light text-teal"
+                              filterActive && "bg-teal-light text-teal-bright"
                             )}
                             aria-label="Filter column"
                           >
@@ -76,7 +76,7 @@ export function DataTable({ columns, rows, viewMore }: Props) {
                             onClick={() => handleSort(i)}
                             className={cn(
                               "grid h-[22px] w-[22px] place-items-center rounded text-text-faint transition-colors hover:bg-surface-muted hover:text-text",
-                              sortActive && "bg-teal-light text-teal"
+                              sortActive && "bg-teal-light text-teal-bright"
                             )}
                             aria-label="Sort column"
                           >

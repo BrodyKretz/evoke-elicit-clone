@@ -229,7 +229,7 @@ export function ReviewSearch() {
                       {style.label}
                     </span>
                     {isSaved ? (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-teal-light dark:bg-[#14302E] px-2 py-0.5 text-[11px] font-medium text-teal">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-teal-light px-2 py-0.5 text-[11px] font-medium text-teal-bright">
                         <Check size={10} /> Saved
                       </span>
                     ) : (

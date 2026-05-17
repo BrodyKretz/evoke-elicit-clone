@@ -191,7 +191,7 @@ export function ReportView({ report }: { report: Report }) {
                 <div className="flex flex-shrink-0 items-center gap-1.5">
                   <CiteCopyButtons paper={r} onCopied={(label) => show(`Copied ${label}`)} />
                   {savedIds.has(r.id) ? (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-teal-light px-2 py-0.5 text-[11px] font-medium text-teal">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-teal-light px-2 py-0.5 text-[11px] font-medium text-teal-bright">
                       <Check size={10} /> Saved
                     </span>
                   ) : (

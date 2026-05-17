@@ -50,7 +50,7 @@ export function Cite({ n = 1, paper }: CiteProps) {
         onClick={handleClick}
         title={tooltip}
         className={cn(
-          "ml-0.5 inline-flex h-4 min-w-[1rem] cursor-pointer items-center justify-center rounded-[3px] bg-chip-bg px-1 align-super text-[10px] leading-none text-text-muted transition-colors hover:bg-teal-light hover:text-teal",
+          "ml-0.5 inline-flex h-4 min-w-[1rem] cursor-pointer items-center justify-center rounded-[3px] bg-chip-bg px-1 align-super text-[10px] leading-none text-text-muted transition-colors hover:bg-teal-light hover:text-teal-bright",
           open && "bg-teal text-white hover:bg-teal hover:text-white"
         )}
         aria-label={tooltip}

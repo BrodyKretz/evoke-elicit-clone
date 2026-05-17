@@ -402,7 +402,7 @@ export function ExtractionView({ report }: { report: Report }) {
 
         {/* Selection action bar */}
         {selected.size > 0 && (
-          <div className="mb-3 flex items-center justify-between gap-3 rounded-md border border-teal bg-teal-light/50 px-3 py-1.5 text-[13px] text-teal">
+          <div className="mb-3 flex items-center justify-between gap-3 rounded-md border border-teal bg-teal-light/50 px-3 py-1.5 text-[13px] text-teal-bright">
             <span className="font-medium">
               {selected.size} selected
             </span>
@@ -422,7 +422,7 @@ export function ExtractionView({ report }: { report: Report }) {
                   if (added > 0) show(`Saved ${added} to library`);
                   else show("All selected papers are already in your library");
                 }}
-                className="inline-flex items-center gap-1 rounded-md border border-teal bg-surface px-2.5 py-1 text-[12.5px] font-medium text-teal hover:bg-teal-light"
+                className="inline-flex items-center gap-1 rounded-md border border-teal bg-surface px-2.5 py-1 text-[12.5px] font-medium text-teal hover:bg-teal-light hover:text-teal-bright"
               >
                 <Book size={11} /> Save {selected.size}
               </button>
