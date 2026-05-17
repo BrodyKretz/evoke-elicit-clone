@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ResearchShell } from "@/components/research-agent/ResearchShell";
+import { LabShell } from "@/components/lab/LabShell";
 import { LabChat } from "@/components/lab/LabChat";
 import { getSelectedPapers, subscribeSelection } from "@/lib/lab/selection";
 
@@ -24,5 +25,9 @@ export default function ChatWithPapersPage() {
   if (hasSelection === null || hasSelection === false) {
     return <ResearchShell mode="chat-papers" />;
   }
-  return <LabChat />;
+  return (
+    <LabShell mode="chat-papers">
+      <LabChat />
+    </LabShell>
+  );
 }

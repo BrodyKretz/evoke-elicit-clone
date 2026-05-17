@@ -1,4 +1,5 @@
 import { ResearchShell } from "@/components/research-agent/ResearchShell";
+import { LabShell } from "@/components/lab/LabShell";
 import { FindPapers } from "@/components/lab/FindPapers";
 
 // /lab/find — empty-state landing shows the shared light shell with mode
@@ -14,6 +15,6 @@ export default function FindPapersPage({
   searchParams?: { q?: string };
 }) {
   const q = (searchParams?.q ?? "").trim();
-  if (q) return <FindPapers />;
+  if (q) return <LabShell mode="find-papers"><FindPapers /></LabShell>;
   return <ResearchShell mode="find-papers" />;
 }
