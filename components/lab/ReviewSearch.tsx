@@ -109,6 +109,33 @@ export function ReviewSearch() {
         papers per run — each triggers an LLM call.
       </p>
 
+      <div className="mb-6 rounded-xl border border-border bg-surface px-4 py-3.5">
+        <div className="mb-1 flex items-center gap-1.5">
+          <Sparkles size={13} className="text-teal-bright" />
+          <span className="text-[12px] font-semibold text-text">What this does</span>
+        </div>
+        <p className="text-[13px] leading-relaxed text-text-muted">
+          Searches the literature for your query, then an LLM reads each abstract and tags every paper Include / Maybe / Exclude against an inclusion criterion you set (or one it generates) — so you only deep-read what&apos;s relevant.
+        </p>
+        <div className="mt-3 mb-1 flex items-center gap-1.5">
+          <Filter size={13} className="text-teal-bright" />
+          <span className="text-[12px] font-semibold text-text">Use it when</span>
+        </div>
+        <ul className="flex flex-col gap-1 text-[13px] text-text-muted">
+          {[
+            "Triaging a broad search down to a relevant set fast",
+            "Building the included-studies set for a literature or systematic review",
+            "Filtering by a specific eligibility rule (population, method, outcome) before extraction",
+            "Sanity-checking whether a topic has enough on-criterion evidence",
+          ].map((item) => (
+            <li key={item} className="flex items-start gap-1.5">
+              <span className="mt-[5px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-teal-bright" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <form
         onSubmit={(e) => {
           e.preventDefault();
