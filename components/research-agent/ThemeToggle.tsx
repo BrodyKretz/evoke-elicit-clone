@@ -3,23 +3,25 @@
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 
-// Light/dark mode toggle. Persists to localStorage, applies the `dark` class
-// on <html> so Tailwind's dark: variants take effect across the app.
+// Light/dark mode toggle. Dark is the default theme. When light mode is active,
+// applies the `.light` class on <html>. Theme preference persists to localStorage.
 
 const STORAGE_KEY = "evoke.theme";
 
 type Theme = "light" | "dark";
 
+export function resolveInitialTheme(stored: string | null): Theme {
+  return stored === "light" ? "light" : "dark";
+}
+
 function read(): Theme {
-  if (typeof window === "undefined") return "light";
-  const raw = window.localStorage.getItem(STORAGE_KEY);
-  if (raw === "light" || raw === "dark") return raw;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  if (typeof window === "undefined") return "dark";
+  return resolveInitialTheme(window.localStorage.getItem(STORAGE_KEY));
 }
 
 function apply(theme: Theme) {
   if (typeof document === "undefined") return;
-  document.documentElement.classList.toggle("dark", theme === "dark");
+  document.documentElement.classList.toggle("light", theme === "light");
 }
 
 export function ThemeToggle() {

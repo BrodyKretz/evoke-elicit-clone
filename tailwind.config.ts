@@ -6,26 +6,26 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#F5F2EA",
-        surface: "#FFFFFF",
-        "surface-muted": "#FAF8F2",
-        border: "#E5E1D6",
-        "border-strong": "#D4CFC0",
+        bg: "rgb(var(--c-bg) / <alpha-value>)",
+        surface: "rgb(var(--c-surface) / <alpha-value>)",
+        "surface-muted": "rgb(var(--c-surface-muted) / <alpha-value>)",
+        border: "rgb(var(--c-border) / <alpha-value>)",
+        "border-strong": "rgb(var(--c-border-strong) / <alpha-value>)",
         teal: {
-          DEFAULT: "#0F5C5C",
-          hover: "#0A4A4A",
-          light: "#E8F0EE",
+          DEFAULT: "rgb(var(--c-teal) / <alpha-value>)",
+          hover: "rgb(var(--c-teal-hover) / <alpha-value>)",
+          light: "rgb(var(--c-teal-light) / <alpha-value>)",
         },
         text: {
-          DEFAULT: "#1A1F1F",
-          muted: "#6B7270",
-          faint: "#9CA09C",
+          DEFAULT: "rgb(var(--c-text) / <alpha-value>)",
+          muted: "rgb(var(--c-text-muted) / <alpha-value>)",
+          faint: "rgb(var(--c-text-faint) / <alpha-value>)",
         },
         chip: {
-          bg: "#F0EDE3",
-          border: "#E0DCCE",
+          bg: "rgb(var(--c-chip-bg) / <alpha-value>)",
+          border: "rgb(var(--c-chip-border) / <alpha-value>)",
         },
-        examples: "#DDE3DE",
+        examples: "rgb(var(--c-examples) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["var(--font-manrope)", "system-ui", "sans-serif"],
