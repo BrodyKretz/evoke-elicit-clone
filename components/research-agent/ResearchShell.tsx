@@ -366,8 +366,8 @@ function DropdownItem({
       disabled={disabled}
       className="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left text-[15px] hover:bg-surface-muted disabled:cursor-default"
     >
-      <Icon size={18} className={active ? "text-teal" : "text-text"} />
-      <span className={"flex-1 truncate " + (active ? "font-semibold text-teal" : "font-medium text-text")}>
+      <Icon size={18} className={active ? "text-teal-bright" : "text-text"} />
+      <span className={"flex-1 truncate " + (active ? "font-semibold text-teal-bright" : "font-medium text-text")}>
         {label}
       </span>
       {pro && <Lock size={13} className="text-text-faint" />}
@@ -417,12 +417,12 @@ function SourceDropdown() {
                 className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-[14px] hover:bg-surface-muted"
               >
                 <span>
-                  <span className={active ? "font-semibold text-teal" : "text-text"}>
+                  <span className={active ? "font-semibold text-teal-bright" : "text-text"}>
                     {opt.label}
                   </span>{" "}
                   <span className="text-text-faint">({opt.count})</span>
                 </span>
-                {active && <Check size={14} className="text-teal" />}
+                {active && <Check size={14} className="text-teal-bright" />}
               </button>
             );
           })}
@@ -609,7 +609,7 @@ function PromptBody({
               type="button"
               onClick={clearAction}
               title="Click to remove this tag"
-              className="group inline-flex items-center gap-1.5 rounded-lg border border-teal/40 bg-teal/[0.08] px-2.5 py-1.5 text-[13px] font-medium text-teal hover:border-teal/70"
+              className="group inline-flex items-center gap-1.5 rounded-lg border border-teal/40 bg-teal/[0.08] px-2.5 py-1.5 text-[13px] font-medium text-teal-bright hover:border-teal/70"
             >
               <ActionIcon size={14} />
               {selectedLabel}

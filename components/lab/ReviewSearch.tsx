@@ -196,7 +196,7 @@ export function ReviewSearch() {
 
       {usedCriterion && (
         <div className="mb-4 rounded-xl bg-teal-light px-4 py-3">
-          <div className="mb-1 inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider text-teal">
+          <div className="mb-1 inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider text-teal-bright">
             <Sparkles size={11} /> Criterion applied
             {!criterion.trim() && (
               <span className="ml-1 normal-case tracking-normal text-text-faint">(auto-generated)</span>

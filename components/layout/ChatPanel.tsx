@@ -245,7 +245,7 @@ export function ChatPanel({ report }: { report: Report }) {
                     <button
                       type="button"
                       onClick={() => simplify(i)}
-                      className="mt-1.5 inline-flex items-center gap-1 rounded-full border border-border-strong bg-surface px-2.5 py-0.5 text-[11px] font-medium text-text-muted hover:border-teal hover:text-teal"
+                      className="mt-1.5 inline-flex items-center gap-1 rounded-full border border-border-strong bg-surface px-2.5 py-0.5 text-[11px] font-medium text-text-muted hover:border-teal hover:text-teal-bright"
                       title="Rewrite this answer in plain language for a high-schooler."
                     >
                       DumDum it

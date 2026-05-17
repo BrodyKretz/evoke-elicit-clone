@@ -135,7 +135,7 @@ export function DataTable({ columns, rows, viewMore }: Props) {
       {viewMore != null && viewMore > 0 && (
         <button
           onClick={() => show("Loading more rows…")}
-          className="mb-6 flex w-full items-center justify-center gap-1.5 rounded-[10px] border border-border bg-surface py-3.5 text-[13px] font-medium text-teal transition-colors hover:bg-surface-muted"
+          className="mb-6 flex w-full items-center justify-center gap-1.5 rounded-[10px] border border-border bg-surface py-3.5 text-[13px] font-medium text-teal-bright transition-colors hover:bg-surface-muted"
         >
           <ExternalLink size={12} />
           View {viewMore} more rows

@@ -201,7 +201,7 @@ const DOT_BY_KIND: Record<Entry["kind"], string> = {
   progress: "bg-text-faint",
   tldr: "bg-teal",
   done: "bg-teal",
-  error: "bg-red-500",
+  error: "bg-error",
 };
 
 export function LiveProgressFeed({ report }: { report: Report }) {
@@ -256,7 +256,7 @@ export function LiveProgressFeed({ report }: { report: Report }) {
           {done ? "Run timeline" : "Live progress"}
         </div>
         {streaming && (
-          <span className="inline-flex items-center gap-1 text-[11px] font-medium text-teal">
+          <span className="inline-flex items-center gap-1 text-[11px] font-medium text-teal-bright">
             <span className="grid h-2 w-2 place-items-center">
               <span className="h-2 w-2 animate-ping rounded-full bg-teal/60" />
               <span className="absolute h-1.5 w-1.5 rounded-full bg-teal" />
@@ -274,7 +274,7 @@ export function LiveProgressFeed({ report }: { report: Report }) {
         )}
         {entries.length === 0 && streaming && (
           <div className="rounded-md bg-surface-muted px-3 py-3 text-[12.5px] text-text-muted">
-            <Sparkles size={11} className="-mt-0.5 mr-1 inline text-teal" />
+            <Sparkles size={11} className="-mt-0.5 mr-1 inline text-teal-bright" />
             Spinning up the pipeline…
           </div>
         )}
@@ -299,10 +299,10 @@ export function LiveProgressFeed({ report }: { report: Report }) {
                 <div
                   className={
                     "text-[12.5px] font-medium leading-snug " +
-                    (e.kind === "error" ? "text-red-600" : "text-text")
+                    (e.kind === "error" ? "text-error" : "text-text")
                   }
                 >
-                  {e.kind === "done" && <Check size={11} className="-mt-0.5 mr-1 inline text-teal" />}
+                  {e.kind === "done" && <Check size={11} className="-mt-0.5 mr-1 inline text-teal-bright" />}
                   {e.title}
                 </div>
                 {e.detail && (

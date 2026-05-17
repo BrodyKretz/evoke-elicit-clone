@@ -225,7 +225,7 @@ export function LabExtract() {
       <div className="mb-6 rounded-[10px] border border-border bg-surface">
         <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
           <span className="text-[13px] font-medium text-text">Papers · {chosen.length} of {pool.length} selected</span>
-          <button type="button" onClick={() => setSelectedIds(chosen.length === pool.length ? new Set() : new Set(pool.map(p => p.id)))} className="text-[12px] font-medium text-teal hover:underline">{chosen.length === pool.length ? "Select none" : "Select all"}</button>
+          <button type="button" onClick={() => setSelectedIds(chosen.length === pool.length ? new Set() : new Set(pool.map(p => p.id)))} className="text-[12px] font-medium text-teal-bright hover:underline">{chosen.length === pool.length ? "Select none" : "Select all"}</button>
         </div>
         <ul className="max-h-64 overflow-y-auto">
           {pool.map(p => {

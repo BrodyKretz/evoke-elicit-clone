@@ -140,7 +140,7 @@ export function ReportView({ report }: { report: Report }) {
           </a>
         </div>
       </div>
-      <h2 className="mb-4 font-display text-[32px] font-medium leading-tight tracking-tight text-teal">
+      <h2 className="mb-4 font-display text-[32px] font-medium leading-tight tracking-tight text-teal-bright">
         {report.question}
       </h2>
       <p className="mb-9 max-w-prose text-base text-text-muted">{report.tldr}</p>
@@ -155,7 +155,7 @@ export function ReportView({ report }: { report: Report }) {
             <button
               type="button"
               onClick={() => setMethodsOpen(true)}
-              className="text-teal font-medium underline-offset-2 hover:underline"
+              className="text-teal-bright font-medium underline-offset-2 hover:underline"
             >
               More on methods
             </button>

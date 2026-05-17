@@ -60,7 +60,7 @@ export function Cite({ n = 1, paper }: CiteProps) {
       </button>
       {open && paper && (
         <span className="absolute left-1/2 top-[calc(100%+6px)] z-30 w-80 -translate-x-1/2 rounded-lg border border-border bg-surface p-3 text-left text-[13px] shadow-md">
-          <span className="mb-1 block text-[11px] font-bold uppercase tracking-wider text-teal">
+          <span className="mb-1 block text-[11px] font-bold uppercase tracking-wider text-teal-bright">
             Reference [{n}]
           </span>
           <span className="mb-1.5 block font-semibold leading-snug text-text">
@@ -80,7 +80,7 @@ export function Cite({ n = 1, paper }: CiteProps) {
               href={`https://doi.org/${paper.doi}`}
               target="_blank"
               rel="noreferrer"
-              className="mt-2 inline-block text-xs font-medium text-teal hover:underline"
+              className="mt-2 inline-block text-xs font-medium text-teal-bright hover:underline"
               onClick={(e) => e.stopPropagation()}
             >
               doi.org/{paper.doi}

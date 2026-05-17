@@ -14,6 +14,8 @@
   --c-teal-bright: 94 227 198;
   --c-error-bg: 58 31 31;
   --c-error-text: 255 138 138;
+  --c-warning-bg: 58 47 20;
+  --c-warning-text: 245 200 110;
   --c-text: 236 236 236;
   --c-text-muted: 180 180 180;
   --c-text-faint: 142 142 142;
@@ -33,6 +35,8 @@ html.light {
   --c-teal-bright: 15 92 92;
   --c-error-bg: 254 242 242;
   --c-error-text: 159 18 57;
+  --c-warning-bg: 255 247 224;
+  --c-warning-text: 146 100 20;
   --c-text: 26 31 31;
   --c-text-muted: 107 114 112;
   --c-text-faint: 156 160 156;
@@ -62,7 +66,7 @@ body {
     @apply w-8 h-8 p-0 grid place-items-center;
   }
   .section-label {
-    @apply inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-teal mb-3.5;
+    @apply inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-teal-bright mb-3.5;
   }
   .subsection-title {
     @apply font-display text-[22px] font-medium my-7 mb-4 text-text;

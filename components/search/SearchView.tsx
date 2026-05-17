@@ -82,7 +82,7 @@ function Result({
             <button
               type="button"
               onClick={onSave}
-              className="inline-flex items-center gap-1 rounded-full border border-border-strong px-2 py-0.5 text-[11px] font-medium text-text-muted hover:border-teal hover:text-teal"
+              className="inline-flex items-center gap-1 rounded-full border border-border-strong px-2 py-0.5 text-[11px] font-medium text-text-muted hover:border-teal hover:text-teal-bright"
               title={`Save to library (${sourceLabel})`}
             >
               <Book size={10} /> Save
@@ -233,7 +233,7 @@ export function SearchView({ report }: { report: Report }) {
       {criterion && (
         <div className="mb-4 rounded-[10px] border border-border bg-teal-light/40 px-4 py-3">
           <div className="mb-1 flex items-center justify-between gap-2">
-            <div className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-teal">
+            <div className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-teal-bright">
               <Sparkles size={11} /> Screening criterion
             </div>
             {editable && !editing && (
@@ -242,7 +242,7 @@ export function SearchView({ report }: { report: Report }) {
                   setDraftCriterion(criterion.text);
                   setEditing(true);
                 }}
-                className="text-[11px] font-semibold text-teal hover:underline"
+                className="text-[11px] font-semibold text-teal-bright hover:underline"
               >
                 Edit & re-screen
               </button>

@@ -223,7 +223,7 @@ export function LibraryView() {
                 onClick={() => setSortOpen((v) => !v)}
                 className={cn(
                   "inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-2.5 py-1.5 text-[13px] text-text hover:bg-surface-muted",
-                  sortBy !== "savedAt" && "border-teal text-teal"
+                  sortBy !== "savedAt" && "border-teal text-teal-bright"
                 )}
               >
                 <Sort size={12} /> Sort: {SORT_LABELS[sortBy]}
@@ -239,10 +239,10 @@ export function LibraryView() {
                       }}
                       className="flex w-full items-center justify-between rounded-md px-2.5 py-1.5 text-left text-[13px] hover:bg-surface-muted"
                     >
-                      <span className={sortBy === k ? "font-semibold text-teal" : "text-text"}>
+                      <span className={sortBy === k ? "font-semibold text-teal-bright" : "text-text"}>
                         {SORT_LABELS[k]}
                       </span>
-                      {sortBy === k && <Check size={12} className="text-teal" />}
+                      {sortBy === k && <Check size={12} className="text-teal-bright" />}
                     </button>
                   ))}
                 </div>
@@ -339,7 +339,7 @@ export function LibraryView() {
                           href={`https://doi.org/${e.paper.doi}`}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-1 rounded bg-surface-muted px-1.5 py-0.5 font-medium hover:text-teal"
+                          className="inline-flex items-center gap-1 rounded bg-surface-muted px-1.5 py-0.5 font-medium hover:text-teal-bright"
                         >
                           <LinkIcon size={9} /> DOI
                         </a>

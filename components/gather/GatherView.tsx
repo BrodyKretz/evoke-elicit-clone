@@ -60,9 +60,9 @@ function StageRow({
         className={cn(
           "mt-0.5 grid h-5 w-5 flex-shrink-0 place-items-center rounded-full border-[1.5px]",
           state === "done" && "border-teal bg-teal text-white",
-          state === "running" && "border-teal text-teal animate-pulse",
+          state === "running" && "border-teal text-teal-bright animate-pulse",
           state === "pending" && "border-text-faint text-text-faint",
-          state === "error" && "border-red-500 text-red-500"
+          state === "error" && "border-error text-error"
         )}
       >
         {state === "done" ? (
@@ -78,7 +78,7 @@ function StageRow({
             state === "pending" && "text-text-muted",
             state === "running" && "text-text",
             state === "done" && "text-text-muted line-through decoration-text-faint",
-            state === "error" && "text-red-600"
+            state === "error" && "text-error"
           )}
         >
           {STAGE_LABEL[stage]}
@@ -225,7 +225,7 @@ export function GatherView({ report }: { report: Report }) {
   return (
     <div>
       {(inProgress || finalizedEmpty) && (
-        <h2 className="mb-3.5 font-display text-[26px] font-medium leading-snug text-teal">
+        <h2 className="mb-3.5 font-display text-[26px] font-medium leading-snug text-teal-bright">
           {report.question}
         </h2>
       )}
@@ -242,22 +242,22 @@ export function GatherView({ report }: { report: Report }) {
       )}
 
       {fatalError && (
-        <div className="mb-6 rounded-[10px] border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className="mb-6 rounded-[10px] border border-error/30 bg-error-bg px-4 py-3 text-sm text-error">
           Pipeline failed: {fatalError}
         </div>
       )}
 
       {finalizedEmpty && (
-        <div className="mb-6 rounded-[10px] border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+        <div className="mb-6 rounded-[10px] border border-warning/30 bg-warning-bg px-4 py-3 text-sm text-warning">
           <div className="font-semibold">{emptyHeading}</div>
-          <div className="mt-1 whitespace-pre-line text-amber-800">{report.tldr}</div>
+          <div className="mt-1 whitespace-pre-line">{report.tldr}</div>
         </div>
       )}
 
       {/* Live pipeline progress card — only when streaming */}
       {streamed && (
         <section className="mt-6 mb-8 rounded-[10px] border border-border bg-surface p-5 shadow-sm">
-          <div className="mb-3 text-[11px] font-bold uppercase tracking-wider text-teal">
+          <div className="mb-3 text-[11px] font-bold uppercase tracking-wider text-teal-bright">
             Live progress
           </div>
           <ol className="divide-y divide-border">
@@ -268,19 +268,19 @@ export function GatherView({ report }: { report: Report }) {
 
           {liveCriterion && (
             <div className="mt-4 rounded-md border border-border bg-surface-muted px-3 py-2 text-xs">
-              <span className="font-semibold text-teal">Criterion:</span>{" "}
+              <span className="font-semibold text-teal-bright">Criterion:</span>{" "}
               <span className="text-text">{liveCriterion}</span>
             </div>
           )}
           {liveColumns && liveColumns.length > 0 && (
             <div className="mt-2 rounded-md border border-border bg-surface-muted px-3 py-2 text-xs">
-              <span className="font-semibold text-teal">Extraction columns:</span>{" "}
+              <span className="font-semibold text-teal-bright">Extraction columns:</span>{" "}
               <span className="text-text">{liveColumns.join(" · ")}</span>
             </div>
           )}
           {liveTldr && (
             <div className="mt-2 rounded-md border border-border bg-teal-light px-3 py-2 text-xs">
-              <span className="font-semibold text-teal">TLDR:</span>{" "}
+              <span className="font-semibold text-teal-bright">TLDR:</span>{" "}
               <span className="text-text">{liveTldr}</span>
             </div>
           )}
@@ -290,7 +290,7 @@ export function GatherView({ report }: { report: Report }) {
       <section className="mt-8">
         <header className="mb-6 flex items-center justify-between border-b border-t border-border py-4">
           <div className="flex items-center gap-2.5 font-semibold">
-            <span className="grid h-5 w-5 place-items-center rounded-full border-[1.5px] border-teal text-teal">
+            <span className="grid h-5 w-5 place-items-center rounded-full border-[1.5px] border-teal text-teal-bright">
               <Check size={12} />
             </span>
             Gather sources

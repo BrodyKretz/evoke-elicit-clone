@@ -29,6 +29,8 @@ const config: Config = {
         examples: "rgb(var(--c-examples) / <alpha-value>)",
         "error-bg": "rgb(var(--c-error-bg) / <alpha-value>)",
         error: "rgb(var(--c-error-text) / <alpha-value>)",
+        "warning-bg": "rgb(var(--c-warning-bg) / <alpha-value>)",
+        warning: "rgb(var(--c-warning-text) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["var(--font-manrope)", "system-ui", "sans-serif"],

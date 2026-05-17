@@ -24,7 +24,7 @@ export function Tabs({ reportId }: { reportId: string }) {
             href={href}
             className={cn(
               "-mb-px border-b-2 border-transparent px-3.5 py-3 text-[13px] font-medium transition-colors",
-              active ? "border-teal text-teal" : "text-text-muted hover:text-text"
+              active ? "border-teal text-teal-bright" : "text-text-muted hover:text-text"
             )}
           >
             {t.label}
