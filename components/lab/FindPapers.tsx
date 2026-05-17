@@ -128,7 +128,7 @@ export function FindPapers() {
       )}
 
       {error && (
-        <div className="mb-6 rounded-lg bg-[#3A1F1F] px-4 py-3 text-sm text-[#FF6B6B]">
+        <div className="mb-6 rounded-lg bg-rose-50/50 px-4 py-3 text-sm text-rose-800">
           {error}
         </div>
       )}
