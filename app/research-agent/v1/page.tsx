@@ -29,7 +29,7 @@ export default function ResearchAgentV1Page() {
         <nav className="flex items-center gap-3 text-[13px] text-text-muted">
           <Link
             href="/research-agent"
-            className="inline-flex items-center rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-bg hover:bg-white"
+            className="inline-flex items-center rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-bg hover:opacity-90"
           >
             Current research agent
           </Link>

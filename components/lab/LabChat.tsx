@@ -177,7 +177,7 @@ export function LabChat() {
         </p>
         <Link
           href="/lab/find"
-          className="inline-flex items-center gap-1 rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-bg hover:bg-white"
+          className="inline-flex items-center gap-1 rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-bg hover:opacity-90"
         >
           <Search size={12} /> Find papers
         </Link>
@@ -309,7 +309,7 @@ export function LabChat() {
         <button
           type="submit"
           disabled={!draft.trim() || streaming}
-          className="rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-bg hover:bg-white disabled:opacity-50"
+          className="rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-bg hover:opacity-90 disabled:opacity-50"
         >
           {streaming ? "…" : "Send"}
         </button>

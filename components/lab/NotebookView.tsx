@@ -104,7 +104,7 @@ export function NotebookView() {
         <button
           type="button"
           onClick={() => setPickerOpen((v) => !v)}
-          className="inline-flex items-center gap-1.5 rounded-full border border-border-strong px-3 py-1 text-[12.5px] font-medium text-text hover:border-border"
+          className="inline-flex items-center gap-1.5 rounded-full border border-border-strong px-3 py-1 text-[12.5px] font-medium text-text hover:border-text-faint"
         >
           <Book size={12} /> {pickerOpen ? "Close" : "Pin from Library"}
         </button>
@@ -153,7 +153,7 @@ export function NotebookView() {
                       const ok = pinPaper(e.paper.id);
                       if (ok) show("Pinned");
                     }}
-                    className="inline-flex flex-shrink-0 items-center gap-1 rounded-full bg-text px-2 py-0.5 text-[11px] font-medium text-bg hover:bg-white"
+                    className="inline-flex flex-shrink-0 items-center gap-1 rounded-full bg-text px-2 py-0.5 text-[11px] font-medium text-bg hover:opacity-90"
                   >
                     <Check size={10} /> Pin
                   </button>

@@ -128,7 +128,7 @@ export function FindPapers() {
       )}
 
       {error && (
-        <div className="mb-6 rounded-lg bg-rose-50/50 px-4 py-3 text-sm text-rose-800">
+        <div className="mb-6 rounded-lg bg-error-bg px-4 py-3 text-sm text-error">
           {error}
         </div>
       )}
@@ -189,7 +189,7 @@ export function FindPapers() {
                               if (added > 0) show("Saved to library");
                               else show("Already in your library");
                             }}
-                            className="inline-flex flex-shrink-0 items-center gap-1 rounded-full border border-border-strong px-2 py-0.5 text-[11px] font-medium text-text-muted hover:border-border hover:text-text"
+                            className="inline-flex flex-shrink-0 items-center gap-1 rounded-full border border-border-strong px-2 py-0.5 text-[11px] font-medium text-text-muted hover:border-text-faint hover:text-text"
                             title="Save to library"
                           >
                             <Book size={10} /> Save

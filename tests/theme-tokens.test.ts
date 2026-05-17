@@ -8,6 +8,7 @@ const VARS = [
   "--c-bg","--c-surface","--c-surface-muted","--c-border","--c-border-strong",
   "--c-teal","--c-teal-hover","--c-teal-light","--c-teal-bright","--c-text","--c-text-muted",
   "--c-text-faint","--c-chip-bg","--c-chip-border","--c-examples",
+  "--c-error-bg","--c-error-text",
 ];
 
 test("globals.css defines a :root (dark) block with every token var", () => {
@@ -31,7 +32,7 @@ test("no raw theme() color calls remain in plain CSS declarations", () => {
 const cfg = readFileSync(new URL("../tailwind.config.ts", import.meta.url), "utf8");
 
 test("tailwind tokens reference CSS vars with alpha support", () => {
-  for (const name of ["c-bg","c-surface","c-surface-muted","c-border","c-border-strong","c-teal","c-teal-hover","c-teal-light","c-teal-bright","c-text","c-text-muted","c-text-faint","c-chip-bg","c-chip-border","c-examples"]) {
+  for (const name of ["c-bg","c-surface","c-surface-muted","c-border","c-border-strong","c-teal","c-teal-hover","c-teal-light","c-teal-bright","c-text","c-text-muted","c-text-faint","c-chip-bg","c-chip-border","c-examples","c-error-bg","c-error-text"]) {
     assert.match(cfg, new RegExp("rgb\\(var\\(--" + name + "\\) / <alpha-value>\\)"), `tailwind must map --${name}`);
   }
   assert.doesNotMatch(cfg, /bg:\s*"#F5F2EA"/, "no hardcoded hex token values remain");

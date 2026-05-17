@@ -185,7 +185,7 @@ export function ReviewSearch() {
       )}
 
       {error && (
-        <div className="mb-6 rounded-lg bg-rose-50/50 px-4 py-3 text-sm text-rose-800">{error}</div>
+        <div className="mb-6 rounded-lg bg-error-bg px-4 py-3 text-sm text-error">{error}</div>
       )}
 
       {ran && !loading && !error && papers.length === 0 && (
@@ -240,7 +240,7 @@ export function ReviewSearch() {
                           if (added > 0) show("Saved to library");
                           else show("Already in your library");
                         }}
-                        className="inline-flex items-center gap-1 rounded-full border border-border-strong dark:border-[#3F3F3F] px-2 py-0.5 text-[11px] font-medium text-text-muted dark:text-[#B4B4B4] hover:border-border dark:hover:border-[#3F3F3F] hover:text-text dark:hover:text-[#ECECEC]"
+                        className="inline-flex items-center gap-1 rounded-full border border-border-strong dark:border-[#3F3F3F] px-2 py-0.5 text-[11px] font-medium text-text-muted dark:text-[#B4B4B4] hover:border-text-faint dark:hover:border-[#3F3F3F] hover:text-text dark:hover:text-[#ECECEC]"
                       >
                         <Book size={10} /> Save
                       </button>

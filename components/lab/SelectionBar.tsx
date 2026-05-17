@@ -36,19 +36,19 @@ export function SelectionBar() {
       <div className="flex items-center gap-2">
         <Link
           href="/lab/chat"
-          className="inline-flex items-center gap-1 rounded-full bg-text px-3 py-1 text-[12.5px] font-medium text-bg hover:bg-white"
+          className="inline-flex items-center gap-1 rounded-full bg-text px-3 py-1 text-[12.5px] font-medium text-bg hover:opacity-90"
         >
           <MessageSquare size={11} /> Chat with selection
         </Link>
         <Link
           href="/lab/extract"
-          className="inline-flex items-center gap-1 rounded-full bg-text px-3 py-1 text-[12.5px] font-medium text-bg hover:bg-white"
+          className="inline-flex items-center gap-1 rounded-full bg-text px-3 py-1 text-[12.5px] font-medium text-bg hover:opacity-90"
         >
           <Grid size={11} /> Extract from selection
         </Link>
         <button
           onClick={saveSelection}
-          className="inline-flex items-center gap-1 rounded-full border border-border-strong bg-transparent px-2.5 py-1 text-[12.5px] font-medium text-text hover:border-border"
+          className="inline-flex items-center gap-1 rounded-full border border-border-strong bg-transparent px-2.5 py-1 text-[12.5px] font-medium text-text hover:border-text-faint"
           title="Save the current selection to your library"
         >
           <Book size={11} /> Save {count}

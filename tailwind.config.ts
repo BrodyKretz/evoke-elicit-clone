@@ -27,6 +27,8 @@ const config: Config = {
           border: "rgb(var(--c-chip-border) / <alpha-value>)",
         },
         examples: "rgb(var(--c-examples) / <alpha-value>)",
+        "error-bg": "rgb(var(--c-error-bg) / <alpha-value>)",
+        error: "rgb(var(--c-error-text) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["var(--font-manrope)", "system-ui", "sans-serif"],

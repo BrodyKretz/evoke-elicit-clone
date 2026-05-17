@@ -12,6 +12,8 @@
   --c-teal-hover: 24 86 80;
   --c-teal-light: 20 48 46;
   --c-teal-bright: 94 227 198;
+  --c-error-bg: 58 31 31;
+  --c-error-text: 255 138 138;
   --c-text: 236 236 236;
   --c-text-muted: 180 180 180;
   --c-text-faint: 142 142 142;
@@ -29,6 +31,8 @@ html.light {
   --c-teal-hover: 10 74 74;
   --c-teal-light: 232 240 238;
   --c-teal-bright: 15 92 92;
+  --c-error-bg: 254 242 242;
+  --c-error-text: 159 18 57;
   --c-text: 26 31 31;
   --c-text-muted: 107 114 112;
   --c-text-faint: 156 160 156;

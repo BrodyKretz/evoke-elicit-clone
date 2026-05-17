@@ -86,7 +86,7 @@ export function Hero() {
         />
         <button
           type="submit"
-          className="inline-flex items-center gap-1 rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-bg hover:bg-white disabled:opacity-50"
+          className="inline-flex items-center gap-1 rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-bg hover:opacity-90 disabled:opacity-50"
           disabled={!q.trim() || submitting}
         >
           {submitting ? "Searching…" : <>Start <ArrowRight size={14} /></>}

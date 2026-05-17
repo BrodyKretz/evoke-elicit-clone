@@ -40,7 +40,7 @@ export function ComingSoon({ tool, blurb, willDo, callout }: Props) {
       <div className="flex items-center gap-3 text-[13px]">
         <Link
           href="/lab/find"
-          className="inline-flex items-center gap-1 rounded-full bg-text px-3 py-1.5 font-medium text-bg hover:bg-white"
+          className="inline-flex items-center gap-1 rounded-full bg-text px-3 py-1.5 font-medium text-bg hover:opacity-90"
         >
           <Search size={12} /> Try Find papers
         </Link>

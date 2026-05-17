@@ -31,7 +31,7 @@ function statusTone(status: TrialStatus): string {
   if (status === "ACTIVE_NOT_RECRUITING") return "bg-border-strong text-text";
   if (status === "COMPLETED") return "bg-surface-muted text-text-muted";
   if (status === "TERMINATED" || status === "WITHDRAWN" || status === "SUSPENDED") {
-    return "bg-rose-50/50 text-rose-800";
+    return "bg-error-bg text-error";
   }
   return "bg-surface-muted text-text-muted";
 }
@@ -112,7 +112,7 @@ export function TrialsSearch() {
         <button
           type="submit"
           disabled={!q.trim() || loading}
-          className="rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-bg hover:bg-white disabled:opacity-50"
+          className="rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-bg hover:opacity-90 disabled:opacity-50"
         >
           {loading ? "Searching…" : "Search"}
         </button>
@@ -135,7 +135,7 @@ export function TrialsSearch() {
       </div>
 
       {error && (
-        <div className="mb-6 rounded-lg bg-rose-50/50 px-4 py-3 text-sm text-rose-800">{error}</div>
+        <div className="mb-6 rounded-lg bg-error-bg px-4 py-3 text-sm text-error">{error}</div>
       )}
 
       {ran && !loading && !error && trials.length === 0 && (

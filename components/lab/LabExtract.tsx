@@ -246,7 +246,7 @@ export function LabExtract() {
       </div>
 
       {error && (
-        <div className="mb-6 rounded-[10px] bg-rose-50/50 px-4 py-3 text-sm text-rose-800">
+        <div className="mb-6 rounded-[10px] bg-error-bg px-4 py-3 text-sm text-error">
           {error}
         </div>
       )}

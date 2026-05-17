@@ -114,7 +114,7 @@ export function ImportPapers() {
             type="button"
             onClick={run}
             disabled={!text.trim() || loading}
-            className="rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-bg hover:bg-white disabled:opacity-50"
+            className="rounded-full bg-text px-4 py-1.5 text-[13px] font-medium text-bg hover:opacity-90 disabled:opacity-50"
           >
             {loading ? "Resolving…" : "Resolve papers"}
           </button>
@@ -122,7 +122,7 @@ export function ImportPapers() {
       </div>
 
       {error && (
-        <div className="mb-6 rounded-lg bg-rose-50/50 px-4 py-3 text-sm text-rose-800">{error}</div>
+        <div className="mb-6 rounded-lg bg-error-bg px-4 py-3 text-sm text-error">{error}</div>
       )}
 
       {ran && !loading && !error && papers.length === 0 && (
@@ -146,7 +146,7 @@ export function ImportPapers() {
             <button
               type="button"
               onClick={saveAll}
-              className="inline-flex items-center gap-1 rounded-full border border-border-strong px-2.5 py-0.5 text-[12px] font-medium text-text hover:border-border"
+              className="inline-flex items-center gap-1 rounded-full border border-border-strong px-2.5 py-0.5 text-[12px] font-medium text-text hover:border-text-faint"
             >
               <Book size={11} /> Save all {papers.length} to library
             </button>
@@ -197,7 +197,7 @@ export function ImportPapers() {
                               if (added > 0) show("Saved to library");
                               else show("Already in your library");
                             }}
-                            className="inline-flex flex-shrink-0 items-center gap-1 rounded-full border border-border-strong px-2 py-0.5 text-[11px] font-medium text-text-muted hover:border-border hover:text-text"
+                            className="inline-flex flex-shrink-0 items-center gap-1 rounded-full border border-border-strong px-2 py-0.5 text-[11px] font-medium text-text-muted hover:border-text-faint hover:text-text"
                             title="Save to library"
                           >
                             <Book size={10} /> Save

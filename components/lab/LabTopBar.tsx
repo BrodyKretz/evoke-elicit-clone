@@ -15,7 +15,7 @@ export function LabTopBar() {
       </Link>
       <Link
         href="/research-agent/v1"
-        className="ml-2 inline-flex items-center rounded-full border border-border-strong bg-transparent px-3 py-1 text-[12px] font-medium text-text-muted hover:border-border hover:text-text"
+        className="ml-2 inline-flex items-center rounded-full border border-border-strong bg-transparent px-3 py-1 text-[12px] font-medium text-text-muted hover:border-text-faint hover:text-text"
       >
         v1
       </Link>
