@@ -12,6 +12,7 @@ import {
   ChevronDown,
   Clock,
   FileText,
+  FlaskConical,
   Hourglass,
   Layers,
   LayoutGrid,
@@ -21,16 +22,18 @@ import {
   Lock,
   Map,
   MessageCircle,
+  NotebookPen,
   Plus,
   Presentation,
   RotateCcw,
   Scan,
   Search,
   Star,
+  Upload,
   X,
   type LucideIcon,
 } from "lucide-react";
-import { getStoredCorpus, type CorpusProvider } from "@/components/home/CorpusToggle";
+import { CorpusToggle, getStoredCorpus, type CorpusProvider } from "@/components/home/CorpusToggle";
 import { useToast } from "@/components/ui/Toast";
 import { ThemeToggle } from "@/components/research-agent/ThemeToggle";
 import { AnimatedPlaceholder } from "@/components/research-agent/AnimatedPlaceholder";
@@ -160,6 +163,9 @@ const SIDE_TOOLS: SideItem[] = [
   { label: "Find papers", icon: Search, href: "/lab/find", mode: "find-papers" },
   { label: "Chat with papers", icon: MessageCircle, href: "/lab/chat", mode: "chat-papers" },
   { label: "Extract data", icon: Scan, href: "/lab/extract" },
+  { label: "Import papers", icon: Upload, href: "/lab/import" },
+  { label: "Clinical trials", icon: FlaskConical, href: "/lab/trials" },
+  { label: "Notebook", icon: NotebookPen, href: "/lab/notebook" },
 ];
 
 const SIDE_RECENTS = [
@@ -267,6 +273,7 @@ export function Sidebar({ mode }: { mode: Mode }) {
 export function TopBar() {
   return (
     <header className="flex items-center justify-end gap-2 px-6 py-3">
+      <CorpusToggle />
       <ThemeToggle />
       <Link
         href="/research-agent/v1"
