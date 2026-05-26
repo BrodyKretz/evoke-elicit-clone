@@ -1,0 +1,16 @@
+node_modules
+.next
+.git
+.gitignore
+.env*
+!.env.example
+npm-debug.log
+README.md
+docs
+tests
+.claude
+.vscode
+.DS_Store
+Dockerfile
+.dockerignore
+fly.toml
