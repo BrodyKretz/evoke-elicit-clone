@@ -2,6 +2,26 @@
 
 An open-source clone of [Elicit](https://elicit.com) — semantic paper search, screening, extraction, and AI-generated research reports.
 
+## New: Agentic RAG mode (beyond the Elicit clone)
+
+Elicit's pipeline is one-shot: pull N papers for a query, screen, extract, synthesize, done. **Agentic RAG flips that** — the LLM drives the retrieval loop itself:
+
+```
+query → agent thinks → decides what to search → reads results
+      → decides if it has enough → if not, searches again differently
+      → synthesize
+```
+
+For a query like *"what peptides have shown efficacy in gut permeability repair?"* the agent might:
+
+1. Search broadly first, read abstracts.
+2. Notice most results cluster around tight-junction proteins → run a follow-up search specifically on claudin-targeting peptides.
+3. Spot a promising preprint → fetch its full methods section.
+4. Find a cited study it doesn't yet have → retrieve that too.
+5. Synthesize across the whole working set.
+
+The button lives in the sidebar under *Workflows* (`/agentic-rag`). The surface is shipped; the agent loop itself is the next milestone — see `docs/writeup/` for design notes.
+
 > **Status: end-to-end pipeline shipped.** All four stages (gather → screen → extract → synthesize) are wired and each agent is verified in isolation. Live progress streams via SSE. Editable screening criterion + re-screen loop. ~$0.15-0.25 per full run.
 
 ## What it does (eventually)

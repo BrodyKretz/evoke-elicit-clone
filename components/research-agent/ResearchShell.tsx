@@ -28,6 +28,7 @@ import {
   RotateCcw,
   Scan,
   Search,
+  Sparkles,
   Star,
   Upload,
   X,
@@ -43,7 +44,13 @@ import { getLibrary, subscribeLibrary } from "@/lib/library";
 // find-papers, chat-papers. Same sidebar + top bar; the prompt card body
 // switches based on the mode the page passes in.
 
-export type Mode = "research-agent" | "report" | "find-papers" | "chat-papers" | "extract-data";
+export type Mode =
+  | "research-agent"
+  | "report"
+  | "agentic-rag"
+  | "find-papers"
+  | "chat-papers"
+  | "extract-data";
 
 type ModeConfig = {
   chipLabel: string;
@@ -67,6 +74,12 @@ const MODES: Record<Mode, ModeConfig> = {
     placeholder: "Mechanisms linking chronic sleep loss to immune dysfunction in adults",
     body: "report-textarea",
   },
+  "agentic-rag": {
+    chipLabel: "Agentic RAG",
+    chipIcon: Sparkles,
+    placeholder: "What peptides have shown efficacy in gut permeability repair?",
+    body: "textarea",
+  },
   "find-papers": {
     chipLabel: "Find papers",
     chipIcon: Search,
@@ -89,6 +102,7 @@ const MODES: Record<Mode, ModeConfig> = {
 const ROUTE_BY_MODE: Record<Mode, string> = {
   "research-agent": "/research-agent",
   report: "/lab/report",
+  "agentic-rag": "/agentic-rag",
   "find-papers": "/lab/find",
   "chat-papers": "/lab/chat",
   "extract-data": "/lab/extract",
@@ -156,6 +170,7 @@ type SideItem = {
 const SIDE_WORKFLOWS: SideItem[] = [
   { label: "Research agent", icon: Atom, href: "/research-agent", mode: "research-agent" },
   { label: "Report", icon: BookOpen, href: "/lab/report", mode: "report" },
+  { label: "Agentic RAG", icon: Sparkles, href: "/agentic-rag", mode: "agentic-rag" },
   { label: "Systematic review", icon: ListChecks, href: "/lab/review" },
 ];
 
@@ -331,7 +346,7 @@ function WorkflowDropdown({ mode }: { mode: Mode }) {
           <div className="px-2 py-1 text-[11px] font-medium uppercase tracking-wider text-text-faint">
             Workflows
           </div>
-          {(["research-agent", "report"] as Mode[]).map((m) => (
+          {(["research-agent", "report", "agentic-rag"] as Mode[]).map((m) => (
             <DropdownItem key={m} m={m} active={m === mode} onPick={pick} />
           ))}
           <DropdownItem m={null} label="Systematic review" icon={ListChecks} onPick={() => {}} />
