@@ -2,6 +2,10 @@
 
 An open-source clone of [Elicit](https://elicit.com) — semantic paper search, screening, extraction, and AI-generated research reports.
 
+## Live demo
+
+[evoke-elicit-clone.fly.dev](https://evoke-elicit-clone.fly.dev) — deployed on Fly.io. **BYO API key.** Visitors paste their own [Anthropic key](https://console.anthropic.com/settings/keys) into the in-app settings dialog (top-right key icon); the key lives in your browser&rsquo;s localStorage and is sent per-request via HTTPS header. Nothing is persisted server-side. Optional: paste an S2 key for higher Semantic Scholar throughput, or leave blank to use the free unauthenticated tier.
+
 ## New: Agentic RAG mode (beyond the Elicit clone)
 
 Elicit's pipeline is one-shot: pull N papers for a query, screen, extract, synthesize, done. **Agentic RAG flips that** — the LLM drives the retrieval loop itself:

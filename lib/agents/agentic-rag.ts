@@ -253,15 +253,24 @@ export async function runAgenticRag(runId: string, question: string, initial: Re
 
     if (finalizeCall) {
       const fi = finalizeCall.input as FinalizeInput;
+      const citedIds = Array.isArray(fi.cited_ids) ? fi.cited_ids : [];
+      const citedPapers = citedIds
+        .map((id) => workingSet.get(id))
+        .filter((p): p is Paper => Boolean(p))
+        .map((p) => ({
+          id: p.id,
+          title: p.title,
+          authors: p.authors,
+          year: p.year,
+          doi: p.doi,
+        }));
       onEvent({
         type: "agent.finalize",
         answer: fi.answer ?? "",
-        citedIds: Array.isArray(fi.cited_ids) ? fi.cited_ids : [],
+        citedIds,
+        citedPapers,
       });
-      finalAnswer = {
-        answer: fi.answer ?? "",
-        cited_ids: Array.isArray(fi.cited_ids) ? fi.cited_ids : [],
-      };
+      finalAnswer = { answer: fi.answer ?? "", cited_ids: citedIds };
       break;
     }
 

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getReport } from "@/lib/data/reports";
 import { saveRun } from "@/lib/store";
 import { runFromScreening } from "@/lib/pipeline";
+import { runWithKeys } from "@/lib/request-context";
 
 // Re-run from screening for an existing run with a (possibly user-edited)
 // criterion. Reuses the run's already-gathered papers — no S2 call.
@@ -12,6 +13,19 @@ export async function POST(
   req: Request,
   { params }: { params: { id: string } }
 ) {
+  const anthropicKey = req.headers.get("x-anthropic-api-key")?.trim();
+  if (!anthropicKey) {
+    return NextResponse.json(
+      {
+        error:
+          "Anthropic API key required. Click the key icon in the top bar to add yours.",
+        code: "MISSING_ANTHROPIC_KEY",
+      },
+      { status: 400 }
+    );
+  }
+  const s2Key = req.headers.get("x-s2-api-key")?.trim() || undefined;
+
   const report = getReport(params.id);
   if (!report) {
     return NextResponse.json({ error: "not_found" }, { status: 404 });
@@ -60,10 +74,13 @@ export async function POST(
 
   const criterion = { id: "c1", text: criterionText };
   // Fire-and-forget background cascade — emits to the SSE bus, persists final
-  // state, returns no value to this route.
-  runFromScreening(params.id, report.question, reset, papers, criterion).catch(
-    (err) => console.error(`rescreen cascade crashed for ${params.id}:`, err)
-  );
+  // state, returns no value to this route. runWithKeys propagates the per-
+  // request key context into the async cascade.
+  runWithKeys({ anthropicKey, s2Key }, () => {
+    runFromScreening(params.id, report.question, reset, papers, criterion).catch(
+      (err) => console.error(`rescreen cascade crashed for ${params.id}:`, err)
+    );
+  });
 
   return NextResponse.json({ id: params.id, status: "started" });
 }

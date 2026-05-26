@@ -1,20 +1,19 @@
 import Anthropic from "@anthropic-ai/sdk";
+import { getRequestKeys } from "./request-context";
 
-// Singleton client. Reads ANTHROPIC_API_KEY from the environment (loaded from
-// .env.local by Next.js). Throws at first use if the key is missing — failing
-// fast is better than emitting cryptic 401s deep in a pipeline.
-let _client: Anthropic | null = null;
-
+// Per-request client. Prefers a user-supplied key from the request context
+// (visitor pasted their key in the BYO settings modal → header → ALS); falls
+// back to process.env for local CLI scripts and dev-without-UI flows.
+//
+// Not cached — caching would couple two requests with different keys.
 export function anthropic(): Anthropic {
-  if (_client) return _client;
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = getRequestKeys().anthropicKey ?? process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     throw new Error(
-      "ANTHROPIC_API_KEY missing from environment. Add it to .env.local."
+      "Anthropic API key missing. Add it via the in-app settings menu, or set ANTHROPIC_API_KEY in .env.local for local dev."
     );
   }
-  _client = new Anthropic({ apiKey });
-  return _client;
+  return new Anthropic({ apiKey });
 }
 
 // Model IDs surfaced once so the rest of the codebase picks them by purpose

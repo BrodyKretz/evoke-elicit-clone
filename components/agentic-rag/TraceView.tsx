@@ -21,9 +21,23 @@ type AgenticEvent =
   | { type: "agent.tool_call"; name: string; input: Record<string, unknown>; ts: number }
   | { type: "agent.tool_result"; name: string; summary: string; ts: number }
   | { type: "agent.working_set"; total: number; added: number; ts: number }
-  | { type: "agent.finalize"; answer: string; citedIds: string[]; ts: number }
+  | {
+      type: "agent.finalize";
+      answer: string;
+      citedIds: string[];
+      citedPapers: CitedPaper[];
+      ts: number;
+    }
   | { type: "complete"; ts: number }
   | { type: "error"; error: string; ts: number };
+
+type CitedPaper = {
+  id: string;
+  title: string;
+  authors: string[];
+  year: number;
+  doi?: string;
+};
 
 type TimelineItem =
   | { kind: "iteration"; n: number; ts: number }
@@ -35,7 +49,11 @@ type Status = "connecting" | "running" | "complete" | "error";
 export function TraceView({ id, question }: { id: string; question: string }) {
   const [items, setItems] = useState<TimelineItem[]>([]);
   const [status, setStatus] = useState<Status>("connecting");
-  const [answer, setAnswer] = useState<{ text: string; citedIds: string[] } | null>(null);
+  const [answer, setAnswer] = useState<{
+    text: string;
+    citedIds: string[];
+    citedPapers: CitedPaper[];
+  } | null>(null);
   const [workingSet, setWorkingSet] = useState({ total: 0 });
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -85,7 +103,11 @@ export function TraceView({ id, question }: { id: string; question: string }) {
           setWorkingSet({ total: e.total });
           break;
         case "agent.finalize":
-          setAnswer({ text: e.answer, citedIds: e.citedIds });
+          setAnswer({
+            text: e.answer,
+            citedIds: e.citedIds,
+            citedPapers: e.citedPapers ?? [],
+          });
           break;
         case "complete":
           setStatus("complete");
@@ -115,7 +137,13 @@ export function TraceView({ id, question }: { id: string; question: string }) {
       <main className="flex flex-1 flex-col">
         <Header question={question} status={status} />
         <div className="mx-auto w-full max-w-[920px] flex-1 px-6 pb-24 pt-6">
-          {answer && <FinalAnswer text={answer.text} citedIds={answer.citedIds} />}
+          {answer && (
+            <FinalAnswer
+              text={answer.text}
+              citedIds={answer.citedIds}
+              citedPapers={answer.citedPapers}
+            />
+          )}
           <SectionLabel
             icon={Brain}
             label={answer ? "Agent trace" : "Live agent trace"}
@@ -233,36 +261,112 @@ function SectionLabel({
   );
 }
 
-function FinalAnswer({ text, citedIds }: { text: string; citedIds: string[] }) {
+function FinalAnswer({
+  text,
+  citedIds,
+  citedPapers,
+}: {
+  text: string;
+  citedIds: string[];
+  citedPapers: CitedPaper[];
+}) {
+  // Deduplicate citation order — first appearance in citedIds wins. The papers
+  // list may also contain entries the agent put in cited_ids but didn't
+  // actually reference inline; render only what we have metadata for.
+  const orderedIds: string[] = [];
+  const seen = new Set<string>();
+  for (const id of citedIds) {
+    if (!seen.has(id)) {
+      orderedIds.push(id);
+      seen.add(id);
+    }
+  }
+  // Index any IDs that appear in the answer text but weren't in cited_ids
+  // (the model sometimes forgets to list them in cited_ids).
+  for (const m of text.matchAll(/\[\[([^\]]+)\]\]/g)) {
+    if (!seen.has(m[1])) {
+      orderedIds.push(m[1]);
+      seen.add(m[1]);
+    }
+  }
+
+  const indexById = new Map<string, number>();
+  orderedIds.forEach((id, i) => indexById.set(id, i + 1));
+  const paperById = new Map(citedPapers.map((p) => [p.id, p]));
+
   return (
     <div className="mb-8 rounded-2xl border border-teal/40 bg-teal/[0.05] p-6">
       <SectionLabel icon={Check} label="Synthesis" sub={null} />
-      <div className="text-[15px] leading-relaxed text-text">{renderAnswer(text)}</div>
-      {citedIds.length > 0 && (
-        <div className="mt-4 border-t border-teal/20 pt-3 text-[12px] text-text-muted">
-          {citedIds.length} paper{citedIds.length === 1 ? "" : "s"} cited
+      <div className="text-[15px] leading-relaxed text-text">
+        {renderAnswer(text, indexById, paperById)}
+      </div>
+      {orderedIds.length > 0 && (
+        <div className="mt-6 border-t border-teal/20 pt-4">
+          <div className="mb-2 text-[11px] font-medium uppercase tracking-wider text-text-faint">
+            References
+          </div>
+          <ol className="space-y-1.5 text-[13px] leading-relaxed text-text-muted">
+            {orderedIds.map((id, i) => {
+              const p = paperById.get(id);
+              return (
+                <li key={id} className="flex gap-2">
+                  <span className="flex-shrink-0 text-text-faint">[{i + 1}]</span>
+                  <a
+                    href={`https://www.semanticscholar.org/paper/${encodeURIComponent(id)}`}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="text-text hover:text-teal-bright hover:underline"
+                  >
+                    {p ? formatReference(p) : `Semantic Scholar paper ${id}`}
+                  </a>
+                </li>
+              );
+            })}
+          </ol>
         </div>
       )}
     </div>
   );
 }
 
-function renderAnswer(text: string) {
+function formatReference(p: CitedPaper): string {
+  const authors =
+    p.authors.length === 0
+      ? "Unknown"
+      : p.authors.length > 3
+      ? `${p.authors.slice(0, 3).join(", ")} et al.`
+      : p.authors.join(", ");
+  return `${authors} (${p.year || "n.d."}). ${p.title}.`;
+}
+
+function renderAnswer(
+  text: string,
+  indexById: Map<string, number>,
+  paperById: Map<string, CitedPaper>
+) {
   const paragraphs = text.split(/\n\n+/);
   return paragraphs.map((para, pi) => (
     <p key={pi} className="mb-3 last:mb-0">
-      {splitWithCites(para).map((seg, si) =>
-        seg.cite ? (
-          <span
+      {splitWithCites(para).map((seg, si) => {
+        if (!seg.cite) return <span key={si}>{seg.text}</span>;
+        const num = indexById.get(seg.cite);
+        const paper = paperById.get(seg.cite);
+        const tooltip = paper
+          ? `${formatReference(paper)}`
+          : `Semantic Scholar paper ${seg.cite}`;
+        return (
+          <a
             key={si}
-            className="mx-0.5 inline-flex items-center rounded bg-teal/15 px-1.5 py-0.5 text-[11px] font-medium text-teal-bright"
+            href={`https://www.semanticscholar.org/paper/${encodeURIComponent(seg.cite)}`}
+            target="_blank"
+            rel="noreferrer noopener"
+            title={tooltip}
+            className="mx-0.5 inline-flex items-center rounded bg-teal/15 px-1.5 py-0.5 text-[11px] font-medium text-teal-bright hover:bg-teal/25 hover:underline"
           >
-            {shortId(seg.cite)}
-          </span>
-        ) : (
-          <span key={si}>{seg.text}</span>
-        )
-      )}
+            [{num ?? shortId(seg.cite)}]
+          </a>
+        );
+      })}
     </p>
   ));
 }

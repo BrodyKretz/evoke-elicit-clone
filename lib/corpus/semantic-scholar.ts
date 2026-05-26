@@ -1,4 +1,9 @@
 import type { Paper } from "../types";
+import { getRequestKeys } from "../request-context";
+
+function s2ApiKey(): string | undefined {
+  return getRequestKeys().s2Key ?? process.env.SEMANTIC_SCHOLAR_API_KEY;
+}
 
 const S2_BASE = "https://api.semanticscholar.org/graph/v1";
 
@@ -61,7 +66,7 @@ export async function searchPapers(query: string, limit = 20): Promise<Paper[]> 
   url.searchParams.set("fields", PAPER_FIELDS);
 
   const headers: Record<string, string> = { Accept: "application/json" };
-  const key = process.env.SEMANTIC_SCHOLAR_API_KEY;
+  const key = s2ApiKey();
   if (key) headers["x-api-key"] = key;
 
   // Retry up to 4 times with exponential backoff on 429/5xx.
@@ -94,7 +99,7 @@ export async function getReferences(paperId: string, limit = 15): Promise<Paper[
   url.searchParams.set("fields", PAPER_FIELDS.split(",").map((f) => `citedPaper.${f}`).join(","));
 
   const headers: Record<string, string> = { Accept: "application/json" };
-  const key = process.env.SEMANTIC_SCHOLAR_API_KEY;
+  const key = s2ApiKey();
   if (key) headers["x-api-key"] = key;
 
   for (let attempt = 1; attempt <= 3; attempt++) {
@@ -127,7 +132,7 @@ export async function resolveByIds(ids: string[]): Promise<Paper[]> {
   if (ids.length === 0) return [];
 
   const headers: Record<string, string> = { Accept: "application/json" };
-  const key = process.env.SEMANTIC_SCHOLAR_API_KEY;
+  const key = s2ApiKey();
   if (key) headers["x-api-key"] = key;
 
   // First try batch — fast path when it works.

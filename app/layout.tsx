@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Fraunces, Inter } from "next/font/google";
 import { ToastProvider } from "@/components/ui/Toast";
+import { KeyDialogProvider } from "@/components/settings/KeyDialog";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -35,7 +36,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${manrope.variable} ${fraunces.variable} ${inter.variable}`}>
       <body className="min-h-screen bg-bg text-text">
-        <ToastProvider>{children}</ToastProvider>
+        <ToastProvider>
+          <KeyDialogProvider>{children}</KeyDialogProvider>
+        </ToastProvider>
       </body>
     </html>
   );

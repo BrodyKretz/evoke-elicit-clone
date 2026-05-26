@@ -24,7 +24,19 @@ export type PipelineEvent =
   | { type: "agent.tool_call"; name: string; input: Record<string, unknown>; ts: number }
   | { type: "agent.tool_result"; name: string; summary: string; ts: number }
   | { type: "agent.working_set"; total: number; added: number; ts: number }
-  | { type: "agent.finalize"; answer: string; citedIds: string[]; ts: number }
+  | {
+      type: "agent.finalize";
+      answer: string;
+      citedIds: string[];
+      citedPapers: Array<{
+        id: string;
+        title: string;
+        authors: string[];
+        year: number;
+        doi?: string;
+      }>;
+      ts: number;
+    }
   | { type: "complete"; ts: number }
   | { type: "error"; error: string; ts: number };
 

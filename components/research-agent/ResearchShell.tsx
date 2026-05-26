@@ -27,6 +27,7 @@ import {
   Presentation,
   RotateCcw,
   Scan,
+  Key,
   Search,
   Sparkles,
   Star,
@@ -39,6 +40,8 @@ import { useToast } from "@/components/ui/Toast";
 import { ThemeToggle } from "@/components/research-agent/ThemeToggle";
 import { AnimatedPlaceholder } from "@/components/research-agent/AnimatedPlaceholder";
 import { getLibrary, subscribeLibrary } from "@/lib/library";
+import { useKeyDialog } from "@/components/settings/KeyDialog";
+import { hasAnthropicKey, keyHeaders } from "@/lib/client-keys";
 
 // Shared shell for the four mode-aware screens — research-agent, report,
 // find-papers, chat-papers. Same sidebar + top bar; the prompt card body
@@ -288,6 +291,7 @@ export function Sidebar({ mode }: { mode: Mode }) {
 export function TopBar() {
   return (
     <header className="flex items-center justify-end gap-2 px-6 py-3">
+      <KeyButton />
       <CorpusToggle />
       <ThemeToggle />
       <Link
@@ -297,6 +301,33 @@ export function TopBar() {
         Research agent v1
       </Link>
     </header>
+  );
+}
+
+function KeyButton() {
+  const { open } = useKeyDialog();
+  const [hasKey, setHasKey] = useState(false);
+  useEffect(() => {
+    const refresh = () => setHasKey(hasAnthropicKey());
+    refresh();
+    window.addEventListener("evoke:keys-changed", refresh);
+    return () => window.removeEventListener("evoke:keys-changed", refresh);
+  }, []);
+  return (
+    <button
+      type="button"
+      onClick={open}
+      title={hasKey ? "API keys configured" : "Set your Anthropic API key"}
+      className={
+        "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[13px] font-medium " +
+        (hasKey
+          ? "border-teal/40 bg-teal/[0.08] text-teal-bright hover:bg-teal/[0.15]"
+          : "border-amber-500/40 bg-amber-500/[0.08] text-amber-500 hover:bg-amber-500/[0.15]")
+      }
+    >
+      <Key size={13} />
+      {hasKey ? "API keys" : "Set API key"}
+    </button>
   );
 }
 
@@ -473,6 +504,7 @@ function PromptCard({
 }) {
   const router = useRouter();
   const { show } = useToast();
+  const { open: openKeyDialog } = useKeyDialog();
   const [submitting, setSubmitting] = useState(false);
   const config = MODES[mode];
 
@@ -485,13 +517,22 @@ function PromptCard({
       return;
     }
 
+    // Cheap client-side gate so users don't burn a request only to bounce on
+    // the server's MISSING_ANTHROPIC_KEY. The server still enforces this.
+    const needsKey = mode === "research-agent" || mode === "report" || mode === "agentic-rag";
+    if (needsKey && !hasAnthropicKey()) {
+      show("Add your Anthropic API key to run this.");
+      openKeyDialog();
+      return;
+    }
+
     if (mode === "research-agent" || mode === "report") {
       setSubmitting(true);
       try {
         const corpus: CorpusProvider = getStoredCorpus();
         const res = await fetch("/api/reports", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", ...keyHeaders() },
           body: JSON.stringify({
             question: text,
             corpus,
@@ -500,6 +541,7 @@ function PromptCard({
         });
         if (!res.ok) {
           const body = await res.json().catch(() => ({}));
+          if (body.code === "MISSING_ANTHROPIC_KEY") openKeyDialog();
           show(body.error ?? "Failed to start run");
           return;
         }
@@ -519,11 +561,12 @@ function PromptCard({
         const corpus: CorpusProvider = getStoredCorpus();
         const res = await fetch("/api/agentic-rag", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", ...keyHeaders() },
           body: JSON.stringify({ question: text, corpus }),
         });
         if (!res.ok) {
           const body = await res.json().catch(() => ({}));
+          if (body.code === "MISSING_ANTHROPIC_KEY") openKeyDialog();
           show(body.error ?? "Failed to start agentic run");
           return;
         }

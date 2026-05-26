@@ -3,6 +3,7 @@ import { listReports } from "@/lib/data/reports";
 import { newRunId, saveRun } from "@/lib/store";
 import { runPipeline } from "@/lib/pipeline";
 import { isCorpusProvider } from "@/lib/corpus";
+import { runWithKeys } from "@/lib/request-context";
 import type { SynthesisAction } from "@/lib/agents/synthesize";
 import type { Report } from "@/lib/types";
 
@@ -26,6 +27,19 @@ export async function GET() {
 // Create a new run. Returns immediately with the run id; the pipeline runs
 // in the background and emits SSE events to /api/reports/[id]/stream.
 export async function POST(req: Request) {
+  const anthropicKey = req.headers.get("x-anthropic-api-key")?.trim();
+  if (!anthropicKey) {
+    return NextResponse.json(
+      {
+        error:
+          "Anthropic API key required. Click the key icon in the top bar to add yours.",
+        code: "MISSING_ANTHROPIC_KEY",
+      },
+      { status: 400 }
+    );
+  }
+  const s2Key = req.headers.get("x-s2-api-key")?.trim() || undefined;
+
   const body = (await req.json().catch(() => ({}))) as {
     question?: string;
     corpus?: string;
@@ -64,9 +78,12 @@ export async function POST(req: Request) {
 
   // Intentionally NOT awaited — the pipeline owns its own error handling and
   // emits events to the run's bus. The Next.js Node runtime keeps the event
-  // loop alive until the promise resolves.
-  runPipeline(id, cleaned, initial, action).catch((err) => {
-    console.error(`pipeline crashed for ${id}:`, err);
+  // loop alive until the promise resolves. The runWithKeys wrapper ensures
+  // the per-request key context propagates into the async pipeline chain.
+  runWithKeys({ anthropicKey, s2Key }, () => {
+    runPipeline(id, cleaned, initial, action).catch((err) => {
+      console.error(`pipeline crashed for ${id}:`, err);
+    });
   });
 
   return NextResponse.json({ id, status: "started" });
