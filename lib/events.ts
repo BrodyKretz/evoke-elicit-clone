@@ -19,6 +19,12 @@ export type PipelineEvent =
   | { type: "columns"; columns: string[]; ts: number }
   | { type: "progress"; stage: "screen" | "extract"; done: number; total: number; ts: number }
   | { type: "tldr"; text: string; ts: number }
+  | { type: "agent.iteration"; n: number; ts: number }
+  | { type: "agent.thought"; text: string; ts: number }
+  | { type: "agent.tool_call"; name: string; input: Record<string, unknown>; ts: number }
+  | { type: "agent.tool_result"; name: string; summary: string; ts: number }
+  | { type: "agent.working_set"; total: number; added: number; ts: number }
+  | { type: "agent.finalize"; answer: string; citedIds: string[]; ts: number }
   | { type: "complete"; ts: number }
   | { type: "error"; error: string; ts: number };
 

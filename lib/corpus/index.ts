@@ -38,3 +38,8 @@ export async function searchPapers(
 export async function resolvePapersByIds(ids: string[]): Promise<Paper[]> {
   return s2.resolveByIds(ids);
 }
+
+// Citation chasing — fetch a paper's references. S2 only for now.
+export async function getReferences(paperId: string, limit = 15): Promise<Paper[]> {
+  return s2.getReferences(paperId, limit);
+}

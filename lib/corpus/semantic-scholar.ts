@@ -85,6 +85,39 @@ export async function searchPapers(query: string, limit = 20): Promise<Paper[]> 
 }
 
 /**
+ * Fetch references cited by a given paper. Returns up to `limit` cited papers
+ * with the same Paper shape as searchPapers. Drops entries S2 couldn't resolve.
+ */
+export async function getReferences(paperId: string, limit = 15): Promise<Paper[]> {
+  const url = new URL(`${S2_BASE}/paper/${encodeURIComponent(paperId)}/references`);
+  url.searchParams.set("limit", String(limit));
+  url.searchParams.set("fields", PAPER_FIELDS.split(",").map((f) => `citedPaper.${f}`).join(","));
+
+  const headers: Record<string, string> = { Accept: "application/json" };
+  const key = process.env.SEMANTIC_SCHOLAR_API_KEY;
+  if (key) headers["x-api-key"] = key;
+
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    const res = await fetch(url, { headers, cache: "no-store" });
+    if (res.ok) {
+      const json = (await res.json()) as { data?: Array<{ citedPaper?: S2Paper | null }> };
+      return (json.data ?? [])
+        .map((r) => r.citedPaper)
+        .filter((p): p is S2Paper => Boolean(p && p.paperId))
+        .map(toPaper);
+    }
+    if (res.status === 404) return [];
+    if (res.status === 429 || res.status >= 500) {
+      await new Promise((r) => setTimeout(r, 500 * 2 ** (attempt - 1)));
+      continue;
+    }
+    const body = await res.text().catch(() => "");
+    throw new Error(`Semantic Scholar references ${res.status}: ${body.slice(0, 200)}`);
+  }
+  return [];
+}
+
+/**
  * Resolve a list of paper identifiers (DOI:..., ARXIV:..., PMID:..., or
  * bare S2 paperId) to Paper records. Tries the /paper/batch endpoint first;
  * if that's rate-limited (the unauth tier rejects batch aggressively) it

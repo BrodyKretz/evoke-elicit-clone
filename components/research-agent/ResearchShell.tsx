@@ -513,6 +513,30 @@ function PromptCard({
       return;
     }
 
+    if (mode === "agentic-rag") {
+      setSubmitting(true);
+      try {
+        const corpus: CorpusProvider = getStoredCorpus();
+        const res = await fetch("/api/agentic-rag", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question: text, corpus }),
+        });
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          show(body.error ?? "Failed to start agentic run");
+          return;
+        }
+        const { id } = (await res.json()) as { id: string };
+        router.push(`/agentic-rag/${id}`);
+      } catch {
+        show("Network error. Is the dev server running?");
+      } finally {
+        setSubmitting(false);
+      }
+      return;
+    }
+
     show(`${config.chipLabel} submit — coming soon`);
   };
 
